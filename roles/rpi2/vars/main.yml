@@ -1,0 +1,6 @@
+packages:
+  - vim
+  - htop
+  - docker.io
+  - docker-compose
+  - kodi
