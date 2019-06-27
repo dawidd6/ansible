@@ -1,0 +1,6 @@
+lint_task:
+  container:
+    image: python:3.7
+  lint_script:
+    - pip install ansible-lint
+    - ls -1 | grep ".yml" | xargs ~/.local/bin/ansible-lint
