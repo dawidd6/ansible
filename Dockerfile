@@ -1,6 +1,13 @@
-# docker run -t --rm --name ansible --security-opt seccomp=unconfined --tmpfs /run --tmpfs /run/lock -v /sys/fs/cgroup:/sys/fs/cgroup:ro -v $HOME/.ssh:/home/user/.ssh:ro ansible-test
-#
 # Parts are taken from solita/docker-systemd (Thanks).
+#
+# This image is meant to be used as a test field for ansible playbooks.
+#
+# In this image:
+# - systemd
+# - sshd
+# - normal user named "user" with password "user"
+#
+# Check run-test-container.sh script for reference how to use this image.
 
 FROM debian:buster
 
