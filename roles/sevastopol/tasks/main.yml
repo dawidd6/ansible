@@ -14,6 +14,19 @@
       - neovim
       - snapd
       - htop
+      - locales
+
+- name: generate locales
+  become: yes
+  block:
+    - name: etc locale
+      lineinfile:
+        path: /etc/locale.gen
+        line: en_US.UTF-8 UTF-8
+    - name: locale gen
+      command: /usr/sbin/locale-gen
+      args:
+        creates: /usr/lib/locale/locale-archive
 
 - name: enable and start snapd
   become: yes
@@ -31,11 +44,27 @@
       - intellij-idea-ultimate
       - code
 
-- name: install brew if isn't already there
-  shell: |
-    CI=true ruby -e "`curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install`"
-  args:
-    creates: /home/linuxbrew/.linuxbrew/bin/brew
+- name: install brew
+  block:
+    - name: create brew base directories
+      become: true
+      file:
+        path: "/home/linuxbrew/.linuxbrew/bin"
+        state: directory
+        owner: "{{ user }}"
+        group: "{{ user }}"
+        mode: "0755"
+        recurse: yes
+    - name: clone brew repository
+      git:
+        repo: "https://github.com/Homebrew/brew"
+        dest: "/home/linuxbrew/.linuxbrew/Homebrew"
+        version: "master"
+    - name: create symlink to brew binary
+      file:
+        src: "/home/linuxbrew/.linuxbrew/Homebrew/bin/brew"
+        dest: "/home/linuxbrew/.linuxbrew/bin/brew"
+        state: "link"
 
 - name: install brew packages
   homebrew:
@@ -103,11 +132,16 @@
         accept_hostkey: yes
         bare: yes
         version: master
+    - name: configure dotfiles repo
+      git_config:
+        repo: "{{ home }}/.dotfiles"
+        name: "status.showUntrackedFiles"
+        value: "no"
+        scope: local
     - name: deploy dotfiles
-      shell: |
-        alias dotfiles="git --git-dir={{ home }}/.dotfiles --work-tree=$HOME"
-        dotfiles config --local status.showUntrackedFiles no
-        dotfiles checkout
+      command: git --git-dir="{{ home }}/.dotfiles" --work-tree=$HOME checkout
+      args:
+        creates: "{{ home }}/.dotfiles"
 
 - name: clone debian repositories
   git:
