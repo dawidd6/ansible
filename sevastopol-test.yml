@@ -1,5 +1,0 @@
-- hosts: vagrant
-  become: yes
-
-  roles:
-    - sevastopol
