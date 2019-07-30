@@ -22,7 +22,8 @@ RUN find /etc/systemd/system \
     -not -name '*systemd-user-sessions*' \
     -exec rm \{} \;
 
-RUN apt-get update && apt-get install -y systemd ssh sudo python
+RUN apt-get update && apt-get install -y systemd ssh sudo python locales
+RUN echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen && /usr/sbin/locale-gen
 RUN sed -i 's/PasswordAuthentication .*/PasswordAuthentication no/g' /etc/ssh/sshd_config
 RUN sed -i 's/PubkeyAuthentication .*/PubkeyAuthentication yes/g' /etc/ssh/sshd_config
 RUN adduser --gecos "" --disabled-password --uid 1000 user && adduser user sudo && echo "user:user" | chpasswd
