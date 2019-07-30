@@ -17,6 +17,7 @@ docker run \
     -t \
     --rm \
     --name $container \
+    --ip 172.17.0.100
     --security-opt \
     seccomp=unconfined \
     --tmpfs /run \
