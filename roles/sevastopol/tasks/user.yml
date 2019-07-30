@@ -1,0 +1,5 @@
+- name: set default shell for user
+  become: yes
+  user:
+    name: "{{ user }}"
+    shell: /usr/bin/fish

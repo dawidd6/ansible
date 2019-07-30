@@ -1,0 +1,6 @@
+- name: clone bin
+  git:
+    repo: "git@github.com:dawidd6/bin.git"
+    dest: "{{ home }}/bin"
+    accept_hostkey: yes
+    version: master

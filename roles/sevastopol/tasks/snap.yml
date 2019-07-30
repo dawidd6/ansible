@@ -1,0 +1,13 @@
+- name: enable and start snapd
+  become: yes
+  systemd:
+    name: snapd
+    enabled: yes
+    state: started
+
+- name: install snap packages
+  become: yes
+  ignore_errors: yes # needs some kernel modules and it doesn't work in Docker
+  snap:
+    classic: yes
+    name: "{{ snap_packages }}"

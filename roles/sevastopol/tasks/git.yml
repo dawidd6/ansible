@@ -1,0 +1,15 @@
+- name: clone debian repositories
+  git:
+    repo: "git@salsa.debian.org:go-team/packages/{{ item }}.git"
+    dest: "{{ home }}/salsa/{{ item }}"
+    accept_hostkey: yes
+    version: debian/sid
+  with_items: "{{ salsa_ssh_go_repos }}"
+
+- name: clone github repositories
+  git:
+    repo: "git@github.com:{{ item }}.git"
+    dest: "{{ home }}/github/{{ item }}"
+    accept_hostkey: yes
+    version: master
+  with_items: "{{ github_ssh_repos }}"

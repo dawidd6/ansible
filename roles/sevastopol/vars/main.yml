@@ -1,2 +1,53 @@
 home: "{{ ansible_env.HOME }}"
 user: "{{ ansible_env.USER }}"
+
+dotfiles: "{{ home }}/.dotfiles"
+brew: "/home/linuxbrew/.linuxbrew"
+
+apt_packages:
+  - python
+  - python-apt
+  - ca-certificates
+  - build-essential
+  - octave
+  - curl
+  - wget
+  - ruby
+  - gpg
+  - git
+  - ssh
+  - fish
+  - neovim
+  - snapd
+  - htop
+  - cups
+deb_packages:
+  - http://www.brother.com/pub/bsc/linux/dlf/dcpj125lpr-1.1.3-1.i386.deb
+  - http://www.brother.com/pub/bsc/linux/dlf/dcpj125cupswrapper-1.1.3-1.i386.deb
+  - http://www.brother.com/pub/bsc/linux/dlf/brscan-skey-0.2.4-1.amd64.deb
+  - http://www.brother.com/pub/bsc/linux/dlf/brscan3-0.2.11-5.amd64.deb
+snap_packages:
+  - intellij-idea-ultimate
+  - code
+  - spotify
+brew_packages:
+  - go
+  - bat
+  - hub
+  - dawidd6/tap/deber
+  - isacikgoz/taps/gitbatch
+  - isacikgoz/taps/gitin
+  - isacikgoz/taps/tldr
+  - jesseduffield/lazygit/lazygit
+  - jesseduffield/lazydocker/lazydocker
+  - skanehira/docui/docui
+brew_head_packages:
+  - dawidd6/tap/debutils
+
+github_ssh_repos:
+  - dawidd6/deber
+  - dawidd6/debutils
+  - jesseduffield/lazydocker
+salsa_ssh_go_repos:
+  - termshark
+  - docui

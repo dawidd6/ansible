@@ -1,0 +1,19 @@
+- name: clone dotfiles
+  git:
+    repo: git@github.com:dawidd6/dotfiles.git
+    dest: "{{ dotfiles }}"
+    accept_hostkey: yes
+    bare: yes
+    version: master
+
+- name: configure dotfiles repo
+  git_config:
+    repo: "{{ dotfiles }}"
+    name: "status.showUntrackedFiles"
+    value: "no"
+    scope: local
+
+- name: deploy dotfiles
+  command: git --git-dir="{{ dotfiles }}" --work-tree="{{ home }}" checkout
+  args:
+    creates: "{{ home }}/README.md"
