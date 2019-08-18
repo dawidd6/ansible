@@ -1,0 +1,5 @@
+home: "{{ ansible_env.HOME }}"
+user: "{{ ansible_env.USER }}"
+
+dotfiles: "{{ home }}/.dotfiles"
+brew: "/home/linuxbrew/.linuxbrew"

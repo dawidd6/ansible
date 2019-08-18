@@ -1,7 +1,0 @@
-- import_tasks: apt.yml
-- import_tasks: snap.yml
-- import_tasks: brew.yml
-- import_tasks: bin.yml
-- import_tasks: dotfiles.yml
-- import_tasks: git.yml
-- import_tasks: user.yml
