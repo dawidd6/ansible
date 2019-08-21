@@ -14,30 +14,11 @@
       - curl
       - wget
       - gpg
+      - trash-cli
       - git
       - ssh
       - htop
       - cups
-
-- name: install i3 and stuff via apt
-  become: yes
-  tags:
-    - i3
-  apt:
-    name:
-      - xorg
-      - i3-wm
-      - i3blocks
-      - i3lock
-      - dunst
-      - udiskie
-      - lxappearance
-      - dmenu
-      - kitty
-      - plymouth
-      - nodm
-      - fonts-ubuntu
-      - numix-icon-theme-circle
 
 - name: install gui applications via apt
   become: yes
@@ -52,6 +33,7 @@
 - name: install brew
   tags:
     - brew
+    - utils
   block:
     - name: create brew base directories
       become: true
@@ -60,7 +42,6 @@
         state: directory
         owner: "{{ user }}"
         group: "{{ user }}"
-        mode: "0755"
         recurse: yes
     - name: clone brew repository
       git:
@@ -75,7 +56,7 @@
 
 - name: install brew packages
   tags:
-    - brew-pkgs
+    - utils
   homebrew:
     path: "{{ brew }}/bin"
     update_homebrew: yes
@@ -83,12 +64,40 @@
       - go
       - bat
       - hub
+      - neovim
+      - fish
       - isacikgoz/taps/gitbatch
       - isacikgoz/taps/gitin
       - isacikgoz/taps/tldr
       - jesseduffield/lazygit/lazygit
       - jesseduffield/lazydocker/lazydocker
       - skanehira/docui/docui
+
+- name: add fish shell
+  become: yes
+  tags:
+    - fish
+  lineinfile:
+    path: /etc/shells
+    line: "{{ brew }}/bin/fish"
+
+- name: install theme packages
+  become: yes
+  tags:
+    - theme
+  block:
+    - name: gtk and gnome
+      apt:
+        deb: "{{ item }}"
+      with_items:
+        - http://de.archive.ubuntu.com/ubuntu/pool/main/y/yaru-theme/yaru-theme-gtk_19.04.3_all.deb
+        - http://de.archive.ubuntu.com/ubuntu/pool/main/y/yaru-theme/yaru-theme-gnome-shell_19.04.3_all.deb
+    - name: cursor, icons and fonts
+      apt:
+        name:
+          - numix-icon-theme-circle
+          - dmz-cursor-theme
+          - fonts-ubuntu
 
 - name: install printer
   become: yes
@@ -117,7 +126,7 @@
         id: B9F8D658297AF3EFC18D5CDFA2F683C52980AECF
     - name: repo virtualbox
       apt_repository:
-        repo: deb https://download.virtualbox.org/virtualbox/debian buster contrib
+        repo: deb https://download.virtualbox.org/virtualbox/debian {{ ansible_distribution_release }} contrib
         state: present
     - name: install virtualbox
       apt:
@@ -134,7 +143,7 @@
         id: 9DC858229FC7DD38854AE2D88D81803C0EBFCD88
     - name: repo docker
       apt_repository:
-        repo: deb [arch=amd64] https://download.docker.com/linux/debian buster stable
+        repo: deb [arch=amd64] https://download.docker.com/linux/debian {{ ansible_distribution_release }} stable
         state: present
     - name: install docker
       apt:
@@ -185,7 +194,6 @@
 
 # TODO plymouth
 # TODO grub no timeout
-# TODO nodm
 
 - name: adjust user
   become: yes
@@ -193,11 +201,7 @@
     - user
   user:
     name: "{{ user }}"
-    shell: /usr/bin/fish # TODO brew
-    append: yes
-    groups:
-      - plugdev
-      - docker
+    shell: "{{ brew }}/bin/fish"
 
 - name: deploy scripts
   tags:
