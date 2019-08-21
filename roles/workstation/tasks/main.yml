@@ -19,6 +19,7 @@
       - ssh
       - htop
       - cups
+      - fish
 
 - name: install gui applications via apt
   become: yes
@@ -65,21 +66,12 @@
       - bat
       - hub
       - neovim
-      - fish
       - isacikgoz/taps/gitbatch
       - isacikgoz/taps/gitin
       - isacikgoz/taps/tldr
       - jesseduffield/lazygit/lazygit
       - jesseduffield/lazydocker/lazydocker
       - skanehira/docui/docui
-
-- name: add fish shell
-  become: yes
-  tags:
-    - fish
-  lineinfile:
-    path: /etc/shells
-    line: "{{ brew }}/bin/fish"
 
 - name: install theme packages
   become: yes
@@ -201,7 +193,7 @@
     - user
   user:
     name: "{{ user }}"
-    shell: "{{ brew }}/bin/fish"
+    shell: /usr/bin/fish
 
 - name: deploy scripts
   tags:
