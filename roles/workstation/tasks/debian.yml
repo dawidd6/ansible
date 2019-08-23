@@ -1,0 +1,19 @@
+- name: install deber
+  command: go install
+  args:
+      chdir: "{{ home }}/github/dawidd6/deber"
+      creates: "{{ home }}/go/bin/deber"
+
+- name: install dh-make-golang
+  command: go install
+  args:
+      chdir: "{{ home }}/github/dawidd6/dh-make-golang"
+      creates: "{{ home }}/go/bin/dh-make-golang"
+
+- name: install development apt packages
+  become: yes
+  apt:
+      name:
+          - git-buildpackage
+          - devscripts
+          - build-essential

@@ -1,0 +1,55 @@
+- name: create brew base directories
+  become: true
+  file:
+    path: "{{ brew }}/bin"
+    state: directory
+    owner: "{{ user }}"
+    group: "{{ user }}"
+    recurse: yes
+
+- name: clone brew repository
+  git:
+    repo: "https://github.com/Homebrew/brew"
+    dest: "{{ brew }}/Homebrew"
+    version: "master"
+
+- name: create symlink to brew binary
+  file:
+    src: "{{ brew }}/Homebrew/bin/brew"
+    dest: "{{ brew }}/bin/brew"
+    state: "link"
+
+- name: install brew packages
+  homebrew:
+    path: "{{ brew }}/bin"
+    update_homebrew: yes
+    name:
+      - go
+      - bat
+      - curl
+      - wget
+      - gpg
+      - trash-cli
+      - git
+      - fish
+      - htop
+      - neovim
+      - hub
+      - isacikgoz/taps/gitbatch
+      - isacikgoz/taps/gitin
+      - isacikgoz/taps/tldr
+      - jesseduffield/lazygit/lazygit
+      - jesseduffield/lazydocker/lazydocker
+      - skanehira/docui/docui
+
+- name: add fish to shells
+  become: yes
+  lineinfile:
+    path: /etc/shells
+    line: /home/linuxbrew/.linuxbrew/bin/fish
+
+- name: set user shell to fish
+  become: yes
+  user:
+    name: "{{ user }}"
+    shell: /home/linuxbrew/.linuxbrew/bin/fish

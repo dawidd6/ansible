@@ -1,0 +1,10 @@
+- name: clone github repositories
+  git:
+    repo: "git@github.com:{{ item }}.git"
+    dest: "{{ home }}/github/{{ item }}"
+    accept_hostkey: yes
+    version: master
+  with_items:
+    - dawidd6/deber
+    - dawidd6/debutils
+    - jesseduffield/lazydocker

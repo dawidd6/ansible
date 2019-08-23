@@ -1,234 +1,41 @@
-- name: apt packages
-  become: yes
-  tags:
-    - apt
-  block:
-    - name: install apt packages
-      apt:
-        update_cache: yes
-        name:
-          - python
-          - python-apt
-          - ca-certificates
-          - build-essential
-          - git-buildpackage
-          - devscripts
-          - curl
-          - wget
-          - gnupg
-          - gnupg2
-          - trash-cli
-          - lm-sensors
-          - git
-          - ssh
-          - htop
-          - cups
-          - fish
-          - virtualbox
-          - gnome-tweaks
-          - gnome-calculator
-          - gnome-system-monitor
-          - evince
-          - cheese
-          - gpick
-          - octave
-          - gimp
-          - inkscape
-          - chrome-gnome-shell
-          - chromium-browser
-    - name: purge apt packages
-      apt:
-        state: absent
-        purge: yes
-        autoremove: yes
-        name:
-          - snapd
-          - firefox
-          - ubuntu-software
-          - gnome-software
+# personalization
+- import_tasks: apt.yml
+  tags: apt
+- import_tasks: fish.yml
+  tags: fish
+- import_tasks: scripts.yml
+  tags: scripts
+- import_tasks: dotfiles.yml
+  tags: dotfiles
+- import_tasks: dconf.yml
+  tags: dconf
 
-- name: install brew
-  tags:
-    - brew
-  block:
-    - name: create brew base directories
-      become: true
-      file:
-        path: "{{ brew }}/bin"
-        state: directory
-        owner: "{{ user }}"
-        group: "{{ user }}"
-        recurse: yes
-    - name: clone brew repository
-      git:
-        repo: "https://github.com/Homebrew/brew"
-        dest: "{{ brew }}/Homebrew"
-        version: "master"
-    - name: create symlink to brew binary
-      file:
-        src: "{{ brew }}/Homebrew/bin/brew"
-        dest: "{{ brew }}/bin/brew"
-        state: "link"
-    - name: install brew packages
-      tags:
-        - utils
-      homebrew:
-        path: "{{ brew }}/bin"
-        update_homebrew: yes
-        name:
-          - go
-          - bat
-          - hub
-          - neovim
-          - isacikgoz/taps/gitbatch
-          - isacikgoz/taps/gitin
-          - isacikgoz/taps/tldr
-          - jesseduffield/lazygit/lazygit
-          - jesseduffield/lazydocker/lazydocker
-          - skanehira/docui/docui
+# brew
+- import_tasks: brew.yml
+  tags: brew
 
-- name: install printer
-  become: yes
-  tags:
-    - printer
-  block:
-    - name: add i386 arch
-      command: dpkg --add-architecture i386
-    - name: install printer debs
-      apt:
-        deb: "{{ item }}"
-      with_items:
-        - http://www.brother.com/pub/bsc/linux/dlf/dcpj125lpr-1.1.3-1.i386.deb
-        - http://www.brother.com/pub/bsc/linux/dlf/dcpj125cupswrapper-1.1.3-1.i386.deb
-        - http://www.brother.com/pub/bsc/linux/dlf/brscan-skey-0.2.4-1.amd64.deb
-        - http://www.brother.com/pub/bsc/linux/dlf/brscan3-0.2.11-5.amd64.deb
+# ide
+- import_tasks: code.yml
+  tags: code
+- import_tasks: intellij.yml
+  tags: intellij
 
-- name: install docker via official apt repo
-  become: yes
-  tags:
-    - docker
-  block:
-    - name: key docker
-      apt_key:
-        url: https://download.docker.com/linux/debian/gpg
-        id: 9DC858229FC7DD38854AE2D88D81803C0EBFCD88
-    - name: repo docker
-      apt_repository:
-        repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable
-        state: present
-    - name: install docker
-      apt:
-        name: docker-ce
+# printer
+- import_tasks: printer.yml
+  tags: printer
 
-- name: install spotify via official apt repo
-  become: yes
-  tags:
-    - spotify
-  block:
-    - name: key spotify
-      apt_key:
-        url: https://download.spotify.com/debian/pubkey.gpg
-        id: 2EBF997C15BDA244B6EBF5D84773BD5E130D1D45
-    - name: repo spotify
-      apt_repository:
-        repo: deb http://repository.spotify.com stable non-free
-        state: present
-    - name: install spotify
-      apt:
-        name: spotify-client
+# work repositories
+- import_tasks: salsa.yml
+  tags: salsa
+- import_tasks: github.yml
+  tags: github
 
-- name: install code via official apt repo
-  become: yes
-  tags:
-    - code
-  block:
-    - name: key code
-      apt_key:
-        url: https://packages.microsoft.com/keys/microsoft.asc
-        id: BC528686B50D79E339D3721CEB3E94ADBE1229CF
-    - name: repo code
-      apt_repository:
-        repo: deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main
-        state: present
-    - name: install code
-      apt:
-        name: code
+# development
+- import_tasks: debian.yml
+  tags: debian
+- import_tasks: docker.yml
+  tags: docker
 
-- name: install intellij
-  tags:
-    - intellij
-  block:
-    - name: create intellij directory
-      file:
-        path: "{{ home }}/intellij"
-        state: directory
-    - name: download and unarchive intellij
-      unarchive:
-        remote_src: yes
-        src: https://download.jetbrains.com/idea/ideaIU-2019.2.tar.gz
-        dest: "{{ home }}/intellij"
-        creates: "{{ home }}/intellij/bin/idea.sh"
-
-- name: adjust user
-  become: yes
-  tags:
-    - user
-  user:
-    name: "{{ user }}"
-    shell: /usr/bin/fish
-
-- name: deploy scripts
-  tags:
-    - scripts
-  git:
-    repo: "git@github.com:dawidd6/bin.git"
-    dest: "{{ home }}/bin"
-    accept_hostkey: yes
-    version: master
-
-- name: deploy dotfiles
-  tags:
-    - dotfiles
-  block:
-    - name: clone dotfiles
-      git:
-        repo: git@github.com:dawidd6/dotfiles.git
-        dest: "{{ dotfiles }}"
-        accept_hostkey: yes
-        bare: yes
-        version: master
-    - name: configure dotfiles repo
-      git_config:
-        repo: "{{ dotfiles }}"
-        name: "status.showUntrackedFiles"
-        value: "no"
-        scope: local
-    - name: deploy dotfiles
-      command: git --git-dir="{{ dotfiles }}" --work-tree="{{ home }}" checkout
-      args:
-        creates: "{{ home }}/README.md"
-
-- name: clone debian repositories
-  tags:
-    - salsa
-  git:
-    repo: "git@salsa.debian.org:go-team/packages/{{ item }}.git"
-    dest: "{{ home }}/salsa/{{ item }}"
-    accept_hostkey: yes
-    version: debian/sid
-  with_items:
-    - docui
-    - termshark
-
-- name: clone github repositories
-  tags:
-    - github
-  git:
-    repo: "git@github.com:{{ item }}.git"
-    dest: "{{ home }}/github/{{ item }}"
-    accept_hostkey: yes
-    version: master
-  with_items:
-    - dawidd6/deber
-    - dawidd6/debutils
-    - jesseduffield/lazydocker
+# fun
+- import_tasks: spotify.yml
+  tags: spotify

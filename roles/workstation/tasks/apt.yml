@@ -1,0 +1,33 @@
+- name: install apt packages
+  become: yes
+  apt:
+    update_cache: yes
+    name:
+      - python-apt
+      - python-psutil
+      - lm-sensors
+      - gnome-tweaks
+      - gnome-calculator
+      - gnome-system-monitor
+      - evince
+      - cheese
+      - gpick
+      - octave
+      - gimp
+      - inkscape
+      - virtualbox
+      - chrome-gnome-shell
+      - chromium-browser
+      - numix-icon-theme-circle
+
+- name: purge apt packages
+  become: yes
+  apt:
+    state: absent
+    purge: yes
+    autoremove: yes
+    name:
+      - snapd
+      - firefox
+      - ubuntu-software
+      - gnome-software

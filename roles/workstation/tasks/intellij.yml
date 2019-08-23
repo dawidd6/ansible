@@ -1,0 +1,11 @@
+- name: create intellij directory
+  file:
+    path: "{{ home }}/intellij"
+    state: directory
+
+- name: download and unarchive intellij
+  unarchive:
+    remote_src: yes
+    src: https://download.jetbrains.com/idea/ideaIU-2019.2.tar.gz
+    dest: "{{ home }}/intellij"
+    creates: "{{ home }}/intellij/bin/idea.sh"
