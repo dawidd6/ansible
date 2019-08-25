@@ -2,4 +2,44 @@ home: "{{ ansible_env.HOME }}"
 user: "{{ ansible_env.USER }}"
 
 dotfiles: "{{ home }}/.dotfiles"
-brew: "/home/linuxbrew/.linuxbrew"
+keys: "{{ home }}/.keys"
+bin: "{{ home }}/bin"
+
+go_path: "{{ ansible_env.GOPATH }}"
+go_version: "1.12"
+
+github_repos:
+  - dawidd6/deber
+  - dawidd6/debutils
+  - dawidd6/dh-make-golang
+  - dawidd6/docker
+  - jesseduffield/lazydocker
+
+salsa_repos:
+  - docui
+  - termshark
+  - golang-github-alcortesm-tgz
+  - golang-github-anmitsu-go-shlex
+  - golang-github-armon-go-proxyproto
+  - golang-github-badgerodon-collections
+  - golang-github-cloudfoundry-jibber-jabber
+  - golang-github-emirpasic-gods
+  - golang-github-gcla-deep
+  - golang-github-gcla-gowid
+  - golang-github-gliderlabs-ssh
+  - golang-github-go-test-deep
+  - golang-github-guptarohit-asciigraph
+  - golang-github-heroku-rollrus
+  - golang-github-jbenet-go-context
+  - golang-github-kevinburke-ssh-config
+  - golang-github-mgutz-to
+  - golang-github-michaeltjones-walk
+  - golang-github-nicksnyder-go-i18n.v2
+  - golang-github-nozzle-throttler
+  - golang-github-ryanuber-go-glob
+  - golang-github-sap-go-hdb
+  - golang-github-schollz-closestmatch
+  - golang-github-spkg-bom
+  - golang-github-stvp-roll
+  - golang-github-x86kernel-htmlcolor
+  - golang-gopkg-src-d-go-billy.v4

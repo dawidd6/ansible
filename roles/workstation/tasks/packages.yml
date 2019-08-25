@@ -1,4 +1,4 @@
-- name: install apt packages
+- name: install cli apt packages
   become: yes
   apt:
     update_cache: yes
@@ -6,6 +6,26 @@
       - python-apt
       - python-psutil
       - lm-sensors
+      - curl
+      - xclip
+      - wget
+      - gpg
+      - trash-cli
+      - git
+      - htop
+      - neovim
+      - hub
+      - git-buildpackage
+      - devscripts
+      - ubuntu-dev-tools
+      - msmtp-mta
+      - apt-file
+      - build-essential
+
+- name: install gui apt packages
+  become: yes
+  apt:
+    name:
       - gnome-tweaks
       - gnome-calculator
       - gnome-system-monitor
@@ -31,3 +51,4 @@
       - firefox
       - ubuntu-software
       - gnome-software
+      - gnome-shell-extension-ubuntu-dock

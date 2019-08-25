@@ -4,7 +4,4 @@
     dest: "{{ home }}/github/{{ item }}"
     accept_hostkey: yes
     version: master
-  with_items:
-    - dawidd6/deber
-    - dawidd6/debutils
-    - jesseduffield/lazydocker
+  with_items: "{{ github_repos }}"

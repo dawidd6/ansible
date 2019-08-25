@@ -1,0 +1,35 @@
+- name: lookup keys
+  find:
+    file_type: directory
+    paths: "/media/{{ user }}"
+    depth: 2
+    recurse: yes
+    patterns: "*keys"
+  register: keys_dir
+
+- name: debug
+  debug:
+    var: keys_dir.files[0].path
+
+- name: clone keys
+  when: keys_dir.matched == 1
+  git:
+    repo: "{{ keys_dir.files[0].path }}"
+    dest: "{{ keys }}"
+    accept_hostkey: yes
+    bare: yes
+    version: master
+
+- name: configure keys repo
+  when: keys_dir.matched == 1
+  git_config:
+    repo: "{{ keys }}"
+    name: "status.showUntrackedFiles"
+    value: "no"
+    scope: local
+
+- name: deploy keys
+  when: keys_dir.matched == 1
+  command: git --git-dir="{{ keys }}" --work-tree="{{ home }}" checkout -f
+  args:
+    creates: "{{ home }}/.ssh/id_rsa"

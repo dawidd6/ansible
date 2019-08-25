@@ -4,6 +4,4 @@
     dest: "{{ home }}/salsa/{{ item }}"
     accept_hostkey: yes
     version: debian/sid
-  with_items:
-    - docui
-    - termshark
+  with_items: "{{ salsa_repos }}"
