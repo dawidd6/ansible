@@ -1,44 +1,8 @@
-- name: install cli apt packages
+- name: install apt packages
   become: yes
   apt:
     update_cache: yes
-    name:
-      - python-apt
-      - python-psutil
-      - lm-sensors
-      - curl
-      - xclip
-      - wget
-      - gpg
-      - trash-cli
-      - git
-      - htop
-      - neovim
-      - hub
-      - git-buildpackage
-      - devscripts
-      - ubuntu-dev-tools
-      - msmtp-mta
-      - apt-file
-      - build-essential
-
-- name: install gui apt packages
-  become: yes
-  apt:
-    name:
-      - gnome-tweaks
-      - gnome-calculator
-      - gnome-system-monitor
-      - evince
-      - cheese
-      - gpick
-      - octave
-      - gimp
-      - inkscape
-      - virtualbox
-      - chrome-gnome-shell
-      - chromium-browser
-      - numix-icon-theme-circle
+    name: "{{ apt_install_packages }}"
 
 - name: purge apt packages
   become: yes
@@ -46,9 +10,4 @@
     state: absent
     purge: yes
     autoremove: yes
-    name:
-      - snapd
-      - firefox
-      - ubuntu-software
-      - gnome-software
-      - gnome-shell-extension-ubuntu-dock
+    name: "{{ apt_purge_packages }}"

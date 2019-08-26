@@ -1,32 +1,32 @@
 - name: install golang
   become: yes
   apt:
-        name: "golang-{{ go_version }}"
+    name: "golang-{{ go_version }}"
 
 - name: update alternatives for go
   become: yes
   alternatives:
-        name: "{{ item }}"
-        path: "/usr/lib/go-{{ go_version }}/bin/{{ item }}"
-        link: "/usr/bin/{{ item }}"
+    name: "{{ item }}"
+    path: "/usr/lib/go-{{ go_version }}/bin/{{ item }}"
+    link: "/usr/bin/{{ item }}"
   with_items:
-        - go
-        - gofmt
+    - go
+    - gofmt
 
 - name: install deber
   command: go install
   args:
-        chdir: "{{ home }}/github/dawidd6/deber"
-        creates: "{{ go_path }}/bin/deber"
+    chdir: "{{ home }}/github/dawidd6/deber"
+    creates: "{{ go_path }}/bin/deber"
 
 - name: install dh-make-golang
   command: go install
   args:
-        chdir: "{{ home }}/github/dawidd6/dh-make-golang"
-        creates: "{{ go_path }}/bin/dh-make-golang"
+    chdir: "{{ home }}/github/dawidd6/dh-make-golang"
+    creates: "{{ go_path }}/bin/dh-make-golang"
 
 - name: install debutils
   command: go install ./...
   args:
-        chdir: "{{ home }}/github/dawidd6/debutils"
-        creates: "{{ go_path }}/bin/deb-bump-standards"
+    chdir: "{{ home }}/github/dawidd6/debutils"
+    creates: "{{ go_path }}/bin/deb-bump-standards"

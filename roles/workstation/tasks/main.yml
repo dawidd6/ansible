@@ -1,6 +1,22 @@
 - import_tasks: packages.yml
   tags: packages
 
+- import_tasks: dconf.yml
+  tags: dconf
+
+- import_tasks: printer.yml
+  tags: printer
+
+- import_tasks: intellij.yml
+  tags: intellij
+
+- import_tasks: keys.yml
+  tags: keys
+- import_tasks: scripts.yml
+  tags: scripts
+- import_tasks: dotfiles.yml
+  tags: dotfiles
+
 - import_tasks: tlp.yml
   when: ansible_system_vendor == "LENOVO" # laptop
   tags: tlp
@@ -14,22 +30,6 @@
   tags: docker
 - import_tasks: spotify.yml
   tags: spotify
-
-- import_tasks: printer.yml
-  tags: printer
-
-- import_tasks: intellij.yml
-  tags: intellij
-
-- import_tasks: scripts.yml
-  tags: scripts
-- import_tasks: dotfiles.yml
-  tags: dotfiles
-- import_tasks: keys.yml
-  tags: keys
-
-- import_tasks: dconf.yml
-  tags: dconf
 
 - import_tasks: salsa.yml
   tags: salsa

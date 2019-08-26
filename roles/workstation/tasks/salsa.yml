@@ -3,5 +3,6 @@
     repo: "git@salsa.debian.org:go-team/packages/{{ item }}.git"
     dest: "{{ home }}/salsa/{{ item }}"
     accept_hostkey: yes
+    update: no
     version: debian/sid
   with_items: "{{ salsa_repos }}"

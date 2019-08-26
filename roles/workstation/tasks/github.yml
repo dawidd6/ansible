@@ -3,5 +3,6 @@
     repo: "git@github.com:{{ item }}.git"
     dest: "{{ home }}/github/{{ item }}"
     accept_hostkey: yes
+    update: no
     version: master
   with_items: "{{ github_repos }}"

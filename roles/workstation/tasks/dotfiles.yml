@@ -3,6 +3,7 @@
     repo: git@github.com:dawidd6/dotfiles.git
     dest: "{{ dotfiles }}"
     accept_hostkey: yes
+    update: no
     bare: yes
     version: master
 

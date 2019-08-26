@@ -1,19 +1,19 @@
 - name: key code
   become: yes
   apt_key:
-      url: https://packages.microsoft.com/keys/microsoft.asc
+    url: "{{ code_key }}"
 
 - name: repo code
   become: yes
   apt_repository:
-      repo: deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main
-      state: present
-      filename: vscode # postinst script installs this file if does not exist
+    repo: "{{ code_repo }}"
+    state: present
+    filename: vscode # postinst script installs this file if does not exist
 
 - name: install code
   become: yes
   apt:
-      name: code
+    name: "{{ code_package }}"
 
 - name: list code extensions
   command: "code --list-extensions"
@@ -23,13 +23,9 @@
 - name: install code extensions
   command: code --install-extension "{{ item }}"
   when: item not in code_installed_extensions.stdout
-  #register: code_install_extension
-  #changed_when: code_install_extension.stdout is not search("already installed")
   with_items: "{{ code_extensions }}"
 
 - name: uninstall code extensions
   command: code --uninstall-extension "{{ item }}"
   when: item not in code_extensions
-  #register: code_uninstall_extension
-  #changed_when: code_uninstall_extension.stdout is not search("not installed")
   with_items: "{{ code_installed_extensions.stdout_lines }}"
