@@ -1,49 +1,35 @@
 - name: key code
   become: yes
   apt_key:
-    url: https://packages.microsoft.com/keys/microsoft.asc
-    id: BC528686B50D79E339D3721CEB3E94ADBE1229CF
+      url: https://packages.microsoft.com/keys/microsoft.asc
 
 - name: repo code
   become: yes
   apt_repository:
-    repo: deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main
-    state: present
-    filename: vscode # postinst script installs this file if does not exist
+      repo: deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main
+      state: present
+      filename: vscode # postinst script installs this file if does not exist
 
 - name: install code
   become: yes
   apt:
-    name: code
+      name: code
+
+- name: list code extensions
+  command: "code --list-extensions"
+  register: code_installed_extensions
+  changed_when: false
 
 - name: install code extensions
   command: code --install-extension "{{ item }}"
-  register: code_extension
-  changed_when: code_extension.stdout is not search("already installed")
-  with_items:
-    - christian-kohler.path-intellisense
-    - CoenraadS.bracket-pair-colorizer
-    - Dart-Code.dart-code
-    - Dart-Code.flutter
-    - DavidAnson.vscode-markdownlint
-    - dunstontc.viml
-    - Equinusocio.vsc-material-theme
-    - formulahendry.terminal
-    - Gimly81.matlab
-    - Gruntfuggly.todo-tree
-    - ms-azuretools.vscode-docker
-    - ms-vscode.cpptools
-    - ms-vscode.Go
-    - peterfh.linesinfostatusbar
-    - PKief.material-icon-theme
-    - platformio.platformio-ide
-    - rafaelmaiolla.diff
-    - redhat.vscode-yaml
-    - romanrei.material-dark
-    - shardulm94.trailing-spaces
-    - skyapps.fish-vscode
-    - tariky.easy-snippet-maker
-    - vscodevim.vim
-    - vscoss.vscode-ansible
-    - yzhang.markdown-all-in-one
-    - zxh404.vscode-proto3
+  when: item not in code_installed_extensions.stdout
+  #register: code_install_extension
+  #changed_when: code_install_extension.stdout is not search("already installed")
+  with_items: "{{ code_extensions }}"
+
+- name: uninstall code extensions
+  command: code --uninstall-extension "{{ item }}"
+  when: item not in code_extensions
+  #register: code_uninstall_extension
+  #changed_when: code_uninstall_extension.stdout is not search("not installed")
+  with_items: "{{ code_installed_extensions.stdout_lines }}"
