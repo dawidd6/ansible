@@ -1,16 +1,11 @@
 - name: install tlp
   become: yes
+  notify: start tlp
   apt:
     name: tlp
-  register: tlp_installed
 
 - name: disable bt on startup
   become: yes
   lineinfile:
     line: DEVICES_TO_DISABLE_ON_STARTUP="bluetooth"
     path: /etc/default/tlp
-
-- name: start tlp
-  become: yes
-  command: tlp start
-  when: tlp_installed.changed

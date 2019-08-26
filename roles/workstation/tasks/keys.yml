@@ -33,3 +33,4 @@
   command: git --git-dir="{{ keys }}" --work-tree="{{ home }}" checkout -f
   args:
     creates: "{{ home }}/.ssh/id_rsa"
+    warn: false
