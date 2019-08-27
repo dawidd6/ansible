@@ -8,6 +8,30 @@ bin: "{{ home }}/bin"
 go_path: "{{ home }}/go"
 go_version: "1.12"
 
+gnome_extensions_dir: "{{ home }}/.local/share/gnome-shell/extensions"
+gnome_extensions_list: # for later usage in task
+gnome_extensions:
+  - {
+      id: "clipboard-indicator@tudmotu.com",
+      dir: "clipboard-indicator@tudmotu.com",
+      version: 30,
+    }
+  - {
+      id: "gtktitlebarvelitasali.github.io",
+      dir: "gtktitlebar@velitasali.github.io",
+      version: 3,
+    }
+  - {
+      id: "hide-dash@xenatt.github.com",
+      dir: "hide-dash@xenatt.github.com",
+      version: 8,
+    }
+  - {
+      id: "gsconnectandyholmes.github.io",
+      dir: "gsconnect@andyholmes.github.io",
+      version: 24,
+    }
+
 intellij_url: https://download.jetbrains.com/idea/ideaIU-2019.2.tar.gz
 intellij_dir: "{{ home }}/intellij"
 
@@ -73,6 +97,7 @@ apt_install_packages:
   - build-essential
   - postgresql-client
   - gnome-tweaks
+  - gnome-boxes
   - gnome-calculator
   - gnome-system-monitor
   - chrome-gnome-shell
@@ -85,7 +110,6 @@ apt_install_packages:
   - octave
   - gimp
   - inkscape
-  - virtualbox
 apt_purge_packages:
   - snapd
   - firefox
