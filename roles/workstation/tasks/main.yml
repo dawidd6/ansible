@@ -17,6 +17,11 @@
 - import_tasks: dotfiles.yml
   tags: dotfiles
 
+- import_tasks: salsa.yml
+  tags: salsa
+- import_tasks: github.yml
+  tags: github
+
 - import_tasks: tlp.yml
   when: ansible_system_vendor == "LENOVO" # laptop
   tags: tlp
@@ -30,8 +35,3 @@
   tags: docker
 - import_tasks: spotify.yml
   tags: spotify
-
-- import_tasks: salsa.yml
-  tags: salsa
-- import_tasks: github.yml
-  tags: github
