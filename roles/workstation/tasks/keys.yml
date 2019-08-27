@@ -34,3 +34,13 @@
   args:
     creates: "{{ home }}/.ssh/id_rsa"
     warn: false
+
+- name: fix keys permissions
+  when: keys_dir.matched == 1
+  file:
+    path: "{{ item }}"
+    mode: 0600
+  with_fileglob:
+    - "{{ home }}/.gnupg/*"
+    - "{{ home }}/.ssh/*"
+  
