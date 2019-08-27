@@ -1,0 +1,43 @@
+- name: dconfigure gnome
+  dconf:
+    key: "/org/gnome/desktop/notifications/show-in-lock-screen"
+    value: "false"
+
+- name: create extensions dirs
+  file:
+    path: "{{ gnome_extensions_dir }}/{{ item.dir }}"
+    state: directory
+  with_items: "{{ gnome_extensions }}"
+
+- name: create extensions list
+  set_fact:
+    gnome_extensions_list: "'{{ item.dir }}', {{ gnome_extensions_list }}"
+  with_items: "{{ gnome_extensions }}"
+
+- name: list extensions
+  find:
+    file_type: directory
+    paths: "{{ gnome_extensions_dir }}"
+    depth: 2
+  register: gnome_installed_extensions
+  changed_when: false
+
+- name: download extensions
+  unarchive:
+    src: "https://extensions.gnome.org/extension-data/{{ item.id }}.v{{ item.version }}.shell-extension.zip"
+    dest: "{{ gnome_extensions_dir }}/{{ item.dir }}"
+    creates: "{{ gnome_extensions_dir }}/{{ item.dir }}/metadata.json"
+    remote_src: yes
+  with_items: "{{ gnome_extensions }}"
+
+- name: enable extensions
+  dconf:
+    key: "/org/gnome/shell/enabled-extensions"
+    value: "[{{ gnome_extensions_list }}]"
+
+- name: remove extensions
+  file:
+    state: absent
+    path: "{{ item.path }}"
+  when: item.path | basename not in gnome_extensions_list
+  with_items: "{{ gnome_installed_extensions.files }}"

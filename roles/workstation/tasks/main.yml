@@ -1,8 +1,8 @@
 - import_tasks: packages.yml
   tags: packages
 
-- import_tasks: dconf.yml
-  tags: dconf
+- import_tasks: gnome.yml
+  tags: gnome
 
 - import_tasks: printer.yml
   tags: printer

@@ -1,4 +1,0 @@
-- name: configure gnome
-  dconf:
-    key: "/org/gnome/desktop/notifications/show-in-lock-screen"
-    value: "false"
