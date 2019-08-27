@@ -9,14 +9,14 @@
     path: "{{ intellij_dir }}/bin/idea.sh"
 
 - name: download intellij
-  when: not intellij_exists
+  when: not intellij_exists.stat.exists
   get_url:
     url: "{{ intellij_url }}"
     dest: /tmp/intellij.tar.gz
     timeout: 3600
 
 - name: unarchive intellij
-  when: not intellij_exists
+  when: not intellij_exists.stat.exists
   unarchive:
     src: /tmp/intellij.tar.gz
     dest: "{{ intellij_dir }}"
