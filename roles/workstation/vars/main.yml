@@ -31,6 +31,7 @@ gnome_extensions:
       dir: "gsconnect@andyholmes.github.io",
       version: 24,
     }
+  - { id: "lockkeysvaina.lt", dir: "lockkeys@vaina.lt", version: 28 }
 
 intellij_url: https://download.jetbrains.com/idea/ideaIU-2019.2.tar.gz
 intellij_dir: "{{ home }}/intellij"
