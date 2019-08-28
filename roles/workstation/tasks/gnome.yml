@@ -1,7 +1,10 @@
 - name: dconfigure gnome
   dconf:
-    key: "/org/gnome/desktop/notifications/show-in-lock-screen"
-    value: "false"
+    key: "{{ item.0.section }}/{{ item.1.key }}"
+    value: "{{ item.1.value }}"
+  with_subelements:
+    - "{{ gnome_dconf }}"
+    - store
 
 - name: create extensions dirs
   file:
