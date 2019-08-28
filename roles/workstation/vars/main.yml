@@ -129,6 +129,7 @@ github_repos:
 salsa_repos:
   - docui
   - lazygit
+  - lazydocker
   - termshark
   - golang-github-alcortesm-tgz
   - golang-github-anmitsu-go-shlex
@@ -155,3 +156,26 @@ salsa_repos:
   - golang-github-stvp-roll
   - golang-github-x86kernel-htmlcolor
   - golang-gopkg-src-d-go-billy.v4
+  - golang-github-integrii-flaggy
+  - golang-github-mgutz-minimist
+  - golang-github-srwiley-rasterx
+  - golang-github-openpeedeep-xdg
+  - golang-github-skanehira-gocui-component
+  - golang-github-jesseduffield-asciigraph
+  - golang-github-jesseduffield-roll
+  - golang-github-jesseduffield-yaml
+  - golang-github-jesseduffield-rollrus
+  - golang-github-mcuadros-go-lookup
+  - golang-github-kodeworks-golang-image-ico
+  - golang-github-josephspurrier-goversioninfo
+  - golang-github-acarl005-stripansi
+  - golang-github-oklog-run
+  - golang-github-jeffail-gabs
+  - golang-github-jefferai-jsonx
+  - golang-github-jackmordaunt-icns
+
+printer_debs:
+  - http://www.brother.com/pub/bsc/linux/dlf/dcpj125lpr-1.1.3-1.i386.deb
+  - http://www.brother.com/pub/bsc/linux/dlf/dcpj125cupswrapper-1.1.3-1.i386.deb
+  - http://www.brother.com/pub/bsc/linux/dlf/brscan-skey-0.2.4-1.amd64.deb
+  - http://www.brother.com/pub/bsc/linux/dlf/brscan3-0.2.11-5.amd64.deb

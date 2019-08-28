@@ -14,7 +14,7 @@
     value: "no"
     scope: local
 
-- name: deploy dotfiles
+- name: checkout dotfiles
   command: git --git-dir="{{ dotfiles }}" --work-tree="{{ home }}" checkout -f
   args:
     creates: "{{ home }}/README.md"
