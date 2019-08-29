@@ -145,6 +145,7 @@ apt_install_packages:
   - htop
   - neovim
   - hub
+  - help2man
   - devscripts
   - git-buildpackage
   - ubuntu-dev-tools
@@ -158,7 +159,6 @@ apt_install_packages:
   - gnome-system-monitor
   - chrome-gnome-shell
   - chromium-browser
-  - numix-icon-theme-circle
   - mpv
   - evince
   - cheese
@@ -174,6 +174,7 @@ apt_purge_packages:
   - gnome-shell-extension-ubuntu-dock
   - gnome-shell-extension-desktop-icons
 
+github_dir: "{{ home }}/github"
 github_repos:
   - dawidd6/deber
   - dawidd6/debutils
@@ -181,6 +182,8 @@ github_repos:
   - dawidd6/docker
   - dawidd6/lazygit-debian
   - jesseduffield/lazydocker
+
+salsa_dir: "{{ home }}/salsa"
 salsa_repos:
   - docui
   - lazygit

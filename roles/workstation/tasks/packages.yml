@@ -4,6 +4,12 @@
     update_cache: yes
     name: "{{ apt_install_packages }}"
 
+# remove this once upgraded to eoan
+- name: install ansible-lint (workaround for disco)
+  become: yes
+  apt:
+    deb: http://mirrors.kernel.org/ubuntu/pool/universe/a/ansible-lint/ansible-lint_4.1.0+dfsg.1-1_all.deb
+
 - name: purge apt packages
   become: yes
   apt:
