@@ -29,13 +29,16 @@ gnome_extensions:
   - id: "suspend-buttonlaserb"
     dir: "suspend-button@laserb"
     version: 20
+  - id: "VitalsCoreCoding.com"
+    dir: "Vitals@CoreCoding.com"
+    version: 20
 gnome_dconf:
   - section: "/org/gnome/shell"
     store:
       - key: "enable-hot-corners"
         value: "true"
       - key: "favorite-apps"
-        value: "['org.gnome.Terminal.desktop', 'code.desktop', 'chromium-browser.desktop', 'jetbrains-idea.desktop', 'spotify.desktop', 'org.gnome.Nautilus.desktop', 'org.gnome.Boxes.desktop', 'org.gnome.tweaks.desktop', 'gnome-system-monitor.desktop', 'org.gnome.DiskUtility.desktop', 'org.gnome.Screenshot.desktop', 'gnome-control-center.desktop']"
+        value: "['org.gnome.Terminal.desktop', 'code.desktop', 'chromium-browser.desktop', 'jetbrains-idea.desktop', 'spotify.desktop', 'org.gnome.Nautilus.desktop', 'org.gnome.Boxes.desktop', 'org.gnome.tweaks.desktop', 'gnome-system-monitor.desktop', 'org.gnome.Screenshot.desktop', 'gnome-control-center.desktop']"
   - section: "/org/gnome/mutter"
     store:
       - key: "center-new-windows"
@@ -94,6 +97,18 @@ gnome_dconf:
         value: "2000"
       - key: "notify-on-copy"
         value: "false"
+  - section: "/org/gnome/shell/extensions/vitals"
+    store:
+      - key: "show-battery"
+        value: "false"
+      - key: "show-voltage"
+        value: "false"
+      - key: "show-system"
+        value: "false"
+      - key: "update-time"
+        value: "3"
+      - key: "hot-sensors"
+        value: "['_memory_usage_', '_processor_average_', '__temperature_avg__', '__max_network-download__', '__max_network-upload__']"
 
 intellij_url: https://download.jetbrains.com/idea/ideaIU-2019.2.tar.gz
 intellij_dir: "{{ home }}/intellij"
@@ -166,6 +181,7 @@ apt_install_packages:
   - gnome-system-monitor
   - chrome-gnome-shell
   - chromium-browser
+  - transmission
   - mpv
   - evince
   - cheese
