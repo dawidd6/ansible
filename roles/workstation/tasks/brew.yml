@@ -1,0 +1,25 @@
+- name: create brew base directories
+  become: true
+  file:
+    path: "{{ brew }}/bin"
+    state: directory
+    owner: "{{ user }}"
+    group: "{{ user }}"
+
+- name: clone brew repository
+  git:
+    repo: "https://github.com/Homebrew/brew"
+    dest: "{{ brew }}/Homebrew"
+    version: "master"
+
+- name: create symlink to brew binary
+  file:
+    src: "{{ brew }}/Homebrew/bin/brew"
+    dest: "{{ brew }}/bin/brew"
+    state: "link"
+
+- name: install brew packages
+  homebrew:
+    path: "{{ brew }}/bin"
+    update_homebrew: yes
+    name: "{{ brew_packages }}"

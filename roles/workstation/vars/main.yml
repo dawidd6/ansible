@@ -152,6 +152,10 @@ code_extensions:
   - yzhang.markdown-all-in-one
   - zxh404.vscode-proto3
 
+brew: "/home/linuxbrew/.linuxbrew"
+brew_packages:
+  - bat
+
 apt_install_packages:
   - ansible
   - ansible-lint
@@ -166,6 +170,7 @@ apt_install_packages:
   - git
   - htop
   - neovim
+  - neofetch
   - hub
   - help2man
   - devscripts
@@ -202,6 +207,7 @@ github_repos:
   - dawidd6/deber
   - dawidd6/debutils
   - dawidd6/dh-make-golang
+  - dawidd6/homebrew-tap
   - dawidd6/docker
   - dawidd6/lazygit-debian
   - jesseduffield/lazydocker
