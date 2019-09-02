@@ -10,6 +10,7 @@
   git:
     repo: "https://github.com/Homebrew/brew"
     dest: "{{ brew }}/Homebrew"
+    update: no
     version: "master"
 
 - name: create symlink to brew binary

@@ -1,17 +1,11 @@
-- import_tasks: packages.yml
-  tags: packages
-
+- import_tasks: apt.yml
+  tags: apt
 - import_tasks: brew.yml
   tags: brew
-
-- import_tasks: gnome.yml
-  tags: gnome
-
+- import_tasks: snap.yml
+  tags: snap
 - import_tasks: printer.yml
   tags: printer
-
-- import_tasks: intellij.yml
-  tags: intellij
 
 - import_tasks: keys.yml
   tags: keys
@@ -25,16 +19,9 @@
 - import_tasks: github.yml
   tags: github
 
-- import_tasks: tlp.yml
-  when: ansible_system_vendor == "LENOVO" # laptop
-  tags: tlp
-- import_tasks: go.yml
-  tags: go
-- import_tasks: fish.yml
-  tags: fish
-- import_tasks: code.yml
-  tags: code
-- import_tasks: docker.yml
-  tags: docker
-- import_tasks: spotify.yml
-  tags: spotify
+- import_tasks: dconf.yml
+  tags: dconf
+- import_tasks: tweaks.yml
+  tags: tweaks
+- import_tasks: extensions.yml
+  tags: extensions

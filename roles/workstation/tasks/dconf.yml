@@ -1,0 +1,7 @@
+- name: dconfigure gnome
+  dconf:
+    key: "{{ item.0.section }}/{{ item.1.key }}"
+    value: "{{ item.1.value }}"
+  with_subelements:
+    - "{{ gnome_dconf }}"
+    - store

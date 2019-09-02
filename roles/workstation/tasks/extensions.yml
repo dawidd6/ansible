@@ -1,23 +1,30 @@
-- name: dconfigure gnome
-  dconf:
-    key: "{{ item.0.section }}/{{ item.1.key }}"
-    value: "{{ item.1.value }}"
-  with_subelements:
-    - "{{ gnome_dconf }}"
-    - store
+- name: list code extensions
+  command: "code --list-extensions"
+  register: code_installed_extensions
+  changed_when: false
 
-- name: create extensions dirs
+- name: install code extensions
+  command: code --install-extension "{{ item }}"
+  when: item not in code_installed_extensions.stdout
+  with_items: "{{ code_extensions }}"
+
+- name: uninstall code extensions
+  command: code --uninstall-extension "{{ item }}"
+  when: item not in code_extensions
+  with_items: "{{ code_installed_extensions.stdout_lines }}"
+
+- name: create gnome extensions dirs
   file:
     path: "{{ gnome_extensions_dir }}/{{ item.dir }}"
     state: directory
   with_items: "{{ gnome_extensions }}"
 
-- name: create extensions list
+- name: create gnome extensions list
   set_fact:
     gnome_extensions_list: "'{{ item.dir }}', {{ gnome_extensions_list }}"
   with_items: "{{ gnome_extensions }}"
 
-- name: list extensions
+- name: list gnome extensions
   find:
     file_type: directory
     paths: "{{ gnome_extensions_dir }}"
@@ -25,7 +32,7 @@
   register: gnome_installed_extensions
   changed_when: false
 
-- name: download extensions
+- name: download gnome extensions
   unarchive:
     src: "https://extensions.gnome.org/extension-data/{{ item.id }}.v{{ item.version }}.shell-extension.zip"
     dest: "{{ gnome_extensions_dir }}/{{ item.dir }}"
@@ -33,12 +40,12 @@
     remote_src: yes
   with_items: "{{ gnome_extensions }}"
 
-- name: enable extensions
+- name: enable gnome extensions
   dconf:
     key: "/org/gnome/shell/enabled-extensions"
     value: "[{{ gnome_extensions_list }}]"
 
-- name: remove extensions
+- name: remove gnome extensions
   file:
     state: absent
     path: "{{ item.path }}"

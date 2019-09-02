@@ -5,9 +5,6 @@ dotfiles: "{{ home }}/.dotfiles"
 keys: "{{ home }}/.keys"
 bin: "{{ home }}/bin"
 
-go_path: "{{ home }}/go"
-go_version: "1.12"
-
 gnome_extensions_dir: "{{ home }}/.local/share/gnome-shell/extensions"
 gnome_extensions_list: # for later usage in task
 gnome_extensions:
@@ -37,8 +34,6 @@ gnome_dconf:
     store:
       - key: "enable-hot-corners"
         value: "true"
-      - key: "favorite-apps"
-        value: "['org.gnome.Terminal.desktop', 'code.desktop', 'chromium-browser.desktop', 'jetbrains-idea.desktop', 'spotify.desktop', 'org.gnome.Nautilus.desktop', 'org.gnome.Boxes.desktop', 'org.gnome.tweaks.desktop', 'gnome-system-monitor.desktop', 'org.gnome.Screenshot.desktop', 'gnome-control-center.desktop']"
   - section: "/org/gnome/mutter"
     store:
       - key: "center-new-windows"
@@ -110,20 +105,6 @@ gnome_dconf:
       - key: "hot-sensors"
         value: "['_memory_usage_', '_processor_average_', '__temperature_avg__', '__max_network-download__', '__max_network-upload__']"
 
-intellij_url: https://download.jetbrains.com/idea/ideaIU-2019.2.tar.gz
-intellij_dir: "{{ home }}/intellij"
-
-docker_key: https://download.docker.com/linux/debian/gpg
-docker_repo: deb [arch=amd64] https://download.docker.com/linux/{{ ansible_distribution|lower }} {{ ansible_distribution_release }} stable
-docker_package: docker-ce
-
-spotify_key: https://download.spotify.com/debian/pubkey.gpg
-spotify_repo: deb http://repository.spotify.com stable non-free
-spotify_package: spotify-client
-
-code_key: https://packages.microsoft.com/keys/microsoft.asc
-code_repo: deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main
-code_package: code
 code_extensions:
   - christian-kohler.path-intellisense
   - CoenraadS.bracket-pair-colorizer
@@ -154,32 +135,42 @@ code_extensions:
 
 brew: "/home/linuxbrew/.linuxbrew"
 brew_packages:
-  - bat
-
-apt_install_packages:
-  - ansible
+  - docker-completion
+  - docker-compose
   - ansible-lint
-  - python-apt
-  - python-psutil
-  - lm-sensors
-  - trash-cli
-  - curl
-  - xclip
+  - ansible
+  - bat
+  - fish
+  - neovim
+  - hub
+  - go
   - wget
+  - curl
   - gpg
   - git
   - htop
-  - neovim
-  - neofetch
-  - hub
+  - trash-cli
   - help2man
+  - shellcheck
+  - postgresql
+  - dawidd6/tap/neofetch
+  - dawidd6/tap/deber
+  - cjbassi/gotop/gotop
+  - isacikgoz/taps/gitbatch
+  - jesseduffield/lazygit/lazygit
+  - jesseduffield/lazydocker/lazydocker
+
+apt_install_packages:
+  - docker.io
+  - lm-sensors
+  - tlp
+  - xsel
   - devscripts
   - git-buildpackage
   - ubuntu-dev-tools
   - msmtp-mta
   - apt-file
   - build-essential
-  - postgresql-client
   - gnome-tweaks
   - gnome-boxes
   - gnome-calculator
@@ -195,18 +186,31 @@ apt_install_packages:
   - gimp
   - inkscape
 apt_purge_packages:
-  - snapd
   - firefox
   - ubuntu-software
   - gnome-software
   - gnome-shell-extension-ubuntu-dock
   - gnome-shell-extension-desktop-icons
 
+snap_install_packages:
+  - name: intellij-idea-ultimate
+    classic: yes
+  - name: code
+    classic: yes
+  - name: spotify
+    classic: no
+snap_remove_packages:
+  - gnome-calculator
+  - gnome-system-monitor
+
 github_dir: "{{ home }}/github"
 github_repos:
   - dawidd6/deber
   - dawidd6/debutils
   - dawidd6/dh-make-golang
+  - dawidd6/go-appindicator
+  - dawidd6/go-spotify-dbus
+  - dawidd6/AndTTT
   - dawidd6/homebrew-tap
   - dawidd6/docker
   - dawidd6/lazygit-debian
