@@ -1,0 +1,23 @@
+- name: key docker
+  become: yes
+  apt_key:
+    url: "{{ docker_key }}"
+
+- name: repo docker
+  become: yes
+  apt_repository:
+    repo: "{{ docker_repo }}"
+    state: present
+
+- name: install docker
+  become: yes
+  apt:
+    name: "{{ docker_package }}"
+
+- name: add user to docker group
+  become: yes
+  user:
+    name: "{{ user }}"
+    append: yes
+    groups:
+      - docker

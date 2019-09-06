@@ -24,3 +24,15 @@
     path: "{{ brew }}/bin"
     update_homebrew: yes
     name: "{{ brew_packages }}"
+
+- name: add brewed fish to shells
+  become: yes
+  lineinfile:
+    path: /etc/shells
+    line: "{{ brew }}/bin/fish"
+
+- name: set fish as default shell
+  become: yes
+  user:
+    name: "{{ user }}"
+    shell: "{{ brew }}/bin/fish"

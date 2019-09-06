@@ -1,17 +1,10 @@
-- name: list code extensions
-  command: "code --list-extensions"
-  register: code_installed_extensions
-  changed_when: false
-
-- name: install code extensions
-  command: code --install-extension "{{ item }}"
-  when: item not in code_installed_extensions.stdout
-  with_items: "{{ code_extensions }}"
-
-- name: uninstall code extensions
-  command: code --uninstall-extension "{{ item }}"
-  when: item not in code_extensions
-  with_items: "{{ code_installed_extensions.stdout_lines }}"
+- name: dconfigure gnome
+  dconf:
+    key: "{{ item.0.section }}/{{ item.1.key }}"
+    value: "{{ item.1.value }}"
+  with_subelements:
+    - "{{ gnome_dconf }}"
+    - store
 
 - name: create gnome extensions dirs
   file:

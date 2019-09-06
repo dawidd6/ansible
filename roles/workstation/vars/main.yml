@@ -105,6 +105,20 @@ gnome_dconf:
       - key: "hot-sensors"
         value: "['_memory_usage_', '_processor_average_', '__temperature_avg__', '__max_network-download__', '__max_network-upload__']"
 
+intellij_url: https://download.jetbrains.com/idea/ideaIU-2019.2.tar.gz
+intellij_dir: "{{ home }}/intellij"
+
+docker_key: https://download.docker.com/linux/debian/gpg
+docker_repo: deb [arch=amd64] https://download.docker.com/linux/{{ ansible_distribution|lower }} {{ ansible_distribution_release }} stable
+docker_package: docker-ce
+
+spotify_key: https://download.spotify.com/debian/pubkey.gpg
+spotify_repo: deb http://repository.spotify.com stable non-free
+spotify_package: spotify-client
+
+code_key: https://packages.microsoft.com/keys/microsoft.asc
+code_repo: deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main
+code_package: code
 code_extensions:
   - christian-kohler.path-intellisense
   - CoenraadS.bracket-pair-colorizer
@@ -139,19 +153,19 @@ brew_packages:
   - docker-compose
   - ansible-lint
   - ansible
+  - lm-sensors
   - bat
   - fish
   - neovim
   - hub
   - go
   - wget
-  - curl
-  - gpg
-  - git
   - htop
+  - jq
   - trash-cli
   - help2man
   - shellcheck
+  - asciinema
   - postgresql
   - dawidd6/tap/neofetch
   - dawidd6/tap/deber
@@ -161,9 +175,6 @@ brew_packages:
   - jesseduffield/lazydocker/lazydocker
 
 apt_install_packages:
-  - docker.io
-  - lm-sensors
-  - tlp
   - xsel
   - devscripts
   - git-buildpackage
@@ -186,32 +197,20 @@ apt_install_packages:
   - gimp
   - inkscape
 apt_purge_packages:
+  - snapd
   - firefox
   - ubuntu-software
   - gnome-software
   - gnome-shell-extension-ubuntu-dock
   - gnome-shell-extension-desktop-icons
 
-snap_install_packages:
-  - name: intellij-idea-ultimate
-    classic: yes
-  - name: code
-    classic: yes
-  - name: spotify
-    classic: no
-snap_remove_packages:
-  - gnome-calculator
-  - gnome-system-monitor
-
 github_dir: "{{ home }}/github"
 github_repos:
   - dawidd6/deber
-  - dawidd6/debutils
   - dawidd6/dh-make-golang
   - dawidd6/go-appindicator
   - dawidd6/go-spotify-dbus
   - dawidd6/AndTTT
-  - dawidd6/homebrew-tap
   - dawidd6/docker
   - dawidd6/lazygit-debian
   - jesseduffield/lazydocker
