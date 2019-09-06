@@ -22,7 +22,6 @@
 - name: install brew packages
   homebrew:
     path: "{{ brew }}/bin"
-    update_homebrew: yes
     name: "{{ brew_packages }}"
 
 - name: add brewed fish to shells
