@@ -8,8 +8,6 @@
   tags: docker
 - import_tasks: intellij.yml
   tags: intellij
-- import_tasks: printer.yml
-  tags: printer
 - import_tasks: spotify.yml
   tags: spotify
 - import_tasks: tlp.yml

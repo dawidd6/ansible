@@ -3,4 +3,4 @@
 set -euo pipefail
 
 sudo apt-get update
-sudo apt-get install build-essential curl file git ansible
+sudo apt-get install build-essential curl file git ansible python python-psutil
