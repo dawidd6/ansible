@@ -164,6 +164,8 @@ brew_packages:
   - wget
   - htop
   - jq
+  - quilt
+  - msmtp
   - trash-cli
   - help2man
   - shellcheck
@@ -178,12 +180,6 @@ brew_packages:
 
 apt_install_packages:
   - xsel
-  - devscripts
-  - git-buildpackage
-  - ubuntu-dev-tools
-  - msmtp-mta
-  - apt-file
-  - build-essential
   - gnome-tweaks
   - gnome-boxes
   - gnome-calculator
