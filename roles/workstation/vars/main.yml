@@ -154,6 +154,7 @@ brew_packages:
   - docker-compose
   - ansible-lint
   - ansible
+  - git
   - lm-sensors
   - bat
   - fish
@@ -162,6 +163,7 @@ brew_packages:
   - ruby
   - go
   - wget
+  - curl
   - htop
   - jq
   - quilt
