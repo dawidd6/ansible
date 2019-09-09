@@ -14,6 +14,7 @@
   tags: spotify
 - import_tasks: tlp.yml
   tags: tlp
+  when: ansible_system_vendor == "LENOVO" # laptop
 
 - import_tasks: keys.yml
   tags: keys
