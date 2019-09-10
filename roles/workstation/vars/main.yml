@@ -146,9 +146,11 @@ code_extensions:
   - vscoss.vscode-ansible
   - yzhang.markdown-all-in-one
   - zxh404.vscode-proto3
-  - rebornix.ruby
 
 brew: "/home/linuxbrew/.linuxbrew"
+brew_commands:
+  - linuxbrew/homebrew-developer
+  - homebrew/homebrew-livecheck
 brew_packages:
   - docker-completion
   - docker-compose
@@ -173,14 +175,15 @@ brew_packages:
   - shellcheck
   - asciinema
   - postgresql
+  - lazygit
+  - lazydocker
   - dawidd6/tap/neofetch
   - dawidd6/tap/deber
   - cjbassi/gotop/gotop
   - isacikgoz/taps/gitbatch
-  - jesseduffield/lazygit/lazygit
-  - jesseduffield/lazydocker/lazydocker
 
 apt_install_packages:
+  - zlib1g-dev # needed by `brew audit` and friends
   - xsel
   - gnome-tweaks
   - gnome-boxes

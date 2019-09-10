@@ -12,6 +12,9 @@
     dest: "{{ brew }}/Homebrew"
     update: no
     version: "master"
+  notify:
+    - brew core unshallow
+    - brew git remote
 
 - name: create symlink to brew binary
   file:
@@ -19,6 +22,13 @@
     dest: "{{ brew }}/bin/brew"
     state: "link"
   notify: brew update
+
+- name: add brew commands
+  command: "{{ brew }}/bin/brew tap {{ item }}"
+  args:
+    warn: no
+    creates: "{{ brew }}/Homebrew/Library/Taps/{{ item }}"
+  with_items: "{{ brew_commands }}"
 
 - name: install brew packages
   homebrew:
