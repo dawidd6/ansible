@@ -11,3 +11,15 @@
     purge: yes
     autoremove: yes
     name: "{{ apt_purge_packages }}"
+
+- name: disable apt daily service
+  become: yes
+  systemd:
+    name: "{{ item }}"
+    masked: yes
+    enabled: no
+  with_items:
+    - apt-daily-upgrade.service
+    - apt-daily-upgrade.timer
+    - apt-daily.service
+    - apt-daily.timer
