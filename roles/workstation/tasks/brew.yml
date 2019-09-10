@@ -18,6 +18,7 @@
     src: "{{ brew }}/Homebrew/bin/brew"
     dest: "{{ brew }}/bin/brew"
     state: "link"
+  notify: brew update
 
 - name: install brew packages
   homebrew:
