@@ -120,6 +120,7 @@ code_key: https://packages.microsoft.com/keys/microsoft.asc
 code_repo: deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main
 code_package: code
 code_extensions:
+  - castwide.solargraph
   - christian-kohler.path-intellisense
   - CoenraadS.bracket-pair-colorizer
   - Dart-Code.dart-code
@@ -131,11 +132,11 @@ code_extensions:
   - Gimly81.matlab
   - Gruntfuggly.todo-tree
   - ms-azuretools.vscode-docker
+  - ms-python.python
   - ms-vscode.cpptools
   - ms-vscode.Go
   - peterfh.linesinfostatusbar
   - PKief.material-icon-theme
-  - platformio.platformio-ide
   - rafaelmaiolla.diff
   - redhat.vscode-yaml
   - romanrei.material-dark
