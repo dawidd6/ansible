@@ -77,6 +77,7 @@ brew: "/home/linuxbrew/.linuxbrew"
 brew_commands:
   - linuxbrew/homebrew-developer
   - homebrew/homebrew-livecheck
+  - dawidd6/homebrew-autoremove
 brew_packages:
   - docker-completion
   - docker-compose
@@ -103,8 +104,13 @@ brew_packages:
   - postgresql
   - lazygit
   - lazydocker
+  - dawidd6/tap/keybase-cli
   - dawidd6/tap/neofetch
   - dawidd6/tap/deber
+  - dawidd6/tap/dh-make-golang
+  - dawidd6/tap/pristine-tar
+  - dawidd6/tap/git-buildpackage
+  - dawidd6/tap/devscripts
   - cjbassi/gotop/gotop
   - isacikgoz/taps/gitbatch
 
