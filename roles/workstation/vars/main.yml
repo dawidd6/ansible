@@ -79,6 +79,7 @@ brew_commands:
   - homebrew/homebrew-livecheck
   - dawidd6/homebrew-autoremove
 brew_packages:
+  - diff-so-fancy
   - docker-completion
   - docker-compose
   - ansible-lint
