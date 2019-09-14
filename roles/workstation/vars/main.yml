@@ -85,6 +85,7 @@ brew_packages:
   - ansible
   - git
   - lm-sensors
+  - youtube-dl
   - bat
   - fish
   - neovim
@@ -125,7 +126,7 @@ apt_install_packages:
   - chromium-browser
   - simple-scan
   - transmission
-  - mpv
+  - totem
   - evince
   - cheese
   - gpick
