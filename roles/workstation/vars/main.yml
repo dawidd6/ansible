@@ -46,6 +46,7 @@ code_repo: deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable m
 code_package: code
 code_extensions:
   - castwide.solargraph
+  - kaiwood.endwise
   - christian-kohler.path-intellisense
   - CoenraadS.bracket-pair-colorizer
   - Dart-Code.dart-code
@@ -88,6 +89,7 @@ brew_packages:
   - lm-sensors
   - youtube-dl
   - bat
+  - noti
   - fish
   - neovim
   - hub
@@ -126,6 +128,8 @@ apt_install_packages:
   - chrome-gnome-shell
   - chromium-browser
   - simple-scan
+  - libreoffice-writer
+  - libreoffice-gtk3
   - transmission
   - totem
   - evince
