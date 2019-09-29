@@ -12,9 +12,3 @@
   args:
     warn: no
     chdir: "{{ brew }}/Homebrew/Library/Taps/homebrew/homebrew-core"
-
-- name: brew git remote
-  command: "git remote add {{ user }} git@github.com:{{ user }}/linuxbrew-core"
-  args:
-    warn: no
-    chdir: "{{ brew }}/Homebrew/Library/Taps/homebrew/homebrew-core"

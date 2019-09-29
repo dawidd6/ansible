@@ -14,7 +14,6 @@
     version: "master"
   notify:
     - brew core unshallow
-    - brew git remote
 
 - name: create symlink to brew binary
   file:
