@@ -5,7 +5,7 @@ on: push
 jobs:
   lint:
     runs-on: ubuntu-latest
-    container: python3.7
+    container: python:3.7
     steps:
       - name: Checkout
         uses: actions/checkout@v1
