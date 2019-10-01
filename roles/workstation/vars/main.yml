@@ -124,6 +124,7 @@ apt_install_packages:
   - gnome-tweaks
   - gnome-boxes
   - gnome-calculator
+  - gnome-calendar
   - gnome-system-monitor
   - chrome-gnome-shell
   - chromium-browser
