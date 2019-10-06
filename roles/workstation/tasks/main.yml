@@ -25,6 +25,3 @@
   tags: salsa
 - import_tasks: github.yml
   tags: github
-
-- import_tasks: gnome.yml
-  tags: gnome

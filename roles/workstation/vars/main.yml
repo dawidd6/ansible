@@ -5,31 +5,6 @@ dotfiles: "{{ home }}/.dotfiles"
 keys: "{{ home }}/.keys"
 bin: "{{ home }}/bin"
 
-gnome_extensions_dir: "{{ home }}/.local/share/gnome-shell/extensions"
-gnome_extensions_list: # for later usage in task
-gnome_extensions:
-  - id: "clipboard-indicator@tudmotu.com"
-    dir: "clipboard-indicator@tudmotu.com"
-    version: 30
-  - id: "gtktitlebarvelitasali.github.io"
-    dir: "gtktitlebar@velitasali.github.io"
-    version: 3
-  #  - id: "hide-dash@xenatt.github.com"
-  #    dir: "hide-dash@xenatt.github.com"
-  #    version: 8
-  - id: "gsconnectandyholmes.github.io"
-    dir: "gsconnect@andyholmes.github.io"
-    version: 24
-  - id: "lockkeysvaina.lt"
-    dir: "lockkeys@vaina.lt"
-    version: 28
-  - id: "suspend-buttonlaserb"
-    dir: "suspend-button@laserb"
-    version: 20
-  - id: "VitalsCoreCoding.com"
-    dir: "Vitals@CoreCoding.com"
-    version: 20
-
 intellij_url: https://download.jetbrains.com/idea/ideaIU-2019.2.tar.gz
 intellij_dir: "{{ home }}/.intellij"
 
@@ -44,41 +19,8 @@ spotify_package: spotify-client
 code_key: https://packages.microsoft.com/keys/microsoft.asc
 code_repo: deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main
 code_package: code
-code_extensions:
-  - castwide.solargraph
-  - kaiwood.endwise
-  - christian-kohler.path-intellisense
-  - CoenraadS.bracket-pair-colorizer
-  - Dart-Code.dart-code
-  - Dart-Code.flutter
-  - DavidAnson.vscode-markdownlint
-  - dunstontc.viml
-  - Equinusocio.vsc-material-theme
-  - formulahendry.terminal
-  - Gimly81.matlab
-  - Gruntfuggly.todo-tree
-  - ms-azuretools.vscode-docker
-  - ms-python.python
-  - ms-vscode.cpptools
-  - ms-vscode.Go
-  - peterfh.linesinfostatusbar
-  - PKief.material-icon-theme
-  - rafaelmaiolla.diff
-  - redhat.vscode-yaml
-  - romanrei.material-dark
-  - shardulm94.trailing-spaces
-  - skyapps.fish-vscode
-  - tariky.easy-snippet-maker
-  - vscodevim.vim
-  - vscoss.vscode-ansible
-  - yzhang.markdown-all-in-one
-  - zxh404.vscode-proto3
 
 brew: "/home/linuxbrew/.linuxbrew"
-brew_commands:
-  - linuxbrew/homebrew-developer
-  - homebrew/homebrew-livecheck
-  - dawidd6/homebrew-autoremove
 brew_packages:
   - diff-so-fancy
   - docker-completion
@@ -157,6 +99,7 @@ github_repos:
   - dawidd6/docker
   - dawidd6/lazygit-debian
   - jesseduffield/lazydocker
+  - jesseduffield/lazygit
 
 salsa_dir: "{{ home }}/salsa"
 salsa_repos:

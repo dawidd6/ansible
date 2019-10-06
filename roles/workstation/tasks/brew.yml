@@ -20,13 +20,6 @@
     state: "link"
   notify: brew update
 
-- name: add brew commands
-  command: "{{ brew }}/bin/brew tap {{ item }}"
-  args:
-    warn: no
-    creates: "{{ brew }}/Homebrew/Library/Taps/{{ item }}"
-  with_items: "{{ brew_commands }}"
-
 - name: install brew packages
   homebrew:
     path: "{{ brew }}/bin"
