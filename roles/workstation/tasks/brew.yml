@@ -12,8 +12,6 @@
     dest: "{{ brew }}/Homebrew"
     update: no
     version: "master"
-  notify:
-    - brew core unshallow
 
 - name: create symlink to brew binary
   file:

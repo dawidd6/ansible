@@ -6,9 +6,3 @@
   command: "{{ brew }}/bin/brew update -f"
   args:
     warn: false
-
-- name: brew core unshallow
-  command: "git fetch --unshallow"
-  args:
-    warn: no
-    chdir: "{{ brew }}/Homebrew/Library/Taps/homebrew/homebrew-core"
