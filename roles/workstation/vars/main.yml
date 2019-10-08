@@ -81,6 +81,7 @@ apt_install_packages:
   - octave
   - gimp
   - inkscape
+  - virtualbox
 apt_purge_packages:
   - snapd
   - firefox
