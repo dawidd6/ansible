@@ -21,11 +21,17 @@
         accept_hostkey: yes
         bare: yes
         version: master
-    - name: configure keys repo
+    - name: do not show untracked keys
       git_config:
         repo: "{{ keys }}"
         name: "status.showUntrackedFiles"
         value: "no"
+        scope: local
+    - name: set keys fetch config
+      git_config:
+        repo: "{{ keys }}"
+        name: "remote.origin.fetch"
+        value: "+refs/heads/*:refs/remotes/origin/*"
         scope: local
     - name: checkout keys
       command: git --git-dir="{{ keys }}" --work-tree="{{ home }}" checkout -f
