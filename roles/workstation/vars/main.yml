@@ -22,12 +22,12 @@ code_package: code
 
 brew: "/home/linuxbrew/.linuxbrew"
 brew_packages:
-  - diff-so-fancy
   - docker-completion
   - docker-compose
   - ansible-lint
   - ansible
   - git
+  - git-delta
   - lm-sensors
   - youtube-dl
   - bat
@@ -92,13 +92,17 @@ apt_purge_packages:
 
 github_dir: "{{ home }}/github"
 github_repos:
+  - dawidd6/action-closing-commit
+  - dawidd6/action-create-pull-request
+  - dawidd6/action-delete-branch
   - dawidd6/deber
   - dawidd6/dh-make-golang
   - dawidd6/go-appindicator
   - dawidd6/go-spotify-dbus
   - dawidd6/AndTTT
   - dawidd6/docker
-  - dawidd6/lazygit-debian
+  - dawidd6/brew
+  - dawidd6/homebrew-core
   - jesseduffield/lazydocker
   - jesseduffield/lazygit
 
