@@ -22,6 +22,7 @@ code_package: code
 
 brew: "/home/linuxbrew/.linuxbrew"
 brew_packages:
+  - diff-so-fancy
   - docker-completion
   - docker-compose
   - ansible-lint
