@@ -74,7 +74,6 @@ apt_install_packages:
   - gnome-calendar
   - gnome-system-monitor
   - chrome-gnome-shell
-  - chromium-browser
   - simple-scan
   - libreoffice-writer
   - libreoffice-gtk3
@@ -90,6 +89,7 @@ apt_install_packages:
 apt_purge_packages:
   - snapd
   - firefox
+  - chromium-browser
   - ubuntu-software
   - gnome-software
   - gnome-shell-extension-ubuntu-dock
