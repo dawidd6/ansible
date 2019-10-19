@@ -2,6 +2,8 @@
   tags: apt
 - import_tasks: brew.yml
   tags: brew
+- import_tasks: chrome.yml
+  tags: chrome
 - import_tasks: code.yml
   tags: code
 - import_tasks: docker.yml
