@@ -17,7 +17,7 @@ spotify_repo: deb http://repository.spotify.com stable non-free
 spotify_package: spotify-client
 
 chrome_key: https://dl.google.com/linux/linux_signing_key.pub
-chrome_repo: deb [arch=amd64] http://dl.google.com/linux/chrome/deb stable main
+chrome_repo: deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main
 chrome_package: google-chrome-stable
 
 code_key: https://packages.microsoft.com/keys/microsoft.asc
