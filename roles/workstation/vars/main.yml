@@ -8,10 +8,6 @@ bin: "{{ home }}/bin"
 intellij_url: https://download.jetbrains.com/idea/ideaIU-2019.2.tar.gz
 intellij_dir: "{{ home }}/.intellij"
 
-docker_key: https://download.docker.com/linux/debian/gpg
-docker_repo: deb [arch=amd64] https://download.docker.com/linux/{{ ansible_distribution|lower }} {{ ansible_distribution_release }} stable
-docker_package: docker-ce
-
 spotify_key: https://download.spotify.com/debian/pubkey.gpg
 spotify_repo: deb http://repository.spotify.com stable non-free
 spotify_package: spotify-client
@@ -66,6 +62,7 @@ brew_packages:
   - isacikgoz/taps/gitbatch
 
 apt_install_packages:
+  - docker.io
   - zlib1g-dev # needed by `brew audit` and friends
   - xsel
   - gnome-tweaks

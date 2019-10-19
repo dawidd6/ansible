@@ -6,8 +6,6 @@
   tags: chrome
 - import_tasks: code.yml
   tags: code
-- import_tasks: docker.yml
-  tags: docker
 - import_tasks: intellij.yml
   tags: intellij
 - import_tasks: spotify.yml
