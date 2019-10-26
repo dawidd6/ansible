@@ -73,6 +73,7 @@ apt_install_packages:
   - chrome-gnome-shell
   - simple-scan
   - libreoffice-writer
+  - libreoffice-calc
   - libreoffice-gtk3
   - transmission
   - totem
