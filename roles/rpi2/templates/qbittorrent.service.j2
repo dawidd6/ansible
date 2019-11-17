@@ -1,0 +1,13 @@
+[Unit]
+Description=qbittorrent
+After=network.target
+After=hdd.mount
+
+[Service]
+User={{ user }}
+Group={{ user }}
+ExecStart=/usr/bin/qbittorrent-nox
+ExecStop=/usr/bin/killall -w qbittorrent-nox
+
+[Install]
+WantedBy=multi-user.target

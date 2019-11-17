@@ -1,20 +1,14 @@
-- name: install apt packages
-  apt:
-    upgrade: dist
-    update_cache: yes
-    state: latest
-    name: "{{ packages }}"
-
-- name: remove default pi user
-  user:
-    name: pi
-    state: absent
-    remove: yes
-
-- name: add my user
-  user:
-    name: dawidd6
-    state: present
-    shell: /bin/bash
-    append: yes
-    groups: adm,dialout,sudo,audio,video,plugdev,games,users,input,netdev,docker
+- import_tasks: user.yml
+  tags: user
+- import_tasks: scripts.yml
+  tags: scripts
+- import_tasks: hdd.yml
+  tags: hdd
+- import_tasks: kodi.yml
+  tags: kodi
+- import_tasks: librespot.yml
+  tags: librespot
+- import_tasks: qbittorrent.yml
+  tags: qbittorrent
+- import_tasks: msmtp.yml
+  tags: msmtp

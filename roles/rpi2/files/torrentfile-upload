@@ -1,0 +1,21 @@
+#!/bin/bash
+
+file="$1.torrent"
+filepath="/tmp/$file"
+
+# token:password
+if curl -k -u "TODO:TODO" -T "$filepath" "https://cloud.disroot.org/public.php/webdav/$file"; then
+    subject="New torrent available"
+    to="TODO"
+else
+    subject="Torrent upload failed"
+    to="TODO"
+fi
+
+msmtp -t <<-EOF
+Subject: $subject
+From: Alfred <TODO>
+To: $to
+
+$file
+EOF

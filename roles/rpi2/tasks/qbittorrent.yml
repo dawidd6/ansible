@@ -1,0 +1,24 @@
+- name: install qbittorrent
+  become: yes
+  apt:
+    name: qbittorrent-nox
+
+- name: copy qbittorrent config
+  become: yes
+  template:
+    src: qBittorrent.conf.j2
+    dest: "/home/{{ user }}/.config/qBittorrent/qBittorrent.conf"
+
+- name: copy qbittorrent service
+  become: yes
+  template:
+    src: qbittorrent.service.j2
+    dest: /etc/systemd/system/qbittorrent.service
+
+- name: start qbittorrent service
+  become: yes
+  systemd:
+    name: qbittorrent
+    enabled: yes
+    daemon_reload: yes
+    state: started
