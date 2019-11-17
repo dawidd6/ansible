@@ -1,4 +1,4 @@
-- name: install librespot # TODO
+# - name: install librespot # TODO
 
 - name: copy librespot service
   become: yes
