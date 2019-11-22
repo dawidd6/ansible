@@ -31,6 +31,8 @@ brew_packages:
   - git-delta
   - lm-sensors
   - youtube-dl
+  - unrar
+  - unzip
   - bat
   - noti
   - fish
