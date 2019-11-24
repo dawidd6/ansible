@@ -38,6 +38,7 @@ brew_packages:
   - fish
   - neovim
   - hub
+  - gist
   - ruby
   - go
   - wget
