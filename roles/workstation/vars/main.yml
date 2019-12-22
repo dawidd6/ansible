@@ -87,6 +87,7 @@ apt_install_packages:
   - gimp
   - inkscape
   - virtualbox
+  - vagrant
 apt_purge_packages:
   - snapd
   - firefox
