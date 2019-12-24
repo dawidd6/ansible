@@ -1,0 +1,23 @@
+- name: mount
+  become: yes
+  systemd:
+    name: media-HDD.mount
+    state: restarted
+
+- name: restart nginx
+  become: yes
+  systemd:
+    name: nginx.service
+    state: restarted
+
+- name: restart minidlna
+  become: yes
+  systemd:
+    name: minidlna.service
+    state: restarted
+
+- name: restart qbittorrent
+  become: yes
+  systemd:
+    name: qbittorrent.service
+    state: restarted

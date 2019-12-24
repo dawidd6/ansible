@@ -1,0 +1,11 @@
+[Unit]
+Description=hdd
+
+[Mount]
+What=/dev/sda1
+Where=/media/HDD
+Type=ext4
+Options=defaults
+
+[Install]
+WantedBy=multi-user.target

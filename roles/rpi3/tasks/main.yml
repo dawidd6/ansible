@@ -1,0 +1,25 @@
+- name: copy scripts
+  become: yes
+  copy:
+    src: "{{ item }}"
+    dest: "/usr/local/bin/{{ item }}"
+  with_items:
+    - temperature
+
+- name: install tools
+  become: yes
+  apt:
+    update_cache: yes
+    name:
+      - net-tools
+      - htop
+      - vim
+
+- import_tasks: hdd.yml
+  tags: hdd
+- import_tasks: minidlna.yml
+  tags: minidlna
+- import_tasks: qbittorrent.yml
+  tags: qbittorrent
+- import_tasks: nginx.yml
+  tags: nginx
