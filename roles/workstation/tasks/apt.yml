@@ -18,8 +18,4 @@
     name: "{{ item }}"
     masked: yes
     enabled: no
-  with_items:
-    - apt-daily-upgrade.service
-    - apt-daily-upgrade.timer
-    - apt-daily.service
-    - apt-daily.timer
+  with_items: "{{ apt_disable_services }}"

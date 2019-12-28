@@ -96,19 +96,26 @@ apt_purge_packages:
   - gnome-software
   - gnome-shell-extension-ubuntu-dock
   - gnome-shell-extension-desktop-icons
+apt_disable_services:
+  - apt-daily-upgrade.service
+  - apt-daily-upgrade.timer
+  - apt-daily.service
+  - apt-daily.timer
 
 github_dir: "{{ home }}/github"
 github_repos:
   - dawidd6/action-closing-commit
-  - dawidd6/action-create-pull-request
   - dawidd6/action-delete-branch
+  - dawidd6/action-send-mail
+  - dawidd6/action-docker-publish-changed
+  - dawidd6/action-publish-gem
+  - dawidd6/actions-updater
   - dawidd6/deber
   - dawidd6/dh-make-golang
   - dawidd6/go-appindicator
   - dawidd6/go-spotify-dbus
   - dawidd6/AndTTT
   - dawidd6/docker
-  - dawidd6/brew
   - dawidd6/homebrew-core
   - jesseduffield/lazydocker
   - jesseduffield/lazygit
