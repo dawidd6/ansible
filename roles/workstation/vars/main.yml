@@ -125,9 +125,12 @@ salsa_repos:
   - docui
   - lazygit
   - lazydocker
-  - termshark
+  - gitbatch
+  - golang-github-acarl005-stripansi
   - golang-github-alcortesm-tgz
   - golang-github-anmitsu-go-shlex
+  - golang-github-antchfx-xmlquery
+  - golang-github-antchfx-xpath
   - golang-github-armon-go-proxyproto
   - golang-github-badgerodon-collections
   - golang-github-cloudfoundry-jibber-jabber
@@ -138,33 +141,29 @@ salsa_repos:
   - golang-github-go-test-deep
   - golang-github-guptarohit-asciigraph
   - golang-github-heroku-rollrus
+  - golang-github-integrii-flaggy
   - golang-github-jbenet-go-context
+  - golang-github-jeffail-gabs
+  - golang-github-jefferai-jsonx
+  - golang-github-jesseduffield-asciigraph
+  - golang-github-jesseduffield-roll
+  - golang-github-jesseduffield-rollrus
+  - golang-github-jesseduffield-yaml
   - golang-github-kevinburke-ssh-config
+  - golang-github-mcuadros-go-lookup
   - golang-github-mgutz-to
   - golang-github-michaeltjones-walk
+  - golang-github-mreiferson-go-snappystream
   - golang-github-nicksnyder-go-i18n.v2
   - golang-github-nozzle-throttler
+  - golang-github-oklog-run
+  - golang-github-openpeedeep-xdg
   - golang-github-ryanuber-go-glob
   - golang-github-sap-go-hdb
   - golang-github-schollz-closestmatch
   - golang-github-spkg-bom
   - golang-github-stvp-roll
+  - golang-github-tevino-abool
   - golang-github-x86kernel-htmlcolor
   - golang-gopkg-src-d-go-billy.v4
-  - golang-github-integrii-flaggy
-  - golang-github-mgutz-minimist
-  - golang-github-srwiley-rasterx
-  - golang-github-openpeedeep-xdg
-  - golang-github-skanehira-gocui-component
-  - golang-github-jesseduffield-asciigraph
-  - golang-github-jesseduffield-roll
-  - golang-github-jesseduffield-yaml
-  - golang-github-jesseduffield-rollrus
-  - golang-github-mcuadros-go-lookup
-  - golang-github-kodeworks-golang-image-ico
-  - golang-github-josephspurrier-goversioninfo
-  - golang-github-acarl005-stripansi
-  - golang-github-oklog-run
-  - golang-github-jeffail-gabs
-  - golang-github-jefferai-jsonx
-  - golang-github-jackmordaunt-icns
+  - termshark
