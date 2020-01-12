@@ -54,6 +54,8 @@ brew_packages:
   - postgresql
   - lazygit
   - lazydocker
+  - bandwhich
+  - jid
   - dawidd6/tap/keybase-cli
   - dawidd6/tap/neofetch
   - dawidd6/tap/deber
