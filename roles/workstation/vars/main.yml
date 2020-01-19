@@ -67,6 +67,8 @@ brew_packages:
   - speedtest-cli
   - checkbashisms
   - crystal
+  - gpatch
+  - patchelf
   - dawidd6/tap/keybase-cli
   - dawidd6/tap/neofetch
   - dawidd6/tap/deber
