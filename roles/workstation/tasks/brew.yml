@@ -25,12 +25,6 @@
     path: "{{ brew }}/bin"
     name: "{{ brew_packages }}"
 
-- name: unlink brewed dpkg
-  homebrew:
-    state: unlinked
-    path: "{{ brew }}/bin"
-    name: dpkg
-
 - name: add brewed fish to shells
   become: yes
   lineinfile:
