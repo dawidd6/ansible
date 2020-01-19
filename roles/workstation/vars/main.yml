@@ -56,9 +56,21 @@ brew_packages:
   - lazydocker
   - bandwhich
   - jid
+  - fzf
+  - glow
+  - ipcalc
+  - kubernetes-cli
+  - minikube
+  - navi
+  - nmap
+  - pastebinit
+  - speedtest-cli
+  - checkbashisms
+  - crystal
   - dawidd6/tap/keybase-cli
   - dawidd6/tap/neofetch
   - dawidd6/tap/deber
+  - dawidd6/tap/actions-updater
   - dawidd6/tap/dh-make-golang
   - dawidd6/tap/pristine-tar
   - dawidd6/tap/git-buildpackage
