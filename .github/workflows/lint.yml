@@ -5,11 +5,10 @@ on: push
 jobs:
   lint:
     runs-on: ubuntu-latest
-    container: python:3.7
     steps:
       - name: Checkout
-        uses: actions/checkout@v1
-      - name: Install
-        run: pip install ansible-lint
+        uses: actions/checkout@v2
       - name: Lint
-        run: ansible-lint *.yml
+        uses: ansible/ansible-lint@v4.1.0
+        with:
+          targets: ./
