@@ -22,53 +22,70 @@ code_package: code
 
 brew: "/home/linuxbrew/.linuxbrew"
 brew_packages:
+  - ansible
+  - ansible-lint
+  - asciinema
+  - awscli
+  - bandwhich
+  - bat
+  - checkbashisms
+  - crystal
+  - curl
   - diff-so-fancy
   - docker-completion
   - docker-compose
-  - ansible-lint
-  - ansible
+  - doctl
+  - fish
+  - fswatch
+  - fx
+  - fzf
+  - gh
+  - gist
   - git
   - git-delta
+  - gitbatch
+  - glow
+  - go
+  - goreleaser
+  - gotop
+  - gpatch
+  - help2man
+  - htop
+  - hub
+  - ipcalc
+  - jid
+  - jq
+  - kubernetes-cli
+  - lazydocker
+  - lazygit
   - lm-sensors
-  - youtube-dl
+  - minikube
+  - msmtp
+  - navi
+  - ncdu
+  - neovim
+  - nmap
+  - node
+  - noti
+  - pastebinit
+  - patchelf
+  - postgresql
+  - protobuf
+  - protoc-gen-go
+  - python
+  - quilt
+  - ruby
+  - rust
+  - shellcheck
+  - speedtest-cli
+  - stress
+  - tldr
+  - trash-cli
+  - typescript
   - unrar
   - unzip
-  - bat
-  - noti
-  - fish
-  - neovim
-  - hub
-  - gist
-  - ruby
-  - go
   - wget
-  - curl
-  - htop
-  - jq
-  - quilt
-  - msmtp
-  - trash-cli
-  - help2man
-  - shellcheck
-  - asciinema
-  - postgresql
-  - lazygit
-  - lazydocker
-  - bandwhich
-  - jid
-  - fzf
-  - glow
-  - ipcalc
-  - kubernetes-cli
-  - minikube
-  - navi
-  - nmap
-  - pastebinit
-  - speedtest-cli
-  - checkbashisms
-  - crystal
-  - gpatch
-  - patchelf
+  - youtube-dl
   - dawidd6/tap/keybase-cli
   - dawidd6/tap/neofetch
   - dawidd6/tap/deber
@@ -77,8 +94,6 @@ brew_packages:
   - dawidd6/tap/pristine-tar
   - dawidd6/tap/git-buildpackage
   - dawidd6/tap/devscripts
-  - cjbassi/gotop/gotop
-  - isacikgoz/taps/gitbatch
 
 apt_install_packages:
   - docker.io
@@ -120,7 +135,11 @@ apt_disable_services:
 
 github_dir: "{{ home }}/github"
 github_repos:
-  - dawidd6/action-closing-commit
+  - dawidd6/action-get-tag
+  - dawidd6/action-download-artifact
+  - dawidd6/action-ansible-playbook
+  - dawidd6/action-homebrew-bump-formula
+  - dawidd6/action-debian-package
   - dawidd6/action-delete-branch
   - dawidd6/action-send-mail
   - dawidd6/action-docker-publish-changed
@@ -132,7 +151,6 @@ github_repos:
   - dawidd6/go-spotify-dbus
   - dawidd6/AndTTT
   - dawidd6/docker
-  - dawidd6/homebrew-core
   - jesseduffield/lazydocker
   - jesseduffield/lazygit
 
