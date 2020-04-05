@@ -96,37 +96,39 @@ brew_packages:
   - dawidd6/tap/devscripts
 
 apt_install_packages:
+  - cheese
+  - chrome-gnome-shell
   - docker.io
-  - zlib1g-dev # needed by `brew audit` and friends
-  - xsel
-  - gnome-tweaks
+  - evince
+  - gimp
   - gnome-boxes
   - gnome-calculator
   - gnome-calendar
+  - gnome-clocks
   - gnome-system-monitor
-  - chrome-gnome-shell
-  - simple-scan
-  - libreoffice-writer
+  - gnome-tweaks
+  - gnome-weather
+  - gpick
+  - inkscape
   - libreoffice-calc
   - libreoffice-gtk3
-  - transmission
-  - totem
-  - evince
-  - cheese
-  - gpick
+  - libreoffice-writer
   - octave
-  - gimp
-  - inkscape
-  - virtualbox
+  - simple-scan
+  - totem
+  - transmission
   - vagrant
+  - virtualbox
+  - xsel
+  - zlib1g-dev # needed by `brew audit` and friends
 apt_purge_packages:
-  - snapd
-  - firefox
   - chromium-browser
-  - ubuntu-software
+  - firefox
   - gnome-software
-  - gnome-shell-extension-ubuntu-dock
   - gnome-shell-extension-desktop-icons
+  - gnome-shell-extension-ubuntu-dock
+  - snapd
+  - ubuntu-software
 apt_disable_services:
   - apt-daily-upgrade.service
   - apt-daily-upgrade.timer
