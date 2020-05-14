@@ -8,7 +8,7 @@
 - name: add my user
   become: yes
   user:
-    name: "{{ user }}"
+    name: "{{ ansible_env.USER }}"
     state: present
     shell: /bin/bash
     append: yes

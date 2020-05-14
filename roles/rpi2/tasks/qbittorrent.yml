@@ -7,7 +7,7 @@
   become: yes
   template:
     src: qBittorrent.conf.j2
-    dest: "/home/{{ user }}/.config/qBittorrent/qBittorrent.conf"
+    dest: "/home/{{ ansible_env.USER }}/.config/qBittorrent/qBittorrent.conf"
 
 - name: copy qbittorrent service
   become: yes

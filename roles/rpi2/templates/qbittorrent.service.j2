@@ -4,8 +4,8 @@ After=network.target
 After=hdd.mount
 
 [Service]
-User={{ user }}
-Group={{ user }}
+User={{ ansible_env.USER }}
+Group={{ ansible_env.USER }}
 ExecStart=/usr/bin/qbittorrent-nox
 ExecStop=/usr/bin/killall -w qbittorrent-nox
 

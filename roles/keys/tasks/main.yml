@@ -37,7 +37,7 @@
     - name: checkout keys
       command: git --git-dir="{{ keys }}" --work-tree="{{ ansible_env.HOME }}" checkout -f
       args:
-        creates: "{{ home }}/.ssh/id_rsa"
+        creates: "{{ ansible_env.HOME }}/.ssh/id_rsa"
         warn: false
     - name: fix keys permissions
       file:

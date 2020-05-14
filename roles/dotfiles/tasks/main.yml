@@ -24,5 +24,5 @@
 - name: checkout dotfiles
   command: git --git-dir="{{ dotfiles }}" --work-tree="{{ ansible_env.HOME }}" checkout -f
   args:
-    creates: "{{ home }}/README.md"
+    creates: "{{ ansible_env.HOME }}/README.md"
     warn: false
