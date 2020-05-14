@@ -1,0 +1,16 @@
+- name: key code
+  become: yes
+  apt_key:
+    url: "{{ code_key }}"
+
+- name: repo code
+  become: yes
+  apt_repository:
+    repo: "{{ code_repo }}"
+    state: present
+    filename: vscode # postinst script installs this file if does not exist
+
+- name: install code
+  become: yes
+  apt:
+    name: "{{ code_package }}"
