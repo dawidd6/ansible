@@ -1,0 +1,39 @@
+apt_install_packages:
+  - cheese
+  - chrome-gnome-shell
+  - docker.io
+  - evince
+  - gimp
+  - gnome-boxes
+  - gnome-calculator
+  - gnome-calendar
+  - gnome-clocks
+  - gnome-system-monitor
+  - gnome-tweaks
+  - gnome-weather
+  - gpick
+  - inkscape
+  - libreoffice-calc
+  - libreoffice-gtk3
+  - libreoffice-writer
+  - octave
+  - simple-scan
+  - totem
+  - transmission
+  - vagrant
+  - virtualbox
+  - xsel
+  - zlib1g-dev # needed by `brew audit` and friends
+apt_purge_packages:
+  - chromium-browser
+  - firefox
+  - gnome-software
+  - gnome-shell-extension-desktop-icons
+  - gnome-shell-extension-ubuntu-dock
+  - snapd
+  - ubuntu-software
+apt_disable_services:
+  - apt-daily-upgrade.service
+  - apt-daily-upgrade.timer
+  - apt-daily.service
+  - apt-daily.timer

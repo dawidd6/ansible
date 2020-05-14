@@ -1,0 +1,21 @@
+- name: install apt packages
+  become: yes
+  apt:
+    update_cache: yes
+    name: "{{ apt_install_packages }}"
+
+- name: purge apt packages
+  become: yes
+  apt:
+    state: absent
+    purge: yes
+    autoremove: yes
+    name: "{{ apt_purge_packages }}"
+
+- name: disable apt daily service
+  become: yes
+  systemd:
+    name: "{{ item }}"
+    masked: yes
+    enabled: no
+  with_items: "{{ apt_disable_services }}"
