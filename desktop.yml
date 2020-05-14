@@ -1,0 +1,25 @@
+- hosts: localhost
+  connection: local
+  roles:
+    - role: apt.yml
+      tags: apt
+    - role: brew.yml
+      tags: brew
+    - role: chrome.yml
+      tags: chrome
+    - role: code.yml
+      tags: code
+    - role: intellij.yml
+      tags: intellij
+    - role: spotify.yml
+      tags: spotify
+    - role: keys.yml
+      tags: keys
+    - role: scripts.yml
+      tags: scripts
+    - role: dotfiles.yml
+      tags: dotfiles
+    - role: salsa.yml
+      tags: salsa
+    - role: github.yml
+      tags: github
