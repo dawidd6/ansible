@@ -1,0 +1,8 @@
+- name: clone github repositories
+  git:
+    repo: "git@github.com:{{ item }}.git"
+    dest: "{{ github_dir }}/{{ item }}"
+    accept_hostkey: yes
+    update: no
+    version: master
+  with_items: "{{ github_repos }}"
