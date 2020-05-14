@@ -1,0 +1,28 @@
+- name: clone dotfiles
+  git:
+    repo: "{{ repo }}"
+    dest: "{{ dotfiles }}"
+    accept_hostkey: yes
+    update: no
+    bare: yes
+    version: master
+
+- name: do not show untracked dotfiles
+  git_config:
+    repo: "{{ dotfiles }}"
+    name: "status.showUntrackedFiles"
+    value: "no"
+    scope: local
+
+- name: set dotfiles fetch config
+  git_config:
+    repo: "{{ dotfiles }}"
+    name: "remote.origin.fetch"
+    value: "+refs/heads/*:refs/remotes/origin/*"
+    scope: local
+
+- name: checkout dotfiles
+  command: git --git-dir="{{ dotfiles }}" --work-tree="{{ ansible_env.HOME }}" checkout -f
+  args:
+    creates: "{{ home }}/README.md"
+    warn: false
