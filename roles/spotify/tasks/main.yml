@@ -1,0 +1,16 @@
+- name: key spotify
+  become: yes
+  apt_key:
+    url: "{{ spotify_key }}"
+
+- name: repo spotify
+  become: yes
+  apt_repository:
+    repo: "{{ spotify_repo }}"
+    state: present
+    filename: spotify
+
+- name: install spotify
+  become: yes
+  apt:
+    name: "{{ spotify_package }}"
