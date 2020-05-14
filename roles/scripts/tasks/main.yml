@@ -1,0 +1,7 @@
+- name: deploy scripts
+  git:
+    repo: "{{ repo }}"
+    dest: "{{ dest }}"
+    accept_hostkey: yes
+    update: no
+    version: master
