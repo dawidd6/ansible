@@ -1,0 +1,3 @@
+- name: start tlp
+  become: yes
+  command: tlp start
