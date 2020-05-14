@@ -1,0 +1,16 @@
+- name: key chrome
+  become: yes
+  apt_key:
+    url: "{{ chrome_key }}"
+
+- name: repo chrome
+  become: yes
+  apt_repository:
+    repo: "{{ chrome_repo }}"
+    state: present
+    filename: google-chrome # postinst script installs this file if does not exist
+
+- name: install chrome
+  become: yes
+  apt:
+    name: "{{ chrome_package }}"

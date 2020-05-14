@@ -1,0 +1,3 @@
+chrome_key: https://dl.google.com/linux/linux_signing_key.pub
+chrome_repo: deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main
+chrome_package: google-chrome-stable
