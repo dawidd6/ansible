@@ -1,7 +1,0 @@
-- name: deploy scripts
-  git:
-    repo: "git@github.com:dawidd6/bin.git"
-    dest: "{{ home }}/bin"
-    accept_hostkey: yes
-    update: no
-    version: master

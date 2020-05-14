@@ -1,8 +1,0 @@
-- name: start tlp
-  become: yes
-  command: tlp start
-
-- name: brew update
-  command: "{{ brew }}/bin/brew update -f"
-  args:
-    warn: false
