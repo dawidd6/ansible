@@ -1,0 +1,4 @@
+- name: brew update
+  command: "{{ brew }}/bin/brew update -f"
+  args:
+    warn: false
