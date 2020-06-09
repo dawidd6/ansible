@@ -1,0 +1,13 @@
+- hosts: localhost
+  connection: local
+  roles:
+    - role: homebrew
+      tags: homebrew
+    - role: keys
+      tags: keys
+    - role: scripts
+      tags: scripts
+    - role: dotfiles
+      tags: dotfiles
+    - role: github
+      tags: github
