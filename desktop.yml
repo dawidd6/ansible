@@ -3,8 +3,8 @@
   roles:
     - role: apt
       tags: apt
-    - role: brew
-      tags: brew
+    - role: linuxbrew
+      tags: linuxbrew
     - role: chrome
       tags: chrome
     - role: code
