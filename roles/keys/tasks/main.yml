@@ -1,27 +1,24 @@
 - name: lookup keys
   find:
-    file_type: directory
     paths:
-      - "/media/{{ ansible_env.USER }}"
+      - "{{ '/Volumes' if ansible_facts['os_family'] == 'Darwin' else '/media' }}"
     depth: 2
     recurse: yes
-    patterns: "*keys"
-  register: keys_dir
+    patterns: "*keys.tar.gz"
+  register: keys_tarball
 
 - name: debug
   debug:
-    var: keys_dir.files[0].path
+    var: keys_tarball.files[0].path
 
 - name: deploy keys
-  when: keys_dir.matched == 1
+  when: keys_tarball.matched == 1
   block:
-    - name: clone keys
-      git:
-        repo: "{{ keys_dir.files[0].path }}"
-        dest: "{{ keys }}"
-        accept_hostkey: yes
-        bare: yes
-        version: master
+    - name: unarchive keys
+      unarchive:
+        src: "{{ keys_tarball.files[0].path }}"
+        dest: "{{ ansible_env.HOME }}"
+        creates: "{{ keys }}/HEAD"
     - name: do not show untracked keys
       git_config:
         repo: "{{ keys }}"
@@ -39,7 +36,14 @@
       args:
         creates: "{{ ansible_env.HOME }}/.ssh/id_rsa"
         warn: false
-    - name: fix keys permissions
+    - name: fix keys permissions (dirs)
+      file:
+        path: "{{ item }}"
+        mode: 0700
+      with_items:
+        - "{{ ansible_env.HOME }}/.gnupg"
+        - "{{ ansible_env.HOME }}/.ssh"
+    - name: fix keys permissions (files)
       file:
         path: "{{ item }}"
         mode: 0600
