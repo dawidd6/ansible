@@ -1,0 +1,19 @@
+- name: install brew formulae
+  homebrew:
+    name: "{{ formulae }}"
+
+- name: install brew casks
+  homebrew_cask:
+    name: "{{ casks }}"
+
+- name: add brewed fish to shells
+  become: yes
+  lineinfile:
+    path: /etc/shells
+    line: "{{ brew }}/bin/fish"
+
+- name: set fish as default shell
+  become: yes
+  user:
+    name: "{{ ansible_env.USER }}"
+    shell: "{{ brew }}/bin/fish"
