@@ -3,19 +3,19 @@
   roles:
     - role: apt
       tags: apt
-    - role: linuxbrew
-      tags: linuxbrew
     - role: chrome
       tags: chrome
     - role: code
       tags: code
-    - role: intellij
-      tags: intellij
-    - role: spotify
-      tags: spotify
-    - role: keys
-      tags: keys
-    - role: scripts
-      tags: scripts
     - role: dotfiles
       tags: dotfiles
+    - role: homebrew
+      tags: homebrew
+    - role: keys
+      tags: keys
+    - role: intellij
+      tags: intellij
+    - role: scripts
+      tags: scripts
+    - role: spotify
+      tags: spotify
