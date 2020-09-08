@@ -1,8 +1,0 @@
-- name: copy scripts
-  become: yes
-  copy:
-    src: "{{ item }}"
-    dest: "/usr/local/bin/{{ item }}"
-  with_items:
-    - temperature
-    - torrentfile-upload

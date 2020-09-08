@@ -1,5 +1,0 @@
-- name: install kodi
-  become: yes
-  apt:
-    update_cache: yes
-    name: kodi
