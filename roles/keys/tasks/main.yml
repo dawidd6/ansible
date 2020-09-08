@@ -2,7 +2,7 @@
   find:
     file_type: directory
     paths:
-      - "/media/{{ ansible_env.USER }}"
+      - "{{ '/Volumes' if ansible_facts['os_family'] == 'Darwin' else '/media' }}"
     depth: 2
     recurse: yes
     patterns: "*keys"
