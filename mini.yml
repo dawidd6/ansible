@@ -9,5 +9,3 @@
       tags: scripts
     - role: dotfiles
       tags: dotfiles
-    - role: github
-      tags: github

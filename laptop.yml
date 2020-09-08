@@ -21,7 +21,3 @@
       tags: scripts
     - role: dotfiles
       tags: dotfiles
-    - role: salsa
-      tags: salsa
-    - role: github
-      tags: github
