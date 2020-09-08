@@ -11,6 +11,8 @@ apt_install_packages:
   - gnome-system-monitor
   - gnome-tweaks
   - gnome-weather
+  - fonts-firacode
+  - fonts-noto-color-emoji
   - gpick
   - inkscape
   - libreoffice-calc
