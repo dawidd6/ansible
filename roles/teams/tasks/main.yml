@@ -1,0 +1,16 @@
+- name: key teams
+  become: yes
+  apt_key:
+    url: "{{ teams_key }}"
+
+- name: repo teams
+  become: yes
+  apt_repository:
+    repo: "{{ teams_repo }}"
+    state: present
+    filename: teams # postinst script installs this file if does not exist
+
+- name: install teams
+  become: yes
+  apt:
+    name: "{{ teams_package }}"
