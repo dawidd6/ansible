@@ -11,11 +11,9 @@
       tags: dotfiles
     - role: homebrew
       tags: homebrew
-    - role: keys
-      tags: keys
-    - role: intellij
-      tags: intellij
     - role: scripts
       tags: scripts
     - role: spotify
       tags: spotify
+    - role: tlp
+      tags: tlp
