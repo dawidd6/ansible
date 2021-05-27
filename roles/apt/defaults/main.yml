@@ -25,6 +25,7 @@ apt_install_packages:
   - vagrant
   - virtualbox
   - xsel
+  - neovim
   - zlib1g-dev # needed by `brew audit` and friends
 apt_purge_packages:
   - chromium-browser
