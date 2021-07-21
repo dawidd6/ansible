@@ -3,14 +3,14 @@
     file_type: directory
     paths:
       - "{{ '/Volumes' if ansible_facts['os_family'] == 'Darwin' else '/media' }}"
-    depth: 2
+    depth: 3
     recurse: yes
     patterns: "*keys"
   register: keys_dir
 
 - name: debug
   debug:
-    var: keys_dir.files[0].path
+    var: keys_dir.files
 
 - name: deploy keys
   when: keys_dir.matched == 1
@@ -37,7 +37,7 @@
     - name: checkout keys
       command: git --git-dir="{{ keys }}" --work-tree="{{ ansible_env.HOME }}" checkout -f
       args:
-        creates: "{{ ansible_env.HOME }}/.ssh/id_rsa"
+        creates: "{{ ansible_env.HOME }}/.the_codes"
         warn: false
     - name: fix keys permissions
       file:
