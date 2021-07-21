@@ -26,6 +26,14 @@ apt_install_packages:
   - virtualbox
   - xsel
   - neovim
+  - network-manager-openconnect
+  - network-manager-openconnect-gnome
+  - network-manager-openvpn
+  - network-manager-openvpn-gnome
+  - network-manager-pptp
+  - network-manager-pptp-gnome
+  - network-manager-vpnc
+  - network-manager-vpnc-gnome
   - zlib1g-dev # needed by `brew audit` and friends
 apt_purge_packages:
   - chromium-browser
