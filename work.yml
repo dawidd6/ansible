@@ -9,6 +9,8 @@
       tags: code
     - role: teams
       tags: teams
+    - role: keys
+      tags: keys
     - role: dotfiles
       tags: dotfiles
     - role: homebrew
