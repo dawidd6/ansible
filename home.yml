@@ -7,12 +7,12 @@
       tags: chrome
     - role: code
       tags: code
+    - role: keys
+      tags: keys
     - role: dotfiles
       tags: dotfiles
     - role: homebrew
       tags: homebrew
-    - role: keys
-      tags: keys
     - role: intellij
       tags: intellij
     - role: scripts
