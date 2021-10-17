@@ -3,6 +3,8 @@
   roles:
     - role: apt
       tags: apt
+    - role: chrome
+      tags: chrome
     - role: code
       tags: code
     - role: teams
@@ -13,6 +15,8 @@
       tags: dotfiles
     - role: homebrew
       tags: homebrew
+    - role: intellij
+      tags: intellij
     - role: scripts
       tags: scripts
     - role: spotify
