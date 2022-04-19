@@ -1,9 +1,9 @@
 apt_install_packages:
+  - curl
   - cheese
   - chrome-gnome-shell
   - docker.io
   - evince
-  - firefox
   - gimp
   - gnome-boxes
   - gnome-calculator
@@ -16,16 +16,16 @@ apt_install_packages:
   - fonts-noto-color-emoji
   - gpick
   - inkscape
-  - libreoffice-calc
-  - libreoffice-gtk3
-  - libreoffice-writer
   - octave
   - simple-scan
   - totem
   - transmission
-  - vagrant
   - virtualbox
   - xsel
+  - fish
+  - trash-cli
+  - git
+  - build-essential
   - neovim
   - network-manager-openconnect
   - network-manager-openconnect-gnome
@@ -38,11 +38,13 @@ apt_install_packages:
   - zlib1g-dev # needed by `brew audit` and friends
 apt_purge_packages:
   - chromium-browser
+  - firefox
   - gnome-software
   - gnome-shell-extension-desktop-icons
   - gnome-shell-extension-ubuntu-dock
   - snapd
   - ubuntu-software
+  - unattended-upgrades
 apt_disable_services:
   - apt-daily-upgrade.service
   - apt-daily-upgrade.timer
