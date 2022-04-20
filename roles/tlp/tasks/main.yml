@@ -8,4 +8,6 @@
   become: yes
   lineinfile:
     line: DEVICES_TO_DISABLE_ON_STARTUP="bluetooth"
-    path: /etc/default/tlp
+    path: /etc/tlp.d/99-no-bluetooth-at-startup.conf
+    create: yes
+    mode: 0644
