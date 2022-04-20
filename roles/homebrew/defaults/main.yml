@@ -1,2 +1,1 @@
-brew: "{{ '/usr/local' if ansible_facts['os_family'] == 'Darwin' else '/home/linuxbrew/.linuxbrew' }}"
-brewfile: "{{ ansible_env.HOME }}/.Brewfile"
+brew: "{{ '/home/' + ansible_env.USER + '/.brew/' }}"
