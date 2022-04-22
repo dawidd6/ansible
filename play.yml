@@ -1,6 +1,6 @@
 - hosts: localhost
   roles:
-    - { role: homebrew, tags: homebrew }
+    - { role: brew, tags: brew }
     - { role: apps, tags: apps }
     - { role: tools, tags: tools }
     - { role: fonts, tags: fonts }
