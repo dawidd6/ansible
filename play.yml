@@ -25,3 +25,5 @@
       tags: spotify
     - role: tlp
       tags: tlp
+    - role: hibernation
+      tags: hibernation
