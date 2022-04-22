@@ -25,3 +25,9 @@
     path: /etc/default/grub
   notify:
     - update grub
+
+- name: enable hibernation
+  become: yes
+  copy:
+    src: com.ubuntu.desktop.pkla
+    dest: /etc/polkit-1/localauthority/50-local.d/com.ubuntu.desktop.pkla
