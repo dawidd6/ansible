@@ -1,16 +1,16 @@
 - name: key chrome
   become: yes
   apt_key:
-    url: "{{ chrome_key }}"
+    url: https://dl.google.com/linux/linux_signing_key.pub
 
 - name: repo chrome
   become: yes
   apt_repository:
-    repo: "{{ chrome_repo }}"
+    repo: deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main
     state: present
     filename: google-chrome # postinst script installs this file if does not exist
 
 - name: install chrome
   become: yes
   apt:
-    name: "{{ chrome_package }}"
+    name: google-chrome-stable

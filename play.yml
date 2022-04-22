@@ -5,6 +5,8 @@
       tags: apt
     - role: fish
       tags: fish
+    - role: nvim
+      tags: nvim
     - role: chrome
       tags: chrome
     - role: code
@@ -17,8 +19,6 @@
       tags: dotfiles
     - role: homebrew
       tags: homebrew
-    - role: intellij
-      tags: intellij
     - role: scripts
       tags: scripts
     - role: spotify
@@ -27,3 +27,7 @@
       tags: tlp
     - role: hibernation
       tags: hibernation
+    - role: nosnapd
+      tags: nosnapd
+    - role: noupgrade
+      tags: noupgrade

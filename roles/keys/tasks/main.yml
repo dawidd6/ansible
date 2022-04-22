@@ -2,7 +2,7 @@
   find:
     file_type: directory
     paths:
-      - "{{ '/Volumes' if ansible_facts['os_family'] == 'Darwin' else '/media' }}"
+      - "/media"
     depth: 3
     recurse: yes
     patterns: "*keys"
@@ -35,7 +35,7 @@
         value: "+refs/heads/*:refs/remotes/origin/*"
         scope: local
     - name: checkout keys
-      command: git --git-dir="{{ keys }}" --work-tree="{{ ansible_env.HOME }}" checkout -f
+      command: "git --git-dir={{ keys }} --work-tree={{ ansible_env.HOME }} checkout -f"
       args:
         creates: "{{ ansible_env.HOME }}/.the_codes"
         warn: false

@@ -1,21 +1,42 @@
+# TODO split into smaller tasks
 - name: install apt packages
   become: yes
   apt:
     update_cache: yes
-    name: "{{ apt_install_packages }}"
+    name:
+      - curl
+      - cheese
+      - chrome-gnome-shell
+      - docker.io
+      - evince
+      - gimp
+      - gnome-boxes
+      - gnome-calculator
+      - gnome-calendar
+      - gnome-clocks
+      - gnome-system-monitor
+      - gnome-tweaks
+      - gnome-weather
+      - fonts-firacode
+      - fonts-noto-color-emoji
+      - gpick
+      - inkscape
+      - octave
+      - simple-scan
+      - totem
+      - transmission
+      - virtualbox
+      - xsel
+      - trash-cli
+      - git
+      - build-essential
+      - network-manager-openconnect
+      - network-manager-openconnect-gnome
+      - network-manager-openvpn
+      - network-manager-openvpn-gnome
+      - network-manager-pptp
+      - network-manager-pptp-gnome
+      - network-manager-vpnc
+      - network-manager-vpnc-gnome
+      - zlib1g-dev # needed by `brew audit` and friends
 
-- name: purge apt packages
-  become: yes
-  apt:
-    state: absent
-    purge: yes
-    autoremove: yes
-    name: "{{ apt_purge_packages }}"
-
-- name: disable apt daily service
-  become: yes
-  systemd:
-    name: "{{ item }}"
-    masked: yes
-    enabled: no
-  with_items: "{{ apt_disable_services }}"

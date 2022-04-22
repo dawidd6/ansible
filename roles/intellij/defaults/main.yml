@@ -1,2 +1,0 @@
-intellij_url: https://download.jetbrains.com/idea/ideaIU-2019.2.tar.gz
-intellij_dir: "{{ ansible_env.HOME }}/.intellij"

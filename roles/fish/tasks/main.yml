@@ -1,12 +1,12 @@
 - name: repo fish
   become: yes
   apt_repository:
-    repo: "{{ fish_repo }}"
+    repo: ppa:fish-shell/release-3
 
 - name: install fish
   become: yes
   apt:
-    name: "{{ fish_package }}"
+    name: fish
 
 - name: use fish
   become: yes

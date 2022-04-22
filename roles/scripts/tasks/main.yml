@@ -1,7 +1,7 @@
 - name: deploy scripts
   git:
-    repo: "{{ repo }}"
-    dest: "{{ dest }}"
+    repo: git@github.com:dawidd6/bin.git
+    dest: "{{ ansible_env.HOME }}/bin"
     accept_hostkey: yes
     update: no
     version: master

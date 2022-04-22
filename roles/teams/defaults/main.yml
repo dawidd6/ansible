@@ -1,3 +1,0 @@
-teams_key: https://packages.microsoft.com/keys/microsoft.asc
-teams_repo: deb [arch=amd64] https://packages.microsoft.com/repos/ms-teams stable main
-teams_package: teams

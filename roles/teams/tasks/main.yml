@@ -1,16 +1,16 @@
 - name: key teams
   become: yes
   apt_key:
-    url: "{{ teams_key }}"
+    url: https://packages.microsoft.com/keys/microsoft.asc
 
 - name: repo teams
   become: yes
   apt_repository:
-    repo: "{{ teams_repo }}"
+    repo: deb [arch=amd64] https://packages.microsoft.com/repos/ms-teams stable main
     state: present
     filename: teams # postinst script installs this file if does not exist
 
 - name: install teams
   become: yes
   apt:
-    name: "{{ teams_package }}"
+    name: teams
