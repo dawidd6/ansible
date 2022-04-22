@@ -22,7 +22,6 @@ apt_install_packages:
   - transmission
   - virtualbox
   - xsel
-  - fish
   - trash-cli
   - git
   - build-essential
