@@ -11,7 +11,8 @@
 - name: set up hibernation in initramfs
   become: yes
   lineinfile:
-    line: "RESUME=/dev/mapper/ubuntu--vg-swap_1"
+    regexp: "^RESUME=.+"
+    line: "RESUME=/dev/mapper/vgubuntu-swap_1"
     path: /etc/initramfs-tools/conf.d/resume
     create: yes
   notify:
@@ -21,7 +22,7 @@
   become: yes
   lineinfile:
     regexp: "^GRUB_CMDLINE_LINUX_DEFAULT=.+"
-    line: 'GRUB_CMDLINE_LINUX_DEFAULT="quiet splash resume=/dev/mapper/ubuntu--vg-swap_1"'
+    line: 'GRUB_CMDLINE_LINUX_DEFAULT="quiet splash resume=/dev/mapper/vgubuntu-swap_1"'
     path: /etc/default/grub
   notify:
     - update grub
