@@ -28,11 +28,12 @@
 
 - name: install additional cli tools
   homebrew:
-    path: "{{ ansible_env.HOME/.brew/bin"
+    path: "{{ ansible_env.HOME }}/.brew/bin"
     name:
       - bat
       - docker-completion
       - diff-so-fancy
       - gh
+      - gitbatch
       - go
       - neofetch
