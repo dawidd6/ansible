@@ -26,7 +26,7 @@
   notify:
     - update grub
 
-- name: enable hibernation
+- name: enable hibernation without password
   become: yes
   copy:
     src: com.ubuntu.desktop.pkla
