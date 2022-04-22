@@ -1,18 +1,18 @@
 - name: create brew base directories
   file:
-    path: "{{ brew }}/bin"
+    path: "{{ ansible_env.HOME }}/.brew/bin"
     state: directory
 
 - name: clone brew repository
   git:
     repo: "https://github.com/Homebrew/brew"
-    dest: "{{ brew }}/Homebrew"
+    dest: "{{ ansible_env.HOME }}/.brew/Homebrew"
     update: no
-    version: "master"
+    version: master
 
 - name: create symlink to brew binary
   file:
-    src: "{{ brew }}/Homebrew/bin/brew"
-    dest: "{{ brew }}/bin/brew"
-    state: "link"
+    src: "{{ ansible_env.HOME }}/.brew/Homebrew/bin/brew"
+    dest: "{{ ansible_env.HOME }}/.brew/bin/brew"
+    state: link
   notify: brew update

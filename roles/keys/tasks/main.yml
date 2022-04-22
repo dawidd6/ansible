@@ -18,27 +18,24 @@
     - name: clone keys
       git:
         repo: "{{ keys_dir.files[0].path }}"
-        dest: "{{ keys }}"
+        dest: "{{ ansible_env.HOME }}/.keys"
         accept_hostkey: yes
         bare: yes
         version: master
-    - name: do not show untracked keys
+      notify: checkout keys
+
+    - name: set configs
       git_config:
-        repo: "{{ keys }}"
-        name: "status.showUntrackedFiles"
-        value: "no"
+        repo: "{{ ansible_env.HOME }}/.keys"
+        name: "{{ item.key }}"
+        value: "{{ item.value }}"
         scope: local
-    - name: set keys fetch config
-      git_config:
-        repo: "{{ keys }}"
-        name: "remote.origin.fetch"
-        value: "+refs/heads/*:refs/remotes/origin/*"
-        scope: local
-    - name: checkout keys
-      command: "git --git-dir={{ keys }} --work-tree={{ ansible_env.HOME }} checkout -f"
-      args:
-        creates: "{{ ansible_env.HOME }}/.the_codes"
-        warn: false
+      with_items:
+        - key: status.showUntrackedFiles
+          value: no
+        - key: remote.origin.fetch
+          value: +refs/heads/*:refs/remotes/origin/*
+
     - name: fix keys permissions
       file:
         path: "{{ item }}"

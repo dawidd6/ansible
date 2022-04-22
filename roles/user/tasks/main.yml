@@ -1,0 +1,5 @@
+- name: use fish
+  become: yes
+  user:
+    name: "{{ ansible_env.USER }}"
+    shell: /usr/bin/fish

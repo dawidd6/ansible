@@ -6,6 +6,7 @@
     update: no
     bare: yes
     version: master
+  notify: checkout dotfiles
 
 - name: do not show untracked dotfiles
   git_config:
@@ -20,9 +21,3 @@
     name: "remote.origin.fetch"
     value: "+refs/heads/*:refs/remotes/origin/*"
     scope: local
-
-- name: checkout dotfiles
-  command: "git --git-dir={{ ansible_env.HOME }}/.dotfiles --work-tree={{ ansible_env.HOME }} checkout -f"
-  args:
-    creates: "{{ ansible_env.HOME }}/README.md"
-    warn: false

@@ -1,0 +1,7 @@
+- name: install fonts
+  become: yes
+  apt:
+    update_cache: yes
+    name:
+      - fonts-firacode
+      - fonts-noto-color-emoji

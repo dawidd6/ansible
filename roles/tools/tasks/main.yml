@@ -1,0 +1,22 @@
+- name: add repos
+  become: yes
+  apt_repository:
+    repo: "{{ item }}"
+  loop:
+    - ppa:fish-shell/release-3
+
+- name: install cli tools
+  become: yes
+  apt:
+    update_cache: yes
+    name:
+      - build-essential
+      - curl
+      - docker.io
+      - fish
+      - git
+      - neovim
+      - tlp
+      - trash-cli
+      - xsel
+      - zlib1g-dev # needed by `brew audit` and friends

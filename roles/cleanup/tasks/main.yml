@@ -1,0 +1,21 @@
+- name: purge unneeded packages
+  become: yes
+  apt:
+    state: absent
+    purge: yes
+    autoremove: yes
+    name:
+      - snapd
+      - unattended-upgrades
+
+- name: disable apt daily services
+  become: yes
+  systemd:
+    name: "{{ item }}"
+    masked: yes
+    enabled: no
+  with_items:
+    - apt-daily-upgrade.service
+    - apt-daily-upgrade.timer
+    - apt-daily.service
+    - apt-daily.timer

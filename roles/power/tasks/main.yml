@@ -1,0 +1,27 @@
+- name: disable bt on startup
+  become: yes
+  lineinfile:
+    line: DEVICES_TO_DISABLE_ON_STARTUP="bluetooth"
+    path: /etc/tlp.d/99-no-bluetooth-at-startup.conf
+    create: yes
+    mode: 0644
+  notify:
+    - start tlp
+
+- name: set up hibernation in initramfs
+  become: yes
+  lineinfile:
+    line: "RESUME=/dev/mapper/ubuntu--vg-swap_1"
+    path: /etc/initramfs-tools/conf.d/resume
+    create: yes
+  notify:
+    - update initramfs
+
+- name: set up hibernation in grub
+  become: yes
+  lineinfile:
+    regexp: "^GRUB_CMDLINE_LINUX_DEFAULT=.+"
+    line: 'GRUB_CMDLINE_LINUX_DEFAULT="quiet splash resume=/dev/mapper/ubuntu--vg-swap_1"'
+    path: /etc/default/grub
+  notify:
+    - update grub

@@ -1,33 +1,12 @@
 - hosts: localhost
-  connection: local
   roles:
-    - role: apt
-      tags: apt
-    - role: fish
-      tags: fish
-    - role: nvim
-      tags: nvim
-    - role: chrome
-      tags: chrome
-    - role: code
-      tags: code
-    - role: teams
-      tags: teams
-    - role: keys
-      tags: keys
-    - role: dotfiles
-      tags: dotfiles
-    - role: homebrew
-      tags: homebrew
-    - role: scripts
-      tags: scripts
-    - role: spotify
-      tags: spotify
-    - role: tlp
-      tags: tlp
-    - role: hibernation
-      tags: hibernation
-    - role: nosnapd
-      tags: nosnapd
-    - role: noupgrade
-      tags: noupgrade
+    - { role: homebrew, tags: homebrew }
+    - { role: apps, tags: apps }
+    - { role: tools, tags: tools }
+    - { role: fonts, tags: fonts }
+    - { role: keys, tags: keys }
+    - { role: scripts, tags: scripts }
+    - { role: dotfiles, tags: dotfiles }
+    - { role: power, tags: power }
+    - { role: user, tags: user }
+    - { role: cleanup, tags: cleanup }

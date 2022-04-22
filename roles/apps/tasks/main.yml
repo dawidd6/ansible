@@ -1,0 +1,53 @@
+- name: add keys
+  become: yes
+  apt_key:
+    url: "{{ item }}"
+  loop:
+    - https://dl.google.com/linux/linux_signing_key.pub
+    - https://packages.microsoft.com/keys/microsoft.asc
+    - https://download.spotify.com/debian/pubkey_5E3C45D7B312C643.gpg
+
+- name: add repos
+  become: yes
+  apt_repository:
+    repo: "{{ item.repo }}"
+    filename: "{{ item.filename }}"
+  loop:
+    - repo: deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main
+      filename: google-chrome
+    - repo: deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main
+      filename: vscode
+    - repo: deb [arch=amd64] https://packages.microsoft.com/repos/ms-teams stable main
+      filename: teams
+    - repo: deb [arch=amd64] http://repository.spotify.com stable non-free
+      filename: spotify
+
+- name: install apps
+  become: yes
+  apt:
+    update_cache: yes
+    name:
+      - cheese
+      - chrome-gnome-shell
+      - code
+      - evince
+      - gimp
+      - gnome-boxes
+      - gnome-calculator
+      - gnome-calendar
+      - gnome-clocks
+      - gnome-system-monitor
+      - gnome-tweaks
+      - gnome-weather
+      - google-chrome-stable
+      - gpick
+      - inkscape
+      - network-manager-openconnect-gnome
+      - network-manager-vpnc-gnome
+      - octave
+      - simple-scan
+      - spotify-client
+      - teams
+      - totem
+      - transmission
+      - virtualbox

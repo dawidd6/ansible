@@ -1,8 +1,0 @@
-- name: purge snapd
-  become: yes
-  apt:
-    state: absent
-    purge: yes
-    autoremove: yes
-    name:
-      - snapd
