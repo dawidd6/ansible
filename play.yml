@@ -3,6 +3,8 @@
   roles:
     - role: apt
       tags: apt
+    - role: fish
+      tags: fish
     - role: chrome
       tags: chrome
     - role: code

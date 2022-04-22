@@ -1,0 +1,15 @@
+- name: repo fish
+  become: yes
+  apt_repository:
+    repo: "{{ fish_repo }}"
+
+- name: install fish
+  become: yes
+  apt:
+    name: "{{ fish_package }}"
+
+- name: use fish
+  become: yes
+  user:
+    name: "{{ ansible_env.USER }}"
+    shell: /usr/bin/fish
