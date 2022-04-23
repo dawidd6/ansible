@@ -18,6 +18,7 @@
       - git
       - hub
       - jq
+      - lm-sensors
       - neovim
       - python3
       - ruby
