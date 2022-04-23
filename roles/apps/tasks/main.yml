@@ -11,16 +11,17 @@
   become: yes
   apt_repository:
     repo: "{{ item.repo }}"
-    filename: "{{ item.filename }}"
+    filename: "{{ item.filename | default(omit) }}"
   loop:
-    - repo: deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main
+    - repo: deb [arch=amd64] https://dl.google.com/linux/chrome/deb/ stable main
       filename: google-chrome
     - repo: deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main
       filename: vscode
     - repo: deb [arch=amd64] https://packages.microsoft.com/repos/ms-teams stable main
       filename: teams
-    - repo: deb [arch=amd64] http://repository.spotify.com stable non-free
+    - repo: deb http://repository.spotify.com stable non-free
       filename: spotify
+    - repo: ppa:flexiondotorg/quickemu
 
 - name: install apps
   become: yes
@@ -44,6 +45,7 @@
       - inkscape
       - network-manager-openconnect-gnome
       - network-manager-vpnc-gnome
+      - quickemu
       - octave
       - simple-scan
       - spotify-client
