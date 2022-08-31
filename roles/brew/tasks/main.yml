@@ -21,6 +21,7 @@
 
 - name: install brew packages
   homebrew:
+    update_homebrew: yes
     path: "{{ ansible_env.HOME }}/.brew/bin"
     name:
       - dawidd6/tap/deber
