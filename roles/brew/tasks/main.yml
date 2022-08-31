@@ -30,7 +30,6 @@
       - curl
       - diff-so-fancy
       - diffoscope
-      - fish
       - fzf
       - gh
       - ghorg
@@ -55,9 +54,3 @@
       - trash-cli
       - tree
       - xsel
-
-- name: set user shell
-  become: yes
-  user:
-    name: "{{ ansible_env.USER }}"
-    shell: "{{ ansible_env.HOME }}/.brew/bin/fish"

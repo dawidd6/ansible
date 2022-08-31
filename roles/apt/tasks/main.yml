@@ -21,6 +21,7 @@
       filename: teams
     - repo: deb http://repository.spotify.com stable non-free
       filename: spotify
+    - repo: ppa:fish-shell/release-3
 
 - name: install apps
   become: yes
@@ -35,6 +36,7 @@
       - evince
       - filezilla
       - firefox
+      - fish
       - fonts-dejavu-extra
       - fonts-firacode
       - fonts-noto-color-emoji
@@ -81,3 +83,9 @@
   dpkg_selections:
     name: snapd
     selection: hold
+
+- name: set user shell
+  become: yes
+  user:
+    name: "{{ ansible_env.USER }}"
+    shell: "/usr/bin/fish"
