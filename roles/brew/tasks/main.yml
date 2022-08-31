@@ -15,4 +15,46 @@
     src: "{{ ansible_env.HOME }}/.brew/Homebrew/bin/brew"
     dest: "{{ ansible_env.HOME }}/.brew/bin/brew"
     state: link
-  notify: brew update
+  notify: update brew
+
+- meta: flush_handlers
+
+- name: install brew packages
+  homebrew:
+    path: "{{ ansible_env.HOME }}/.brew/bin"
+    name:
+      - bat
+      - curl
+      - diff-so-fancy
+      - diffoscope
+      - fish
+      - fzf
+      - gh
+      - ghorg
+      - git
+      - gitbatch
+      - go
+      - hub
+      - ipcalc
+      - jfrog-cli
+      - jq
+      - lab
+      - lazygit
+      - lm-sensors
+      - ncdu
+      - neofetch
+      - neovim
+      - nmap
+      - packer
+      - parallel
+      - ruby
+      - shellcheck
+      - trash-cli
+      - tree
+      - xsel
+
+- name: set user shell
+  become: yes
+  user:
+    name: "{{ ansible_env.USER }}"
+    shell: "{{ ansible_env.HOME }}/.brew/bin/fish"

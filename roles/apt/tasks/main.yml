@@ -21,17 +21,23 @@
       filename: teams
     - repo: deb http://repository.spotify.com stable non-free
       filename: spotify
-    - repo: ppa:flexiondotorg/quickemu
 
 - name: install apps
   become: yes
   apt:
     update_cache: yes
     name:
+      - alien
       - cheese
       - chrome-gnome-shell
       - code
+      - docker.io
       - evince
+      - filezilla
+      - firefox
+      - fonts-dejavu-extra
+      - fonts-firacode
+      - fonts-noto-color-emoji
       - gimp
       - gnome-boxes
       - gnome-calculator
@@ -43,13 +49,35 @@
       - google-chrome-stable
       - gpick
       - inkscape
+      - jxplorer
+      - keepassxc
+      - meld
       - network-manager-openconnect-gnome
       - network-manager-vpnc-gnome
-      - quickemu
+      - pavucontrol
       - octave
       - simple-scan
       - spotify-client
+      - sshpass
       - teams
+      - tlp
       - totem
+      - traceroute
       - transmission
       - virtualbox
+
+- name: purge unneeded packages
+  become: yes
+  apt:
+    state: absent
+    purge: yes
+    autoremove: yes
+    name:
+      - snapd
+      - unattended-upgrades
+
+- name: hold unneeded packages
+  become: yes
+  dpkg_selections:
+    name: snapd
+    selection: hold
