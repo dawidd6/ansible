@@ -32,6 +32,7 @@
       - cheese
       - chrome-gnome-shell
       - code
+      - diffoscope
       - docker.io
       - evince
       - filezilla
@@ -40,6 +41,7 @@
       - fonts-dejavu-extra
       - fonts-firacode
       - fonts-noto-color-emoji
+      - fzf
       - gimp
       - gnome-boxes
       - gnome-calculator
@@ -50,12 +52,18 @@
       - gnome-weather
       - google-chrome-stable
       - gpick
+      - hub
       - inkscape
       - jxplorer
       - keepassxc
+      - lm-sensors
       - meld
+      - ncdu
+      - neovim
       - network-manager-openconnect-gnome
       - network-manager-vpnc-gnome
+      - nmap
+      - parallel
       - pavucontrol
       - octave
       - simple-scan
@@ -66,7 +74,10 @@
       - totem
       - traceroute
       - transmission
+      - trash-cli
+      - tree
       - virtualbox
+      - xsel
 
 - name: purge unneeded packages
   become: yes
