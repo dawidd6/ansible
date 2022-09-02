@@ -21,7 +21,6 @@
       filename: teams
     - repo: deb http://repository.spotify.com stable non-free
       filename: spotify
-    - repo: ppa:fish-shell/release-3
 
 - name: install apps
   become: yes
@@ -31,12 +30,13 @@
       - alien
       - cheese
       - chrome-gnome-shell
+      - clang
+      - cmake
       - code
       - diffoscope
       - docker.io
       - evince
       - filezilla
-      - firefox
       - fish
       - fonts-dejavu-extra
       - fonts-firacode
@@ -56,12 +56,14 @@
       - inkscape
       - jxplorer
       - keepassxc
+      - libgtk-3-dev
       - lm-sensors
       - meld
       - ncdu
       - neovim
       - network-manager-openconnect-gnome
       - network-manager-vpnc-gnome
+      - ninja-build
       - nmap
       - parallel
       - pavucontrol
