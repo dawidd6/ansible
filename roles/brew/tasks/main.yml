@@ -28,6 +28,7 @@
       - dawidd6/tap/dh-make-golang
       - bat
       - diff-so-fancy
+      - distrobox
       - gh
       - ghorg
       - gitbatch
