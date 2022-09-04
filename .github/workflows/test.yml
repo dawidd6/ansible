@@ -10,4 +10,6 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Test
+        env:
+          OPTIONS: --skip-tags docker
         run: make
