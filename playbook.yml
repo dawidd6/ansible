@@ -21,12 +21,13 @@
 - name: Install development stuff
   hosts: localhost
   roles:
-    - { role: docker, tags: docker }
-    - { role: flutter, tags: flutter }
-    - { role: golang, tags: golang }
-    - { role: python, tags: python }
-    - { role: ruby, tags: ruby }
     - { role: vscode, tags: vscode }
+    - { role: ruby, tags: ruby }
+    - { role: python, tags: python }
+    - { role: golang, tags: golang }
+    - { role: flutter, tags: flutter }
+    - { role: docker, tags: docker }
+    - { role: ansible, tags: ansible }
 
 - name: Remove unneeded stuff
   hosts: localhost
