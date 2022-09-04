@@ -18,23 +18,3 @@
   notify: update brew
 
 - meta: flush_handlers
-
-- name: install brew packages
-  community.general.homebrew:
-    update_homebrew: true
-    path: "{{ ansible_env.HOME }}/.brew/bin"
-    name:
-      - dawidd6/tap/deber
-      - dawidd6/tap/dh-make-golang
-      - bat
-      - diff-so-fancy
-      - distrobox
-      - gh
-      - ghorg
-      - gitbatch
-      - ipcalc
-      - jfrog-cli
-      - jq
-      - lab
-      - neofetch
-      - shellcheck

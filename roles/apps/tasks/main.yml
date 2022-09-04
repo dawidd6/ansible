@@ -45,3 +45,22 @@
       - trash-cli
       - tree
       - xsel
+
+- name: install more cli tools
+  community.general.homebrew:
+    path: "{{ ansible_env.HOME }}/.brew/bin"
+    name:
+      - dawidd6/tap/deber
+      - dawidd6/tap/dh-make-golang
+      - bat
+      - diff-so-fancy
+      - distrobox
+      - gh
+      - ghorg
+      - gitbatch
+      - ipcalc
+      - jfrog-cli
+      - jq
+      - lab
+      - neofetch
+      - shellcheck

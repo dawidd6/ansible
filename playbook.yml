@@ -1,21 +1,41 @@
-- hosts: localhost
+- name: Install basic stuff
+  hosts: localhost
   roles:
-    # base
-    - { role: base, tags: base }
-    # brew
     - { role: brew, tags: brew }
-    # shell
+    - { role: apps, tags: apps }
     - { role: fish, tags: fish }
-    # apps
     - { role: chrome, tags: chrome }
     - { role: spotify, tags: spotify }
-    - { role: teams, tags: teams }
-    - { role: vscode, tags: vscode }
-    # power
+
+- name: Install power management stuff
+  hosts: localhost
+  roles:
     - { role: tlp, tags: tlp }
-    # snapd
+
+- name: Install work stuff
+  hosts: localhost
+  roles:
+    - { role: teams, tags: teams }
+    - { role: vpn, tags: vpn }
+
+- name: Install development stuff
+  hosts: localhost
+  roles:
+    - { role: docker, tags: docker }
+    - { role: flutter, tags: flutter }
+    - { role: golang, tags: golang }
+    - { role: python, tags: python }
+    - { role: ruby, tags: ruby }
+    - { role: vscode, tags: vscode }
+
+- name: Remove unneeded stuff
+  hosts: localhost
+  roles:
     - { role: snapd, tags: snapd }
-    # repos
+
+- name: Deploy git repositories
+  hosts: localhost
+  roles:
     - { role: keys, tags: keys }
     - { role: dotfiles, tags: dotfiles }
     - { role: scripts, tags: scripts }
