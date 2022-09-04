@@ -1,4 +1,4 @@
-- name: install deps
+- name: Install deps
   become: true
   ansible.builtin.apt:
     name:

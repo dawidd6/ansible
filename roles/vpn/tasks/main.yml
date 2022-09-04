@@ -1,4 +1,4 @@
-- name: install vpn packages
+- name: Install vpn packages
   become: true
   ansible.builtin.apt:
     name:

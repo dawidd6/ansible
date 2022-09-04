@@ -1,4 +1,4 @@
-- name: checkout dotfiles
+- name: Checkout dotfiles
   ansible.builtin.command: "git --git-dir={{ ansible_env.HOME }}/.dotfiles --work-tree={{ ansible_env.HOME }} checkout -f"
   args:
     warn: false

@@ -1,4 +1,4 @@
-- name: checkout keys
+- name: Checkout keys
   ansible.builtin.command: "git --git-dir={{ ansible_env.HOME }}/.keys --work-tree={{ ansible_env.HOME }} checkout -f"
   args:
     warn: false

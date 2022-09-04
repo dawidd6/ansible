@@ -1,22 +1,22 @@
-- name: create brew base directories
+- name: Create brew base directories
   ansible.builtin.file:
     path: "{{ ansible_env.HOME }}/.brew/bin"
     state: directory
     mode: 0755
 
-- name: clone brew repository
+- name: Clone brew repository
   ansible.builtin.git:
     repo: "https://github.com/Homebrew/brew"
     dest: "{{ ansible_env.HOME }}/.brew/Homebrew"
     update: false
     version: master
 
-- name: create symlink to brew binary
+- name: Create symlink to brew binary
   ansible.builtin.file:
     src: "{{ ansible_env.HOME }}/.brew/Homebrew/bin/brew"
     dest: "{{ ansible_env.HOME }}/.brew/bin/brew"
     state: link
-  notify: update brew
+  notify: Update brew
 
-- name: flush handlers
-  meta: flush_handlers
+- name: Flush handlers
+  ansible.builtin.meta: flush_handlers

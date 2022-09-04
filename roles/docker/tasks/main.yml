@@ -1,4 +1,4 @@
-- name: install docker
+- name: Install docker
   become: true
   ansible.builtin.apt:
     name: docker.io

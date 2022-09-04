@@ -1,4 +1,4 @@
-- name: purge snapd
+- name: Purge snapd
   become: true
   ansible.builtin.apt:
     state: absent

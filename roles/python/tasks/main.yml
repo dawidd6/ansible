@@ -1,4 +1,4 @@
-- name: install python
+- name: Install python
   become: true
   ansible.builtin.apt:
     name:
