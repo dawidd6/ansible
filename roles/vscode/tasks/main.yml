@@ -1,0 +1,16 @@
+- name: add vscode repo key
+  become: true
+  ansible.builtin.apt_key:
+    url: https://packages.microsoft.com/keys/microsoft.asc
+
+- name: add vscode repo
+  become: true
+  ansible.builtin.apt_repository:
+    repo: deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main
+    filename: teams
+
+- name: install vscode
+  become: true
+  ansible.builtin.apt:
+    update_cache: true
+    name: code

@@ -1,2 +1,2 @@
 - name: checkout dotfiles
-  command: "git --git-dir={{ ansible_env.HOME }}/.dotfiles --work-tree={{ ansible_env.HOME }} checkout -f"
+  ansible.builtin.shell: "git --git-dir={{ ansible_env.HOME }}/.dotfiles --work-tree={{ ansible_env.HOME }} checkout -f"

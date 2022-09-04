@@ -1,0 +1,21 @@
+- hosts: localhost
+  roles:
+    # base
+    - { role: base, tags: base }
+    # brew
+    - { role: brew, tags: brew }
+    # shell
+    - { role: fish, tags: fish }
+    # apps
+    - { role: chrome, tags: chrome }
+    - { role: spotify, tags: spotify }
+    - { role: teams, tags: teams }
+    - { role: vscode, tags: vscode }
+    # power
+    - { role: tlp, tags: tlp }
+    # snapd
+    - { role: snapd, tags: snapd }
+    # repos
+    - { role: keys, tags: keys }
+    - { role: dotfiles, tags: dotfiles }
+    - { role: scripts, tags: scripts }

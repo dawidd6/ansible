@@ -1,7 +1,0 @@
-- hosts: localhost
-  roles:
-    - { role: apt, tags: apt }
-    - { role: brew, tags: brew }
-    - { role: keys, tags: keys }
-    - { role: dotfiles, tags: dotfiles }
-    - { role: scripts, tags: scripts }

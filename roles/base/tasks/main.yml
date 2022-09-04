@@ -1,0 +1,47 @@
+- name: install gui apps
+  become: true
+  ansible.builtin.apt:
+    name:
+      - cheese
+      - evince
+      - filezilla
+      - fonts-dejavu-extra
+      - fonts-firacode
+      - fonts-noto-color-emoji
+      - gimp
+      - gnome-boxes
+      - gnome-calculator
+      - gnome-calendar
+      - gnome-clocks
+      - gnome-system-monitor
+      - gnome-tweaks
+      - gnome-weather
+      - gpick
+      - inkscape
+      - jxplorer
+      - keepassxc
+      - meld
+      - pavucontrol
+      - octave
+      - simple-scan
+      - totem
+      - transmission
+      - virtualbox
+
+- name: install cli tools
+  become: true
+  ansible.builtin.apt:
+    name:
+      - alien
+      - diffoscope
+      - fzf
+      - lm-sensors
+      - ncdu
+      - neovim
+      - nmap
+      - parallel
+      - sshpass
+      - traceroute
+      - trash-cli
+      - tree
+      - xsel

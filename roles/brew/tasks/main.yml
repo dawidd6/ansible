@@ -1,17 +1,17 @@
 - name: create brew base directories
-  file:
+  ansible.builtin.file:
     path: "{{ ansible_env.HOME }}/.brew/bin"
     state: directory
 
 - name: clone brew repository
-  git:
+  ansible.builtin.git:
     repo: "https://github.com/Homebrew/brew"
     dest: "{{ ansible_env.HOME }}/.brew/Homebrew"
-    update: no
+    update: false
     version: master
 
 - name: create symlink to brew binary
-  file:
+  ansible.builtin.file:
     src: "{{ ansible_env.HOME }}/.brew/Homebrew/bin/brew"
     dest: "{{ ansible_env.HOME }}/.brew/bin/brew"
     state: link
@@ -20,8 +20,8 @@
 - meta: flush_handlers
 
 - name: install brew packages
-  homebrew:
-    update_homebrew: yes
+  community.general.homebrew:
+    update_homebrew: true
     path: "{{ ansible_env.HOME }}/.brew/bin"
     name:
       - dawidd6/tap/deber

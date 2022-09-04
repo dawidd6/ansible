@@ -1,0 +1,6 @@
+- name: install python
+  become: true
+  ansible.builtin.apt:
+    name:
+      - python3
+      - python3-pip

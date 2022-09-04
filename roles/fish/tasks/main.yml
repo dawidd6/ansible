@@ -1,0 +1,10 @@
+- name: install fish
+  become: true
+  ansible.builtin.apt:
+    name: fish
+
+- name: set user shell
+  become: true
+  ansible.builtin.user:
+    name: "{{ ansible_env.USER }}"
+    shell: /usr/bin/fish

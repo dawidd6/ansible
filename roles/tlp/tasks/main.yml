@@ -1,0 +1,21 @@
+- name: install tlp
+  become: true
+  ansible.builtin.apt:
+    name: tlp
+  notify: start tlp
+
+- name: disable bt at startup
+  become: true
+  ansible.builtin.lineinfile:
+    line: DEVICES_TO_DISABLE_ON_STARTUP="bluetooth"
+    path: /etc/tlp.d/99-no-bluetooth-at-startup.conf
+    create: true
+  notify: start tlp
+
+- name: disable wifi power saving on battery mode
+  become: true
+  ansible.builtin.lineinfile:
+    line: WIFI_PWR_ON_BAT="off"
+    path: /etc/tlp.d/99-no-wifi-power-saving.conf
+    create: true
+  notify: start tlp
