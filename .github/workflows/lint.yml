@@ -9,5 +9,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      - name: Install linter
+        run: |
+          sudo apt update
+          sudo apt install ansible-lint
+
       - name: Lint
         run: ansible-lint *.yml
