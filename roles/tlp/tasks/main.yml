@@ -9,6 +9,7 @@
   ansible.builtin.lineinfile:
     line: DEVICES_TO_DISABLE_ON_STARTUP="bluetooth"
     path: /etc/tlp.d/99-no-bluetooth-at-startup.conf
+    mode: 0644
     create: true
   notify: start tlp
 
@@ -17,5 +18,6 @@
   ansible.builtin.lineinfile:
     line: WIFI_PWR_ON_BAT="off"
     path: /etc/tlp.d/99-no-wifi-power-saving.conf
+    mode: 0644
     create: true
   notify: start tlp

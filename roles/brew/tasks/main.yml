@@ -2,6 +2,7 @@
   ansible.builtin.file:
     path: "{{ ansible_env.HOME }}/.brew/bin"
     state: directory
+    mode: 0755
 
 - name: clone brew repository
   ansible.builtin.git:
@@ -17,4 +18,5 @@
     state: link
   notify: update brew
 
-- meta: flush_handlers
+- name: flush handlers
+  meta: flush_handlers
