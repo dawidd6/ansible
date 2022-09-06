@@ -1,4 +1,5 @@
-- hosts: localhost
+- name: Playbook
+  hosts: localhost
   roles:
     - { role: apt, tags: apt }
     - { role: brew, tags: brew }
