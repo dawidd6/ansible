@@ -15,5 +15,5 @@ jobs:
 
       - name: Test
         env:
-          OPTIONS: --skip-tags apt,brew
+          OPTIONS: --skip-tags apt,brew,flatpak
         run: make
