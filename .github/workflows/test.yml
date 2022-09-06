@@ -15,5 +15,5 @@ jobs:
 
       - name: Test
         env:
-          OPTIONS: --skip-tags docker
+          OPTIONS: --skip-tags apt,brew
         run: make
