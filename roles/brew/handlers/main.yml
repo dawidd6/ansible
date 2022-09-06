@@ -1,2 +1,2 @@
 - name: Update brew
-  ansible.builtin.command: "{{ ansible_env.HOME }}/.brew/bin/brew update -f"
+  ansible.builtin.command: /home/linuxbrew/.linuxbrew/bin/brew update -f

@@ -1,6 +1,0 @@
-- name: Install vpn packages
-  become: true
-  ansible.builtin.apt:
-    name:
-      - network-manager-openconnect-gnome
-      - network-manager-vpnc-gnome

@@ -1,22 +1,69 @@
 - name: Create brew base directories
+  become: true
   ansible.builtin.file:
-    path: "{{ ansible_env.HOME }}/.brew/bin"
+    path: /home/linuxbrew/.linuxbrew/bin
     state: directory
+    owner: "{{ ansible_env.USER }}"
+    group: "{{ ansible_env.USER }}"
     mode: 0755
 
 - name: Clone brew repository
   ansible.builtin.git:
-    repo: "https://github.com/Homebrew/brew"
-    dest: "{{ ansible_env.HOME }}/.brew/Homebrew"
+    repo: https://github.com/Homebrew/brew
+    dest: /home/linuxbrew/.linuxbrew/Homebrew
     update: false
     version: master
 
 - name: Create symlink to brew binary
   ansible.builtin.file:
-    src: "{{ ansible_env.HOME }}/.brew/Homebrew/bin/brew"
-    dest: "{{ ansible_env.HOME }}/.brew/bin/brew"
+    src: /home/linuxbrew/.linuxbrew/Homebrew/bin/brew
+    dest: /home/linuxbrew/.linuxbrew/bin/brew
     state: link
   notify: Update brew
 
 - name: Flush handlers
   ansible.builtin.meta: flush_handlers
+
+- name: Install brewed software
+  community.general.homebrew:
+    path: /home/linuxbrew/.linuxbrew/bin
+    name:
+      - dawidd6/tap/deber
+      - dawidd6/tap/dh-make-golang
+      - bat
+      - cmake
+      - diff-so-fancy
+      - diffoscope
+      - distrobox
+      - fish
+      - fzf
+      - gh
+      - ghorg
+      - gitbatch
+      - go
+      - htop
+      - ipcalc
+      - jfrog-cli
+      - jq
+      - lab
+      - llvm
+      - lm-sensors
+      - ncdu
+      - neofetch
+      - neovim
+      - ninja
+      - nmap
+      - node
+      - parallel
+      - python
+      - ruby
+      - shellcheck
+      - trash-cli
+      - tree
+      - xsel
+
+- name: Set user shell
+  become: true
+  ansible.builtin.user:
+    name: "{{ ansible_env.USER }}"
+    shell: /home/linuxbrew/.linuxbrew/bin/fish

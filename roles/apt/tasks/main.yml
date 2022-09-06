@@ -1,0 +1,104 @@
+- name: Add vscode repo key
+  become: true
+  ansible.builtin.apt_key:
+    url: https://packages.microsoft.com/keys/microsoft.asc
+
+- name: Add vscode repo
+  become: true
+  ansible.builtin.apt_repository:
+    repo: deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main
+    filename: teams
+
+- name: Add teams repo key
+  become: true
+  ansible.builtin.apt_key:
+    url: https://packages.microsoft.com/keys/microsoft.asc
+
+- name: Add teams repo
+  become: true
+  ansible.builtin.apt_repository:
+    repo: deb [arch=amd64] https://packages.microsoft.com/repos/ms-teams stable main
+    filename: teams
+
+- name: Add chrome repo key
+  become: true
+  ansible.builtin.apt_key:
+    url: https://dl.google.com/linux/linux_signing_key.pub
+
+- name: Add chrome repo
+  become: true
+  ansible.builtin.apt_repository:
+    repo: deb [arch=amd64] https://dl.google.com/linux/chrome/deb/ stable main
+    filename: google-chrome
+
+- name: Install apt packages
+  become: true
+  ansible.builtin.apt:
+    update_cache: true
+    name:
+      - build-essential
+      - cheese
+      - chrome-gnome-shell
+      - code
+      - curl
+      - evince
+      - docker.io
+      - file
+      - filezilla
+      - flatpak
+      - fonts-dejavu-extra
+      - fonts-firacode
+      - fonts-noto-color-emoji
+      - gimp
+      - git
+      - gnome-boxes
+      - gnome-calculator
+      - gnome-calendar
+      - gnome-clocks
+      - gnome-system-monitor
+      - gnome-tweaks
+      - gnome-weather
+      - google-chrome-stable
+      - gpick
+      - inkscape
+      - jxplorer
+      - keepassxc
+      - meld
+      - network-manager-openconnect-gnome
+      - network-manager-vpnc-gnome
+      - pavucontrol
+      - procps
+      - octave
+      - simple-scan
+      - teams
+      - tlp
+      - totem
+      - transmission
+      - virtualbox
+      - zlib1g-dev
+
+- name: Purge snapd
+  become: true
+  ansible.builtin.apt:
+    state: absent
+    purge: true
+    autoremove: true
+    name: snapd
+
+- name: Disable bt at startup
+  become: true
+  ansible.builtin.lineinfile:
+    line: DEVICES_TO_DISABLE_ON_STARTUP="bluetooth"
+    path: /etc/tlp.d/99-no-bluetooth-at-startup.conf
+    mode: 0644
+    create: true
+  notify: Start tlp
+
+- name: Disable wifi power saving on battery mode
+  become: true
+  ansible.builtin.lineinfile:
+    line: WIFI_PWR_ON_BAT="off"
+    path: /etc/tlp.d/99-no-wifi-power-saving.conf
+    mode: 0644
+    create: true
+  notify: Start tlp
