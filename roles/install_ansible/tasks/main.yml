@@ -1,0 +1,13 @@
+- name: Install ansible
+  ansible.builtin.pip:
+    name:
+      - ansible
+      - ansible-lint
+
+- name: Purge ansible
+  become: true
+  ansible.builtin.apt:
+    state: absent
+    purge: true
+    autoremove: true
+    name: ansible
