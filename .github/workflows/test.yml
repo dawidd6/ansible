@@ -13,5 +13,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Test
-        run: ansible-playbook -vvv --skip-tags docker playbook.yml
+      - name: Cache vagrant boxes
+        uses: actions/cache@v2
+        with:
+          path: ~/.vagrant.d/boxes
+          key: ${{ runner.os }}-vagrant-${{ hashFiles('Vagrantfile') }}
+          restore-keys: |
+            ${{ runner.os }}-vagrant-
+
+      - name: Run vagrant up
+        run: vagrant up
