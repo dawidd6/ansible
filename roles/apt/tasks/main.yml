@@ -94,12 +94,3 @@
     mode: 0644
     create: true
   notify: Start tlp
-
-- name: Disable wifi power saving on battery mode
-  become: true
-  ansible.builtin.lineinfile:
-    line: WIFI_PWR_ON_BAT="off"
-    path: /etc/tlp.d/99-no-wifi-power-saving.conf
-    mode: 0644
-    create: true
-  notify: Start tlp
