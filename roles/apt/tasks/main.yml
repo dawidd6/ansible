@@ -49,6 +49,7 @@
       - fonts-dejavu-extra
       - fonts-firacode
       - fonts-noto-color-emoji
+      - fprintd
       - gimp
       - git
       - gnome-boxes
