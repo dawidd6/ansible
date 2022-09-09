@@ -10,7 +10,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout code
         uses: actions/checkout@v3
 
       - name: Cache vagrant boxes
@@ -20,6 +20,9 @@ jobs:
           key: ${{ runner.os }}-vagrant-${{ hashFiles('Vagrantfile') }}
           restore-keys: |
             ${{ runner.os }}-vagrant-
+      
+      - name: Install vagrant
+        run: brew install vagrant
 
       - name: Run vagrant up
         run: vagrant up
