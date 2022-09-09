@@ -78,13 +78,15 @@
       - virtualbox
       - zlib1g-dev
 
-- name: Purge snapd
+- name: Purge apt packages
   become: true
   ansible.builtin.apt:
     state: absent
     purge: true
     autoremove: true
-    name: snapd
+    name:
+      - snapd
+      - unattended-upgrades
 
 - name: Disable bt at startup
   become: true
