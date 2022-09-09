@@ -1,0 +1,12 @@
+# TODO
+#- name: Install flutter dependencies
+#  environment:
+#    HOMEBREW_NO_AUTO_UPDATE: 1
+#  ansible.builtin.command: "/home/linuxbrew/.linuxbrew/bin/brew install {{ formulae | join(' ') }}"
+#  register: brew_install
+#  changed_when: '"Installing" in brew_install.stdout'
+#  vars:
+#    formulae:
+#      - cmake
+#      - llvm
+#      - ninja

@@ -1,9 +1,25 @@
 - name: Playbook
   hosts: localhost
   roles:
-    - { role: apt, tags: apt }
-    - { role: brew, tags: brew }
-    - { role: flatpak, tags: flatpak }
-    - { role: keys, tags: keys }
-    - { role: dotfiles, tags: dotfiles }
-    - { role: scripts, tags: scripts }
+    - { role: deploy_keys, tags: keys }
+    - { role: deploy_dotfiles, tags: dotfiles }
+    - { role: deploy_scripts, tags: scripts }
+    - { role: install_homebrew, tags: homebrew }
+    - { role: install_ansible, tags: ansible }
+    - { role: install_chrome, tags: chrome }
+    - { role: install_dev_tools, tags: dev_tools }
+    - { role: install_docker, tags: docker }
+    - { role: install_fish, tags: fish }
+    - { role: install_flatpak, tags: flatpak }
+    - { role: install_flutter, tags: flutter }
+    - { role: install_fonts, tags: fonts }
+    - { role: install_git, tags: git }
+    - { role: install_gnome_apps, tags: gnome_apps }
+    - { role: install_other_apps, tags: other_apps }
+    - { role: install_robot_framework, tags: robot_framework }
+    - { role: install_spotify, tags: spotify }
+    - { role: install_teams, tags: teams }
+    - { role: install_tlp, tags: tlp }
+    - { role: install_vscode, tags: vscode }
+    - { role: purge_snapd, tags: snapd }
+    - { role: purge_unattended_upgrades, tags: unattended_upgrades }

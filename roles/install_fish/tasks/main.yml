@@ -3,6 +3,14 @@
     path: /home/linuxbrew/.linuxbrew/bin
     name: fish
 
+- name: Purge fish
+  become: true
+  ansible.builtin.apt:
+    state: absent
+    purge: true
+    autoremove: true
+    name: fish
+
 - name: Set fish as default shell
   become: true
   ansible.builtin.user:
