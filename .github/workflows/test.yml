@@ -20,9 +20,9 @@ jobs:
           key: ${{ runner.os }}-vagrant-${{ hashFiles('Vagrantfile') }}
           restore-keys: |
             ${{ runner.os }}-vagrant-
-      
+
       - name: Install vagrant
-        run: brew install vagrant
+        run: sudo apt install -y vagrant
 
       - name: Run vagrant up
         run: vagrant up
