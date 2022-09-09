@@ -22,4 +22,4 @@ jobs:
             ${{ runner.os }}-vagrant-
 
       - name: Run vagrant up
-        run: vagrant up
+        run: vagrant up --color
