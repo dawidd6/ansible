@@ -1,0 +1,7 @@
+- name: Purge snapd
+  become: true
+  ansible.builtin.apt:
+    state: absent
+    purge: true
+    autoremove: true
+    name: snapd

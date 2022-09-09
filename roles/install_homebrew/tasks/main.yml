@@ -1,3 +1,14 @@
+- name: Install dependencies
+  become: true
+  ansible.builtin.apt:
+    name:
+      - build-essential
+      - procps
+      - curl
+      - file
+      - git
+      - zlib1g-dev # for brew style
+
 - name: Create brew base directories
   become: true
   ansible.builtin.file:
