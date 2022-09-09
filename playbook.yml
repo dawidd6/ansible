@@ -171,16 +171,11 @@
 - name: Install nvim
   hosts: localhost
   tags: nvim
-  handlers:
-    - name: Install plugins
-      ansible.builtin.command: nvim -c PlugInstall -c qa
   tasks:
     - name: Install nvim
       community.general.homebrew:
         path: /home/linuxbrew/.linuxbrew/bin
         name: neovim
-      notify:
-        - Install plugins
 
     - name: Purge neovim
       become: true
@@ -189,6 +184,10 @@
         purge: true
         autoremove: true
         name: neovim
+
+    - name: Install plugins
+      ansible.builtin.command: nvim -c PlugInstall -c qa
+      changed_when: false
 
 
 - name: Install fish
