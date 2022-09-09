@@ -1,6 +1,0 @@
-- name: Install robotframework
-  ansible.builtin.pip:
-    name:
-      - robotframework
-      - robotframework-sshlibrary
-      - robotframework-selenium2library

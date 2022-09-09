@@ -1,2 +1,0 @@
-- name: Update brew
-  ansible.builtin.command: /home/linuxbrew/.linuxbrew/bin/brew update -f

@@ -1,25 +1,510 @@
-- name: Playbook
+- name: Deploy dotfiles
   hosts: localhost
-  roles:
-    - { role: deploy_keys, tags: keys }
-    - { role: deploy_dotfiles, tags: dotfiles }
-    - { role: deploy_scripts, tags: scripts }
-    - { role: install_homebrew, tags: homebrew }
-    - { role: install_ansible, tags: ansible }
-    - { role: install_chrome, tags: chrome }
-    - { role: install_dev_tools, tags: dev_tools }
-    - { role: install_docker, tags: docker }
-    - { role: install_fish, tags: fish }
-    - { role: install_flatpak, tags: flatpak }
-    - { role: install_flutter, tags: flutter }
-    - { role: install_fonts, tags: fonts }
-    - { role: install_git, tags: git }
-    - { role: install_gnome_apps, tags: gnome_apps }
-    - { role: install_other_apps, tags: other_apps }
-    - { role: install_robot_framework, tags: robot_framework }
-    - { role: install_spotify, tags: spotify }
-    - { role: install_teams, tags: teams }
-    - { role: install_tlp, tags: tlp }
-    - { role: install_vscode, tags: vscode }
-    - { role: purge_snapd, tags: snapd }
-    - { role: purge_unattended_upgrades, tags: unattended_upgrades }
+  tags: dotfiles
+  handlers:
+    - name: Checkout dotfiles
+      ansible.builtin.command: "git --git-dir={{ ansible_env.HOME }}/.dotfiles --work-tree={{ ansible_env.HOME }} checkout -f"
+      args:
+        warn: false
+  tasks:
+    - name: Clone dotfiles
+      ansible.builtin.git:
+        repo: https://github.com/dawidd6/dotfiles.git
+        dest: "{{ ansible_env.HOME }}/.dotfiles"
+        update: false
+        bare: true
+        version: master
+      notify: Checkout dotfiles
+
+    - name: Do not show untracked dotfiles
+      community.general.git_config:
+        repo: "{{ ansible_env.HOME }}/.dotfiles"
+        name: "status.showUntrackedFiles"
+        value: "no"
+        scope: local
+
+    - name: Set dotfiles fetch config
+      community.general.git_config:
+        repo: "{{ ansible_env.HOME }}/.dotfiles"
+        name: "remote.origin.fetch"
+        value: "+refs/heads/*:refs/remotes/origin/*"
+        scope: local
+
+
+- name: Deploy keys
+  hosts: localhost
+  tags: keys
+  handlers:
+    - name: Checkout keys
+      ansible.builtin.command: "git --git-dir={{ ansible_env.HOME }}/.keys --work-tree={{ ansible_env.HOME }} checkout -f"
+      args:
+        warn: false
+  tasks:
+    - name: Lookup keys
+      ansible.builtin.find:
+        file_type: directory
+        paths:
+          - "/media"
+        depth: 3
+        recurse: true
+        patterns: "*keys"
+      register: keys_dir
+
+    - name: Deploy keys
+      when: keys_dir.matched == 1
+      block:
+        - name: Clone keys
+          ansible.builtin.git:
+            repo: "{{ keys_dir.files[0].path }}"
+            dest: "{{ ansible_env.HOME }}/.keys"
+            accept_hostkey: true
+            bare: true
+            version: master
+          notify: Checkout keys
+
+        - name: Set configs
+          community.general.git_config:
+            repo: "{{ ansible_env.HOME }}/.keys"
+            name: "{{ item.key }}"
+            value: "{{ item.value }}"
+            scope: local
+          with_items:
+            - key: status.showUntrackedFiles
+              value: false
+            - key: remote.origin.fetch
+              value: +refs/heads/*:refs/remotes/origin/*
+
+        - name: Fix keys permissions
+          ansible.builtin.file:
+            path: "{{ item }}"
+            mode: 0600
+          with_fileglob:
+            - "{{ ansible_env.HOME }}/.gnupg/*"
+            - "{{ ansible_env.HOME }}/.ssh/*"
+
+
+- name: Deploy scripts
+  hosts: localhost
+  tags: scripts
+  tasks:
+    - name: Deploy scripts
+      ansible.builtin.git:
+        repo: https://github.com/dawidd6/bin.git
+        dest: "{{ ansible_env.HOME }}/bin"
+        update: false
+        version: master
+
+
+- name: Install Flatpak
+  hosts: localhost
+  tags: flatpak
+  tasks:
+    - name: Install flatpak
+      become: true
+      ansible.builtin.apt:
+        name: flatpak
+
+    - name: Add flathub remote
+      community.general.flatpak_remote:
+        method: user
+        flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
+        name: flathub
+
+
+- name: Install Spotify
+  hosts: localhost
+  tags: spotify
+  tasks:
+    - name: Install flatpak apps
+      community.general.flatpak:
+        method: user
+        name: com.spotify.Client
+
+
+- name: Install Homebrew
+  hosts: localhost
+  tags: homebrew
+  vars:
+    prefix: /home/linuxbrew/.linuxbrew
+  handlers:
+    - name: Update Homebrew
+      ansible.builtin.command: "{{ prefix }}/bin/brew update -f"
+  tasks:
+    - name: Install dependencies
+      become: true
+      ansible.builtin.apt:
+        name:
+          - build-essential
+          - procps
+          - curl
+          - file
+          - git
+          - zlib1g-dev # for brew style
+
+    - name: Create Homebrew base directories
+      become: true
+      ansible.builtin.file:
+        path: "{{ prefix }}/bin"
+        state: directory
+        owner: "{{ ansible_env.USER }}"
+        group: "{{ ansible_env.USER }}"
+        mode: 0755
+
+    - name: Clone Homebrew repository
+      ansible.builtin.git:
+        repo: https://github.com/Homebrew/brew
+        dest: "{{ prefix }}/Homebrew"
+        update: false
+        version: master
+
+    - name: Create symlink to brew binary
+      ansible.builtin.file:
+        src: "{{ prefix }}/Homebrew/bin/brew"
+        dest: "{{ prefix }}/bin/brew"
+        state: link
+      notify: Update Homebrew
+
+    - name: Flush handlers
+      ansible.builtin.meta: flush_handlers
+
+
+- name: Install nvim
+  hosts: localhost
+  tags: nvim
+  handlers:
+    - name: Install plugins
+      ansible.builtin.command: nvim -c PlugInstall -c qa
+  tasks:
+    - name: Install nvim
+      community.general.homebrew:
+        path: /home/linuxbrew/.linuxbrew/bin
+        name: neovim
+      notify:
+        - Install plugins
+
+    - name: Purge neovim
+      become: true
+      ansible.builtin.apt:
+        state: absent
+        purge: true
+        autoremove: true
+        name: neovim
+
+
+- name: Install fish
+  hosts: localhost
+  tags: fish
+  tasks:
+    - name: Install fish
+      community.general.homebrew:
+        path: /home/linuxbrew/.linuxbrew/bin
+        name: fish
+
+    - name: Purge fish
+      become: true
+      ansible.builtin.apt:
+        state: absent
+        purge: true
+        autoremove: true
+        name: fish
+
+    - name: Set fish as default shell
+      become: true
+      ansible.builtin.user:
+        name: "{{ ansible_env.USER }}"
+        shell: /home/linuxbrew/.linuxbrew/bin/fish
+
+
+- name: Install git
+  hosts: localhost
+  tags: git
+  tasks:
+    - name: Install git and deps
+      community.general.homebrew:
+        path: /home/linuxbrew/.linuxbrew/bin
+        name:
+          - diff-so-fancy
+          - git
+
+    - name: Purge git
+      become: true
+      ansible.builtin.apt:
+        state: absent
+        purge: true
+        autoremove: true
+        name: git
+
+
+- name: Install docker
+  hosts: localhost
+  tags: docker
+  tasks:
+    - name: Install docker
+      become: true
+      ansible.builtin.apt:
+        name: docker.io
+
+
+- name: Install go
+  hosts: localhost
+  tags: go
+  tasks:
+    - name: Install go
+      community.general.homebrew:
+        path: /home/linuxbrew/.linuxbrew/bin
+        name: go
+
+
+- name: Install node
+  hosts: localhost
+  tags: node
+  tasks:
+    - name: Install node
+      community.general.homebrew:
+        path: /home/linuxbrew/.linuxbrew/bin
+        name: node
+
+
+- name: Install python
+  hosts: localhost
+  tags: python
+  tasks:
+    - name: Install python
+      community.general.homebrew:
+        path: /home/linuxbrew/.linuxbrew/bin
+        name: python
+
+
+- name: Install ruby
+  hosts: localhost
+  tags: ruby
+  tasks:
+    - name: Install ruby
+      community.general.homebrew:
+        path: /home/linuxbrew/.linuxbrew/bin
+        name: ruby
+
+
+- name: Install ansible
+  hosts: localhost
+  tags: ansible
+  tasks:
+    - name: Install ansible
+      ansible.builtin.pip:
+        name:
+          - ansible
+          - ansible-lint
+
+    - name: Purge ansible
+      become: true
+      ansible.builtin.apt:
+        state: absent
+        purge: true
+        autoremove: true
+        name: ansible
+
+
+- name: Install robotframework
+  hosts: localhost
+  tags: robot
+  tasks:
+    - name: Install robotframework
+      ansible.builtin.pip:
+        name:
+          - robotframework
+          - robotframework-sshlibrary
+          - robotframework-selenium2library
+
+
+- name: Install misc tools
+  hosts: localhost
+  tags: tools
+  tasks:
+    - name: Install misc tools
+      community.general.homebrew:
+        path: /home/linuxbrew/.linuxbrew/bin
+        name:
+          - dawidd6/tap/deber
+          - dawidd6/tap/dh-make-golang
+          - bat
+          - diffoscope
+          - distrobox
+          - fzf
+          - gh
+          - ghorg
+          - gitbatch
+          - htop
+          - ipcalc
+          - jfrog-cli
+          - jq
+          - lab
+          - lm-sensors
+          - ncdu
+          - neofetch
+          - neovim
+          - nmap
+          - parallel
+          - shellcheck
+          - trash-cli
+          - tree
+          - xsel
+
+
+- name: Install fonts
+  hosts: localhost
+  tags: fonts
+  tasks:
+    - name: Install fonts
+      become: true
+      ansible.builtin.apt:
+        name:
+          - fonts-dejavu-extra
+          - fonts-firacode
+          - fonts-noto-color-emoji
+
+
+- name: Install GNOME apps
+  hosts: localhost
+  tags: gnome
+  tasks:
+    - name: Install gnome apps
+      become: true
+      ansible.builtin.apt:
+        name:
+          - cheese
+          - evince
+          - gnome-boxes
+          - gnome-calculator
+          - gnome-calendar
+          - gnome-clocks
+          - gnome-shell-extension-prefs
+          - gnome-system-monitor
+          - gnome-tweaks
+          - gnome-weather
+          - network-manager-openconnect-gnome
+          - network-manager-vpnc-gnome
+          - transmission
+
+    - name: Install other apps
+      become: true
+      ansible.builtin.apt:
+        name:
+          - filezilla
+          - gimp
+          - gpick
+          - inkscape
+          - jxplorer
+          - keepassxc
+          - meld
+          - octave
+          - pavucontrol
+          - simple-scan
+
+
+- name: Install tlp
+  hosts: localhost
+  tags: tlp
+  handlers:
+    - name: Start tlp
+      become: true
+      ansible.builtin.command: tlp start
+  tasks:
+    - name: Install tlp
+      become: true
+      ansible.builtin.apt:
+        name: tlp
+
+    - name: Disable bt at startup
+      become: true
+      ansible.builtin.lineinfile:
+        line: DEVICES_TO_DISABLE_ON_STARTUP="bluetooth"
+        path: /etc/tlp.d/99-no-bluetooth-at-startup.conf
+        mode: 0644
+        create: true
+      notify: Start tlp
+
+
+- name: Install teams
+  hosts: localhost
+  tags: teams
+  tasks:
+    - name: Add teams repo key
+      become: true
+      ansible.builtin.apt_key:
+        url: https://packages.microsoft.com/keys/microsoft.asc
+
+    - name: Add teams repo
+      become: true
+      ansible.builtin.apt_repository:
+        repo: deb [arch=amd64] https://packages.microsoft.com/repos/ms-teams stable main
+        filename: teams
+
+    - name: Install teams
+      become: true
+      ansible.builtin.apt:
+        update_cache: true
+        name: teams
+
+
+- name: Install vscode
+  hosts: localhost
+  tags: vscode
+  tasks:
+    - name: Add vscode repo key
+      become: true
+      ansible.builtin.apt_key:
+        url: https://packages.microsoft.com/keys/microsoft.asc
+
+    - name: Add vscode repo
+      become: true
+      ansible.builtin.apt_repository:
+        repo: deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main
+        filename: teams
+
+    - name: Install code
+      become: true
+      ansible.builtin.apt:
+        update_cache: true
+        name: code
+
+
+- name: Install chrome
+  hosts: localhost
+  tags: chrome
+  tasks:
+    - name: Add chrome repo key
+      become: true
+      ansible.builtin.apt_key:
+        url: https://dl.google.com/linux/linux_signing_key.pub
+
+    - name: Add chrome repo
+      become: true
+      ansible.builtin.lineinfile:
+        line: deb [arch=amd64] https://dl.google.com/linux/chrome/deb/ stable main
+        path: /etc/apt/sources.list.d/google-chrome.list
+        regexp: deb
+        create: true
+        mode: 0644
+
+    - name: Install chrome
+      become: true
+      ansible.builtin.apt:
+        update_cache: true
+        name:
+          - chrome-gnome-shell
+          - google-chrome-stable
+
+
+- name: Clean up
+  hosts: localhost
+  tags: cleanup
+  tasks:
+    - name: Purge unneeded packages
+      become: true
+      ansible.builtin.apt:
+        state: absent
+        purge: true
+        autoremove: true
+        name:
+          - snapd
+          - unattended-upgrades

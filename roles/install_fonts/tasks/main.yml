@@ -1,7 +1,0 @@
-- name: Install fonts
-  become: true
-  ansible.builtin.apt:
-    name:
-      - fonts-dejavu-extra
-      - fonts-firacode
-      - fonts-noto-color-emoji

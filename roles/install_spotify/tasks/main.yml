@@ -1,4 +1,0 @@
-- name: Install flatpak apps
-  community.general.flatpak:
-    method: user
-    name: com.spotify.Client
