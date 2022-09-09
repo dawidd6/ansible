@@ -95,7 +95,7 @@
         version: master
 
 
-- name: Install Flatpak
+- name: Install flatpak
   hosts: localhost
   tags: flatpak
   tasks:
@@ -111,23 +111,23 @@
         name: flathub
 
 
-- name: Install Spotify
+- name: Install spotify
   hosts: localhost
   tags: spotify
   tasks:
-    - name: Install flatpak apps
+    - name: Install spotify
       community.general.flatpak:
         method: user
         name: com.spotify.Client
 
 
-- name: Install Homebrew
+- name: Install homebrew
   hosts: localhost
   tags: homebrew
   vars:
     prefix: /home/linuxbrew/.linuxbrew
   handlers:
-    - name: Update Homebrew
+    - name: Update homebrew
       ansible.builtin.command: "{{ prefix }}/bin/brew update -f"
   tasks:
     - name: Install dependencies
@@ -141,7 +141,7 @@
           - git
           - zlib1g-dev # for brew style
 
-    - name: Create Homebrew base directories
+    - name: Create homebrew base directories
       become: true
       ansible.builtin.file:
         path: "{{ prefix }}/bin"
@@ -150,7 +150,7 @@
         group: "{{ ansible_env.USER }}"
         mode: 0755
 
-    - name: Clone Homebrew repository
+    - name: Clone homebrew repository
       ansible.builtin.git:
         repo: https://github.com/Homebrew/brew
         dest: "{{ prefix }}/Homebrew"
@@ -162,7 +162,7 @@
         src: "{{ prefix }}/Homebrew/bin/brew"
         dest: "{{ prefix }}/bin/brew"
         state: link
-      notify: Update Homebrew
+      notify: Update homebrew
 
     - name: Flush handlers
       ansible.builtin.meta: flush_handlers
