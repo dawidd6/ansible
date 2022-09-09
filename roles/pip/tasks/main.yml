@@ -1,0 +1,8 @@
+- name: Install pip packages
+  ansible.builtin.pip:
+    name:
+      - ansible
+      - ansible-lint
+      - robotframework
+      - robotframework-sshlibrary
+      - robotframework-selenium2library
