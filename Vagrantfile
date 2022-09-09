@@ -2,7 +2,7 @@ Vagrant.configure("2") do |config|
     config.vm.box = "generic/ubuntu2204"
 
     # Prevent SharedFoldersEnableSymlinksCreate errors
-    #config.vm.synced_folder ".", "/vagrant", disabled: true
+    config.vm.synced_folder ".", "/vagrant", disabled: false
 
     config.vm.provision "shell", path: "bootstrap.sh"
 
