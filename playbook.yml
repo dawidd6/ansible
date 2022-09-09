@@ -183,7 +183,7 @@
         name: neovim
 
     - name: Install plugins
-      ansible.builtin.command: nvim -c PlugInstall -c qa
+      ansible.builtin.command: /home/linuxbrew/.linuxbrew/bin/nvim -c PlugInstall -c qa
       changed_when: false
 
 
