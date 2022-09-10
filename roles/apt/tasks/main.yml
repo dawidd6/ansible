@@ -139,8 +139,5 @@
     purge: true
     autoremove: true
     name:
-      - fish
-      - git
-      - neovim
       - snapd
       - unattended-upgrades
