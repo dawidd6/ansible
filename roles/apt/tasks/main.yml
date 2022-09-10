@@ -120,16 +120,3 @@
         name:
           - chrome-gnome-shell
           - google-chrome-stable
-
-- name: Purge unneeded apt packages
-  become: true
-  ansible.builtin.apt:
-    state: absent
-    purge: true
-    autoremove: true
-    name:
-      - ansible
-      - curl
-      - git
-      - snapd
-      - unattended-upgrades
