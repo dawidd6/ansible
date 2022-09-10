@@ -1,4 +1,4 @@
 #!/bin/bash
 
 sudo apt-get update
-sudo apt-get install -y ansible git
+sudo apt-get install -y ansible
