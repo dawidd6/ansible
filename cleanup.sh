@@ -1,3 +1,4 @@
 #!/bin/bash
 
-sudo apt-get remove --purge -y curl git ansible
+sudo apt-get remove --purge -y ansible
+sudo apt-get autoremove --purge
