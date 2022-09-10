@@ -59,17 +59,6 @@
     name:
       - tlp
 
-- name: Install Homebrew dependencies
-  become: true
-  ansible.builtin.apt:
-    name:
-      - build-essential
-      - procps
-      - curl
-      - file
-      - git
-      - zlib1g-dev # for brew style
-
 - name: Install teams
   block:
     - name: Add teams repo key
@@ -139,5 +128,8 @@
     purge: true
     autoremove: true
     name:
+      - ansible
+      - curl
+      - git
       - snapd
       - unattended-upgrades

@@ -1,8 +1,8 @@
 - name: Set up
   hosts: localhost
   roles:
-    - apt
-    - brew
-    - flatpak
     - git
+    - brew
+    - apt
+    - flatpak
     - other

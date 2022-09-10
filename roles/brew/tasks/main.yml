@@ -33,6 +33,7 @@
       - ansible
       - ansible-lint
       - bat
+      - curl
       - diff-so-fancy
       - diffoscope
       - distrobox
