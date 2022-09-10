@@ -14,4 +14,6 @@ Vagrant.configure("2") do |config|
         ansible.limit = "all"
         ansible.inventory_path = "inventory"
     end
+
+    config.vm.provision "shell", path: "cleanup.sh"
 end
