@@ -24,10 +24,16 @@
 - name: Flush handlers
   ansible.builtin.meta: flush_handlers
 
+# community.general.homebrew module installs formulae one by one,
+# below direct shell invocation is faster
 - name: Install brewed tools
-  community.general.homebrew:
-    path: "{{ prefix }}/bin"
-    name:
+  environment:
+    HOMEBREW_NO_AUTO_UPDATE: 1
+  ansible.builtin.command: "{{ prefix }}/bin/brew install {{ formulae | join(' ') }}"
+  register: brew_install
+  changed_when: '"Installing" in brew_install.stdout'
+  vars:
+    formulae:
       - dawidd6/tap/deber
       - dawidd6/tap/dh-make-golang
       - ansible
