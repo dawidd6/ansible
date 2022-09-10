@@ -1,0 +1,27 @@
+- name: Set fish as default shell
+  become: true
+  ansible.builtin.user:
+    name: "{{ ansible_env.USER }}"
+    shell: /home/linuxbrew/.linuxbrew/bin/fish
+
+- name: Create nvim directories
+  ansible.builtin.file:
+    path: "{{ ansible_env.HOME }}/.local/share/nvim/site/autoload"
+    state: directory
+    mode: 0775
+
+- name: Install nvim plugin manager
+  ansible.builtin.get_url:
+    url: https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    dest: "{{ ansible_env.HOME }}/.local/share/nvim/site/autoload/plug.vim"
+    mode: 0775
+  notify: Install nvim plugins
+
+- name: Disable bt at startup
+  become: true
+  ansible.builtin.lineinfile:
+    line: DEVICES_TO_DISABLE_ON_STARTUP="bluetooth"
+    path: /etc/tlp.d/99-no-bluetooth-at-startup.conf
+    mode: 0644
+    create: true
+  notify: Start tlp

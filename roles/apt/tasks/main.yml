@@ -1,0 +1,146 @@
+- name: Install docker
+  become: true
+  ansible.builtin.apt:
+    name:
+      - docker.io
+      - docker-compose
+
+- name: Install flatpak
+  become: true
+  ansible.builtin.apt:
+    name:
+      - flatpak
+
+- name: Install fonts
+  become: true
+  ansible.builtin.apt:
+    name:
+      - fonts-dejavu-extra
+      - fonts-firacode
+      - fonts-noto-color-emoji
+
+- name: Install GNOME apps
+  become: true
+  ansible.builtin.apt:
+    name:
+      - cheese
+      - evince
+      - gnome-boxes
+      - gnome-calculator
+      - gnome-calendar
+      - gnome-clocks
+      - gnome-shell-extension-prefs
+      - gnome-system-monitor
+      - gnome-tweaks
+      - gnome-weather
+      - network-manager-openconnect-gnome
+      - network-manager-vpnc-gnome
+      - transmission
+
+- name: Install desktop apps
+  become: true
+  ansible.builtin.apt:
+    name:
+      - filezilla
+      - gimp
+      - gpick
+      - inkscape
+      - jxplorer
+      - keepassxc
+      - meld
+      - octave
+      - pavucontrol
+      - simple-scan
+      - tlp
+
+- name: Install tlp
+  become: true
+  ansible.builtin.apt:
+    name:
+      - tlp
+
+- name: Install Homebrew dependencies
+  become: true
+  ansible.builtin.apt:
+    name:
+      - build-essential
+      - procps
+      - curl
+      - file
+      - git
+      - zlib1g-dev # for brew style
+
+- name: Install teams
+  block:
+    - name: Add teams repo key
+      become: true
+      ansible.builtin.apt_key:
+        url: https://packages.microsoft.com/keys/microsoft.asc
+
+    - name: Add teams repo
+      become: true
+      ansible.builtin.apt_repository:
+        repo: deb [arch=amd64] https://packages.microsoft.com/repos/ms-teams stable main
+        filename: teams
+
+    - name: Install teams
+      become: true
+      ansible.builtin.apt:
+        update_cache: true
+        name: teams
+
+- name: Install vscode
+  block:
+    - name: Add vscode repo key
+      become: true
+      ansible.builtin.apt_key:
+        url: https://packages.microsoft.com/keys/microsoft.asc
+
+    - name: Add vscode repo
+      become: true
+      ansible.builtin.apt_repository:
+        repo: deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main
+        filename: teams
+
+    - name: Install code
+      become: true
+      ansible.builtin.apt:
+        update_cache: true
+        name: code
+
+- name: Install chrome
+  block:
+    - name: Add chrome repo key
+      become: true
+      ansible.builtin.apt_key:
+        url: https://dl.google.com/linux/linux_signing_key.pub
+
+    - name: Add chrome repo
+      become: true
+      ansible.builtin.lineinfile:
+        line: deb [arch=amd64] https://dl.google.com/linux/chrome/deb/ stable main
+        path: /etc/apt/sources.list.d/google-chrome.list
+        regexp: deb
+        create: true
+        mode: 0644
+
+    - name: Install chrome
+      become: true
+      ansible.builtin.apt:
+        update_cache: true
+        name:
+          - chrome-gnome-shell
+          - google-chrome-stable
+
+- name: Purge unneeded apt packages
+  become: true
+  ansible.builtin.apt:
+    state: absent
+    purge: true
+    autoremove: true
+    name:
+      - fish
+      - git
+      - neovim
+      - snapd
+      - unattended-upgrades
