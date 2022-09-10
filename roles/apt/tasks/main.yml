@@ -1,3 +1,14 @@
+- name: Install Homebrew deps
+  become: true
+  ansible.builtin.apt:
+    name:
+      - build-essential
+      - procps
+      - curl
+      - file
+      - git
+      - zlib1g-dev
+
 - name: Install docker
   become: true
   ansible.builtin.apt:
