@@ -25,16 +25,3 @@
     mode: 0644
     create: true
   notify: Start tlp
-
-- name: Purge unneeded apt packages
-  become: true
-  ansible.builtin.apt:
-    state: absent
-    purge: true
-    autoremove: true
-    name:
-      - ansible
-      - curl
-      - git
-      - snapd
-      - unattended-upgrades
