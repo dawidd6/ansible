@@ -1,6 +1,0 @@
-- name: Start tlp
-  become: true
-  ansible.builtin.command: tlp start
-
-- name: Install nvim plugins
-  ansible.builtin.command: /home/linuxbrew/.linuxbrew/bin/nvim -c PlugInstall -c qa

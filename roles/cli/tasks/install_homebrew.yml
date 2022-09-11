@@ -1,0 +1,36 @@
+- name: Install homebrew deps
+  become: true
+  ansible.builtin.apt:
+    name:
+      - build-essential
+      - procps
+      - curl
+      - file
+      - git
+      - zlib1g-dev
+
+- name: Create homebrew base directories
+  become: true
+  ansible.builtin.file:
+    path: "{{ homebrew_prefix }}/bin"
+    state: directory
+    owner: "{{ ansible_env.USER }}"
+    group: "{{ ansible_env.USER }}"
+    mode: 0755
+
+- name: Clone homebrew repository
+  ansible.builtin.git:
+    repo: https://github.com/Homebrew/brew
+    dest: "{{ homebrew_prefix }}/Homebrew"
+    update: false
+    version: master
+
+- name: Create symlink to brew binary
+  ansible.builtin.file:
+    src: "{{ homebrew_prefix }}/Homebrew/bin/brew"
+    dest: "{{ homebrew_prefix }}/bin/brew"
+    state: link
+  notify: Update homebrew
+
+- name: Flush handlers
+  ansible.builtin.meta: flush_handlers

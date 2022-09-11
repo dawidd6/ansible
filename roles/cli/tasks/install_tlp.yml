@@ -1,0 +1,13 @@
+- name: Install tlp
+  become: true
+  ansible.builtin.apt:
+    name: tlp
+
+- name: Disable bt at startup
+  become: true
+  ansible.builtin.lineinfile:
+    line: DEVICES_TO_DISABLE_ON_STARTUP="bluetooth"
+    path: /etc/tlp.d/99-no-bluetooth-at-startup.conf
+    mode: 0644
+    create: true
+  notify: Start tlp

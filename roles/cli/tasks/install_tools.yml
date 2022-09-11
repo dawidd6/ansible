@@ -1,0 +1,41 @@
+- name: Install brewed tools
+  environment:
+    HOMEBREW_NO_AUTO_UPDATE: 1
+  ansible.builtin.command: "{{ homebrew_prefix }}/bin/brew install {{ formulae | join(' ') }}"
+  register: brew_install
+  changed_when: '"Installing" in brew_install.stdout'
+  vars:
+    formulae:
+      - dawidd6/tap/deber
+      - dawidd6/tap/dh-make-golang
+      - ansible
+      - ansible-lint
+      - bat
+      - curl
+      - diff-so-fancy
+      - diffoscope
+      - distrobox
+      - docker-completion
+      - fzf
+      - gh
+      - ghorg
+      - git
+      - gitbatch
+      - go
+      - htop
+      - ipcalc
+      - jfrog-cli
+      - jq
+      - lab
+      - lm-sensors
+      - ncdu
+      - neofetch
+      - nmap
+      - node
+      - parallel
+      - python
+      - ruby
+      - shellcheck
+      - trash-cli
+      - tree
+      - xsel

@@ -1,0 +1,21 @@
+- name: Add chrome repo key
+  become: true
+  ansible.builtin.apt_key:
+    url: https://dl.google.com/linux/linux_signing_key.pub
+
+- name: Add chrome repo
+  become: true
+  ansible.builtin.lineinfile:
+    line: deb [arch=amd64] https://dl.google.com/linux/chrome/deb/ stable main
+    path: /etc/apt/sources.list.d/google-chrome.list
+    regexp: deb
+    create: true
+    mode: 0644
+
+- name: Install chrome
+  become: true
+  ansible.builtin.apt:
+    update_cache: true
+    name:
+      - chrome-gnome-shell
+      - google-chrome-stable

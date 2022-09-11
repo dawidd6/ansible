@@ -1,0 +1,11 @@
+- name: Install docker
+  become: true
+  ansible.builtin.apt:
+    name:
+      - docker.io
+      - docker-compose
+
+- name: Install docker completion
+  community.general.homebrew:
+    path: "{{ homebrew_prefix }}/bin"
+    name: docker-completion

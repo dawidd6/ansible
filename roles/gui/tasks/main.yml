@@ -1,0 +1,29 @@
+- name: Install
+  block:
+    - name: Install flatpak
+      ansible.builtin.import_tasks: install_flatpak.yml
+      tags: flatpak
+
+    - name: Install apps
+      ansible.builtin.import_tasks: install_apps.yml
+      tags: apps
+
+    - name: Install chrome
+      ansible.builtin.import_tasks: install_chrome.yml
+      tags: chrome
+
+    - name: Install fonts
+      ansible.builtin.import_tasks: install_fonts.yml
+      tags: fonts
+
+    - name: Install spotify
+      ansible.builtin.import_tasks: install_spotify.yml
+      tags: spotify
+
+    - name: Install teams
+      ansible.builtin.import_tasks: install_teams.yml
+      tags: teams
+
+    - name: Install vscode
+      ansible.builtin.import_tasks: install_vscode.yml
+      tags: vscode

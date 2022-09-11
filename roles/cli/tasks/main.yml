@@ -1,0 +1,49 @@
+- name: Deploy
+  block:
+    - name: Deploy dotfiles
+      ansible.builtin.import_tasks: deploy_dotfiles.yml
+      tags: dotfiles
+
+    - name: Deploy keys
+      ansible.builtin.import_tasks: deploy_keys.yml
+      tags: keys
+
+    - name: Deploy scripts
+      ansible.builtin.import_tasks: deploy_scripts.yml
+      tags: scripts
+
+- name: Install
+  block:
+    - name: Install homebrew
+      ansible.builtin.import_tasks: install_homebrew.yml
+      tags: homebrew
+
+    - name: Install docker
+      ansible.builtin.import_tasks: install_docker.yml
+      tags: docker
+
+    - name: Install fish
+      ansible.builtin.import_tasks: install_fish.yml
+      tags: fish
+
+    - name: Install neovim
+      ansible.builtin.import_tasks: install_neovim.yml
+      tags: neovim
+
+    - name: Install tlp
+      ansible.builtin.import_tasks: install_tlp.yml
+      tags: tlp
+
+    - name: Install tools
+      ansible.builtin.import_tasks: install_tools.yml
+      tags: tools
+
+- name: Purge
+  block:
+    - name: Purge snapd
+      ansible.builtin.import_tasks: purge_snapd.yml
+      tags: snapd
+
+    - name: Purge unattended-upgrades
+      ansible.builtin.import_tasks: purge_unattended_upgrades.yml
+      tags: unattended-upgrades

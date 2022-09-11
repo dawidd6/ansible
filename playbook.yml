@@ -1,8 +1,5 @@
-- name: Set up
+- name: Setup
   hosts: localhost
   roles:
-    - apt
-    - brew
-    - flatpak
-    - git
-    - other
+    - cli
+    - gui

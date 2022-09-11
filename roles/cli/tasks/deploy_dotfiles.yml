@@ -1,0 +1,22 @@
+- name: Clone dotfiles
+  ansible.builtin.git:
+    repo: https://github.com/dawidd6/dotfiles.git
+    dest: "{{ ansible_env.HOME }}/.dotfiles"
+    update: false
+    bare: true
+    version: master
+  notify: Checkout dotfiles
+
+- name: Do not show untracked dotfiles
+  community.general.git_config:
+    repo: "{{ ansible_env.HOME }}/.dotfiles"
+    name: "status.showUntrackedFiles"
+    value: "no"
+    scope: local
+
+- name: Set dotfiles fetch config
+  community.general.git_config:
+    repo: "{{ ansible_env.HOME }}/.dotfiles"
+    name: "remote.origin.fetch"
+    value: "+refs/heads/*:refs/remotes/origin/*"
+    scope: local
