@@ -15,7 +15,6 @@
       - diff-so-fancy
       - diffoscope
       - distrobox
-      - docker-completion
       - fzf
       - gh
       - ghorg
