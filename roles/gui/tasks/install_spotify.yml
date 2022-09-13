@@ -1,6 +1,4 @@
 - name: Install spotify
   community.general.flatpak:
     method: user
-    name: "{{ item }}"
-  loop:
-    - com.spotify.Client
+    name: com.spotify.Client
