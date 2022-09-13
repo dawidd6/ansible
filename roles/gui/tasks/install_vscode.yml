@@ -1,16 +1,21 @@
-- name: Add vscode repo key
-  become: true
-  ansible.builtin.apt_key:
-    url: https://packages.microsoft.com/keys/microsoft.asc
-
-- name: Add vscode repo
+# TODO remove
+- name: Remove vscode repo
   become: true
   ansible.builtin.apt_repository:
     repo: deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main
     filename: teams
+    state: absent
 
-- name: Install code
+- name: Remove code
   become: true
   ansible.builtin.apt:
-    update_cache: true
     name: code
+    state: absent
+
+- name: Install code
+  community.general.flatpak:
+    method: user
+    name: com.visualstudio.code
+  notify:
+    - Set PATH for code flatpak
+    - Mount Docker socket inside code flatpak
