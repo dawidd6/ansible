@@ -1,0 +1,21 @@
+- name: Add flathub remote
+  community.general.flatpak_remote:
+    method: user
+    flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
+    name: flathub
+
+- name: Install flatpak packages
+  community.general.flatpak:
+    method: user
+    name: "{{ item }}"
+  loop: "{{ flatpak_install_packages }}"
+
+- name: Set PATH for code flatpak
+  vars:
+    path: "/app/bin:{{ homebrew_prefix }}/bin:{{ homebrew_prefix }}/sbin:/bin"
+  ansible.builtin.command: "flatpak override --env=PATH={{ path }} --user com.visualstudio.code"
+  changed_when: false
+
+- name: Mount Docker socket inside code flatpak
+  ansible.builtin.command: flatpak override --filesystem=/run/docker.sock --user com.visualstudio.code
+  changed_when: false

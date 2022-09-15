@@ -1,5 +1,10 @@
 - name: Setup
   hosts: localhost
   roles:
-    - cli
-    - gui
+    - { role: apt, tags: apt }
+    - { role: brew, tags: brew }
+    - { role: flatpak, tags: flatpak }
+    - { role: dotfiles, tags: dotfiles }
+    - { role: scripts, tags: scripts }
+    - { role: keys, tags: keys }
+    - { role: mods, tags: mods }

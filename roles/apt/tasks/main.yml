@@ -1,0 +1,38 @@
+- name: Add chrome repo key
+  become: true
+  ansible.builtin.apt_key:
+    url: https://dl.google.com/linux/linux_signing_key.pub
+
+- name: Add chrome repo
+  become: true
+  ansible.builtin.lineinfile:
+    line: deb [arch=amd64] https://dl.google.com/linux/chrome/deb/ stable main
+    path: /etc/apt/sources.list.d/google-chrome.list
+    regexp: deb
+    create: true
+    mode: 0644
+
+- name: Add teams repo key
+  become: true
+  ansible.builtin.apt_key:
+    url: https://packages.microsoft.com/keys/microsoft.asc
+
+- name: Add teams repo
+  become: true
+  ansible.builtin.apt_repository:
+    repo: deb [arch=amd64] https://packages.microsoft.com/repos/ms-teams stable main
+    filename: teams
+
+- name: Install apt packages
+  become: true
+  ansible.builtin.apt:
+    update_cache: true
+    name: "{{ apt_install_packages }}"
+
+- name: Purge apt packages
+  become: true
+  ansible.builtin.apt:
+    state: absent
+    purge: true
+    autoremove: true
+    name: "{{ apt_purge_packages }}"

@@ -1,14 +1,3 @@
-- name: Install homebrew deps
-  become: true
-  ansible.builtin.apt:
-    name:
-      - build-essential
-      - procps
-      - curl
-      - file
-      - git
-      - zlib1g-dev
-
 - name: Create homebrew base directories
   become: true
   ansible.builtin.file:
@@ -34,3 +23,10 @@
 
 - name: Flush handlers
   ansible.builtin.meta: flush_handlers
+
+- name: Install brew packages
+  environment:
+    HOMEBREW_NO_AUTO_UPDATE: 1
+  ansible.builtin.command: "{{ homebrew_prefix }}/bin/brew install {{ brew_install_packages | join(' ') }}"
+  register: brew_install
+  changed_when: '"Installing" in brew_install.stdout'

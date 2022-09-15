@@ -1,0 +1,99 @@
+homebrew_prefix: /home/linuxbrew/.linuxbrew
+
+apt_install_packages:
+  # --- homebrew ---
+  - build-essential
+  - procps
+  - curl
+  - file
+  - git
+  - zlib1g-dev
+  # --- docker ---
+  - docker.io
+  - docker-compose
+  # --- tlp ---
+  - tlp
+  # --- fonts ---
+  - fonts-dejavu-extra
+  - fonts-firacode
+  - fonts-noto-color-emoji
+  # --- flatpak ---
+  - flatpak
+  # --- apps ---
+  - cheese
+  - evince
+  - gnome-boxes
+  - gnome-calculator
+  - gnome-calendar
+  - gnome-clocks
+  - gnome-shell-extension-prefs
+  - gnome-system-monitor
+  - gnome-tweaks
+  - gnome-weather
+  - network-manager-openconnect-gnome
+  - network-manager-vpnc-gnome
+  - transmission
+  - filezilla
+  - gimp
+  - gpick
+  - inkscape
+  - jxplorer
+  - keepassxc
+  - meld
+  - octave
+  - pavucontrol
+  - simple-scan
+  # --- chrome ---
+  - chrome-gnome-shell
+  - google-chrome-stable
+  # --- teams ---
+  # TODO remove once PWA is available
+  - teams
+
+apt_purge_packages:
+  - snapd
+  - unattended-upgrades
+
+brew_install_packages:
+  - dawidd6/tap/deber
+  - dawidd6/tap/dh-make-golang
+  - dawidd6/tap/sshpass
+  - ansible
+  - ansible-lint
+  - bat
+  - curl
+  - diff-so-fancy
+  - diffoscope
+  - distrobox
+  - docker
+  - dos2unix
+  - fish
+  - fzf
+  - gh
+  - ghorg
+  - git
+  - gitbatch
+  - glibc
+  - go
+  - htop
+  - ipcalc
+  - jfrog-cli
+  - jq
+  - lab
+  - lm-sensors
+  - ncdu
+  - neofetch
+  - neovim
+  - nmap
+  - node
+  - parallel
+  - python
+  - ruby
+  - shellcheck
+  - trash-cli
+  - tree
+  - xsel
+
+flatpak_install_packages:
+  - com.visualstudio.code
+  - com.spotify.Client
