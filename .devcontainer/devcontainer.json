@@ -9,7 +9,12 @@
 	"customizations": {
 		"vscode": {
 			"extensions": [
-				"redhat.ansible"
+				"redhat.ansible",
+				"ms-azuretools.vscode-docker",
+				"fabiospampinato.vscode-highlight",
+				"christian-kohler.path-intellisense",
+				"timonwong.shellcheck",
+				"shardulm94.trailing-spaces"
 			]
 		}
 	}
