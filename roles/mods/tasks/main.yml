@@ -25,4 +25,3 @@
   ansible.builtin.user:
     name: "{{ ansible_env.USER }}"
     shell: "{{ homebrew_prefix }}/bin/fish"
-
