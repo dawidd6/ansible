@@ -25,3 +25,23 @@
   ansible.builtin.user:
     name: "{{ ansible_env.USER }}"
     shell: "{{ homebrew_prefix }}/bin/fish"
+
+- name: Raise ulimit for system
+  become: true
+  ansible.builtin.blockinfile:
+    block: |
+      [Manager]
+      DefaultLimitNOFILE=65535
+    path: /etc/systemd/system.conf.d/limits.conf
+    mode: 0644
+    create: true
+
+- name: Raise ulimit for user
+  become: true
+  ansible.builtin.blockinfile:
+    block: |
+      [Manager]
+      DefaultLimitNOFILE=65535
+    path: /etc/systemd/user.conf.d/limits.conf
+    mode: 0644
+    create: true
