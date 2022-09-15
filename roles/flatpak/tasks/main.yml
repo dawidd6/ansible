@@ -12,7 +12,7 @@
 
 - name: Set PATH for code flatpak
   vars:
-    path: "/app/bin:{{ homebrew_prefix }}/bin:{{ homebrew_prefix }}/sbin:/bin"
+    path: "/app/bin:/bin:{{ ansible_env.HOME }}/bin"
   ansible.builtin.command: "flatpak override --env=PATH={{ path }} --user com.visualstudio.code"
   changed_when: false
 
