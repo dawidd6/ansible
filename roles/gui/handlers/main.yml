@@ -1,6 +1,6 @@
 - name: Set PATH for code flatpak
   vars:
-    path: /home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:/bin:/sbin
+    path: /app/bin:/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:/bin:/sbin
   ansible.builtin.command: "flatpak override --env=PATH={{ path }} --user com.visualstudio.code"
 
 - name: Mount Docker socket inside code flatpak
