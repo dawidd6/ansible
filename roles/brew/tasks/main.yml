@@ -24,14 +24,6 @@
 - name: Flush handlers
   ansible.builtin.meta: flush_handlers
 
-- name: Install brewed glibc and gcc
-  environment:
-    HOMEBREW_NO_AUTO_UPDATE: 1
-  ansible.builtin.command: "{{ homebrew_prefix }}/bin/brew install glibc gcc"
-  register: brew_install
-  changed_when: '"Installing" in brew_install.stdout'
-  when: brew_install_glibc_and_gcc | bool
-
 - name: Install brew packages
   environment:
     HOMEBREW_NO_AUTO_UPDATE: 1
