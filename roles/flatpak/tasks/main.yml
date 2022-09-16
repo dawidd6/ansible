@@ -19,3 +19,7 @@
 - name: Mount Docker socket inside code flatpak
   ansible.builtin.command: flatpak override --filesystem=/run/docker.sock --user com.visualstudio.code
   changed_when: false
+
+- name: Mount tmp inside code flatpak
+  ansible.builtin.command: flatpak override --filesystem=/tmp --user com.visualstudio.code
+  changed_when: false
