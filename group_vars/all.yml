@@ -54,6 +54,7 @@ apt_purge_packages:
   - snapd
   - unattended-upgrades
 
+brew_install_glibc_and_gcc: true
 brew_install_packages:
   - dawidd6/tap/deber
   - dawidd6/tap/dh-make-golang
@@ -65,6 +66,7 @@ brew_install_packages:
   - diff-so-fancy
   - diffoscope
   - distrobox
+  - docker
   - dos2unix
   - fish
   - fzf
