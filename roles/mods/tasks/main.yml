@@ -25,3 +25,12 @@
   ansible.builtin.user:
     name: "{{ ansible_env.USER }}"
     shell: "{{ homebrew_prefix }}/bin/fish"
+
+- name: Flatpak override code
+  ansible.builtin.command: "{{ item }}"
+  changed_when: false
+  loop:
+    - flatpak override --user --reset com.visualstudio.code
+    - flatpak override --user --filesystem=/tmp com.visualstudio.code
+    - flatpak override --user --filesystem=/run/docker.sock com.visualstudio.code
+    - "flatpak override --user --env=PATH=/app/bin:/bin:{{ ansible_env.HOME }}/bin com.visualstudio.code"
