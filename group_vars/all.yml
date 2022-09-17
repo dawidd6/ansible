@@ -52,11 +52,11 @@ apt_install_packages:
 
 apt_purge_packages:
   - snapd
+  - systemd-oomd
   - unattended-upgrades
 
 brew_install_packages:
   - dawidd6/tap/deber
-  - dawidd6/tap/dh-make-golang
   - dawidd6/tap/sshpass
   - ansible
   - ansible-lint
