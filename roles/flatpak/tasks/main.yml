@@ -10,6 +10,10 @@
     name: "{{ item }}"
   loop: "{{ flatpak_install_packages }}"
 
+- name: Reset overrides for code flatpak
+  ansible.builtin.command: flatpak override --reset --user com.visualstudio.code
+  changed_when: false
+
 - name: Set PATH for code flatpak
   vars:
     path: "/app/bin:{{ homebrew_prefix }}/bin:/bin"
@@ -18,8 +22,4 @@
 
 - name: Mount Docker socket inside code flatpak
   ansible.builtin.command: flatpak override --filesystem=/run/docker.sock --user com.visualstudio.code
-  changed_when: false
-
-- name: Mount tmp inside code flatpak
-  ansible.builtin.command: flatpak override --filesystem=/tmp --user com.visualstudio.code
   changed_when: false
