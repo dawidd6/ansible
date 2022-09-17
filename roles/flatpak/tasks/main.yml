@@ -9,4 +9,3 @@
     method: user
     name: "{{ item }}"
   loop: "{{ flatpak_install_packages }}"
-
