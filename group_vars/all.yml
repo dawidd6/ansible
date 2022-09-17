@@ -55,6 +55,7 @@ apt_purge_packages:
   - systemd-oomd
   - unattended-upgrades
 
+brew_install_glibc_and_gcc: true
 brew_install_packages:
   - dawidd6/tap/deber
   - dawidd6/tap/sshpass
