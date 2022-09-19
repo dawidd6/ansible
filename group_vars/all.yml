@@ -15,25 +15,12 @@ apt_install_packages:
   - tlp
   # --- flatpak ---
   - flatpak
-  # --- apps ---
-  - gnome-boxes
-  - gnome-clocks
-  - gnome-shell-extension-prefs
+  # --- gnome ---
   - gnome-tweaks
-  - gnome-weather
+  - gnome-screenshot
   - network-manager-openconnect-gnome
   - network-manager-vpnc-gnome
-  - transmission
-  - filezilla
-  - gimp
-  - gpick
-  - inkscape
-  - jxplorer
-  - keepassxc
-  - meld
-  - pavucontrol
   # --- chrome ---
-  - chrome-gnome-shell
   - google-chrome-stable
   # --- teams ---
   # TODO remove once PWA is available
@@ -85,3 +72,10 @@ brew_install_packages:
 flatpak_install_packages:
   - com.visualstudio.code
   - com.spotify.Client
+  - com.mattjakeman.ExtensionManager
+  - org.filezillaproject.Filezilla
+  - org.gimp.GIMP
+  - org.kryogenix.Pick
+  - org.inkscape.Inkscape
+  - org.pulseaudio.pavucontrol
+  - org.keepassxc.KeePassXC
