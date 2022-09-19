@@ -25,6 +25,9 @@ apt_install_packages:
   # --- teams ---
   # TODO remove once PWA is available
   - teams
+  # --- pano ---
+  - gir1.2-gda-5.0
+  - gir1.2-gsound-1.0
 
 apt_purge_packages:
   - snapd
