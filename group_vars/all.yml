@@ -13,21 +13,12 @@ apt_install_packages:
   - docker-compose
   # --- tlp ---
   - tlp
-  # --- fonts ---
-  - fonts-dejavu-extra
-  - fonts-firacode
-  - fonts-noto-color-emoji
   # --- flatpak ---
   - flatpak
   # --- apps ---
-  - cheese
-  - evince
   - gnome-boxes
-  - gnome-calculator
-  - gnome-calendar
   - gnome-clocks
   - gnome-shell-extension-prefs
-  - gnome-system-monitor
   - gnome-tweaks
   - gnome-weather
   - network-manager-openconnect-gnome
@@ -40,9 +31,7 @@ apt_install_packages:
   - jxplorer
   - keepassxc
   - meld
-  - octave
   - pavucontrol
-  - simple-scan
   # --- chrome ---
   - chrome-gnome-shell
   - google-chrome-stable
