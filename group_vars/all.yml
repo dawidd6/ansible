@@ -15,7 +15,6 @@ apt_install_packages:
   - flatpak
   # --- gnome ---
   - gnome-tweaks
-  - gnome-screenshot
   - network-manager-openconnect-gnome
   - network-manager-vpnc-gnome
   # --- chrome ---
