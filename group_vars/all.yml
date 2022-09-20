@@ -11,8 +11,6 @@ apt_install_packages:
   # --- docker ---
   - docker.io
   - docker-compose
-  # --- tlp ---
-  - tlp
   # --- flatpak ---
   - flatpak
   # --- gnome ---
