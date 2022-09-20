@@ -2,4 +2,3 @@
   environment:
     PATH: "{{ homebrew_prefix }}/bin"
   ansible.builtin.command: nvim -c PlugInstall -c qa
-
