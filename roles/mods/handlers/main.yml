@@ -2,3 +2,7 @@
   environment:
     PATH: "{{ homebrew_prefix }}/bin"
   ansible.builtin.command: nvim -c PlugInstall -c qa
+
+- name: Start tlp
+  become: true
+  ansible.builtin.command: tlp start
