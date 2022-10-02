@@ -8,9 +8,10 @@ apt_install_packages:
   - file
   - git
   - zlib1g-dev
-  # --- docker ---
+  # --- containers ---
   - docker.io
   - docker-compose
+  - uidmap
   # --- tlp ---
   - tlp
   # --- flatpak ---
