@@ -71,6 +71,8 @@ brew_install_packages:
   - rpm2cpio
   - ruby
   - shellcheck
+  - strace
+  - stress
   - trash-cli
   - tree
   - xsel
