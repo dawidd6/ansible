@@ -37,6 +37,7 @@ apt_purge_packages:
 
 brew_install_packages:
   - dawidd6/tap/deber
+  - dawidd6/tap/podman
   - dawidd6/tap/sshpass
   - ansible
   - ansible-lint
