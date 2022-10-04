@@ -27,6 +27,6 @@
 - name: Install brew packages
   environment:
     HOMEBREW_NO_AUTO_UPDATE: 1
-  ansible.builtin.shell: "ulimit -Sn 65535; {{ homebrew_prefix }}/bin/brew install {{ brew_install_packages | join(' ') }}"
+  ansible.builtin.shell: "ulimit -Sn 100000; {{ homebrew_prefix }}/bin/brew install {{ brew_install_packages | join(' ') }}"
   register: brew_install
   changed_when: '"Pouring" in brew_install.stdout'
