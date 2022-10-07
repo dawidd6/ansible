@@ -26,11 +26,16 @@
     name: "{{ ansible_env.USER }}"
     shell: "{{ homebrew_prefix }}/bin/fish"
 
+- name: Enable podman service
+  ansible.builtin.shell: "{{ homebrew_prefix }}/bin/brew services start podman"
+  register: brew_services
+  changed_when: '"already started" not in brew_services.stdout'
+
 - name: Flatpak override code
   ansible.builtin.command: "{{ item }}"
   changed_when: false
   loop:
     - flatpak override --user --reset com.visualstudio.code
+    - flatpak override --user --filesystem=xdg-run/podman com.visualstudio.code
     - flatpak override --user --filesystem=/tmp com.visualstudio.code
-    - flatpak override --user --filesystem=/run/docker.sock com.visualstudio.code
     - "flatpak override --user --env=PATH=/app/bin:/bin:{{ ansible_env.HOME }}/bin com.visualstudio.code"
