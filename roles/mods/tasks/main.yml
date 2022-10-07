@@ -27,7 +27,7 @@
     shell: "{{ homebrew_prefix }}/bin/fish"
 
 - name: Enable podman service
-  ansible.builtin.shell: "{{ homebrew_prefix }}/bin/brew services start podman"
+  ansible.builtin.command: "{{ homebrew_prefix }}/bin/brew services start podman"
   register: brew_services
   changed_when: '"already started" not in brew_services.stdout'
 
