@@ -66,6 +66,7 @@ brew_install_packages:
   - neovim
   - nmap
   - node
+  - noti
   - parallel
   - python
   - rpm2cpio
