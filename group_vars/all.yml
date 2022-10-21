@@ -55,6 +55,7 @@ brew_install_packages:
   - git
   - gitbatch
   - go
+  - grex
   - htop
   - ipcalc
   - jfrog-cli
