@@ -36,8 +36,6 @@ apt_purge_packages:
   - unattended-upgrades
 
 brew_install_packages:
-  - dawidd6/tap/deber
-  - dawidd6/tap/podman
   - dawidd6/tap/sshpass
   - ansible
   - ansible-lint
@@ -69,6 +67,7 @@ brew_install_packages:
   - node
   - noti
   - parallel
+  - podman
   - python
   - rpm2cpio
   - ruby
