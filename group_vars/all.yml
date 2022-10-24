@@ -75,6 +75,7 @@ brew_install_packages:
   - shellcheck
   - strace
   - stress
+  - tealdeer
   - trash-cli
   - tree
   - xsel
