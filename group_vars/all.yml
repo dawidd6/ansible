@@ -52,6 +52,7 @@ brew_install_packages:
   - ghorg
   - git
   - gitbatch
+  - glab
   - go
   - grex
   - htop
