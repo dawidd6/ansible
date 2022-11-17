@@ -39,3 +39,7 @@
     - flatpak override --user --filesystem=xdg-run/podman com.visualstudio.code
     - flatpak override --user --filesystem=/tmp com.visualstudio.code
     - "flatpak override --user --env=PATH=/app/bin:/bin:{{ ansible_env.HOME }}/bin com.visualstudio.code"
+
+- name: Flatpak override for theming
+  ansible.builtin.command: flatpak override --user --env=GTK_THEME=Yaru-dark
+  changed_when: false
