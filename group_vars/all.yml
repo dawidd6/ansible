@@ -91,3 +91,4 @@ flatpak_install_packages:
   - org.pulseaudio.pavucontrol
   - org.keepassxc.KeePassXC
   - org.gnome.Boxes
+  - com.belmoussaoui.Authenticator
