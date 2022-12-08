@@ -28,11 +28,8 @@ apt_install_packages:
   - gir1.2-gsound-1.0
 
 apt_purge_packages:
-  - docker.io
-  - docker-compose
   - power-profiles-daemon
   - snapd
-  - systemd-oomd
   - unattended-upgrades
 
 brew_install_packages:
