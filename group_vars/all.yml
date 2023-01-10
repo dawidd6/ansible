@@ -37,6 +37,7 @@ brew_install_packages:
   - ansible
   - ansible-lint
   - bat
+  - btop
   - cpio
   - curl
   - diff-so-fancy
