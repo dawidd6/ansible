@@ -10,22 +10,15 @@ apt_install_packages:
   - zlib1g-dev
   # --- containers ---
   - uidmap
-  # --- tlp ---
-  - tlp
   # --- flatpak ---
   - flatpak
   # --- gnome ---
   - gnome-tweaks
   - network-manager-openconnect-gnome
-  - network-manager-vpnc-gnome
   # --- chrome ---
   - google-chrome-stable
-  # --- teams ---
-  # TODO remove once PWA is available
-  - teams
 
 apt_purge_packages:
-  - power-profiles-daemon
   - snapd
   - unattended-upgrades
 
