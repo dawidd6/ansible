@@ -1,3 +1,4 @@
+---
 - name: Make the OS mine
   hosts: localhost
   vars:
@@ -229,14 +230,14 @@
         - name: Do not show untracked dotfiles
           community.general.git_config:
             repo: "{{ ansible_env.HOME }}/.dotfiles"
-            name: "status.showUntrackedFiles"
+            name: status.showUntrackedFiles
             value: "no"
             scope: local
 
         - name: Set dotfiles fetch config
           community.general.git_config:
             repo: "{{ ansible_env.HOME }}/.dotfiles"
-            name: "remote.origin.fetch"
+            name: remote.origin.fetch
             value: "+refs/heads/*:refs/remotes/origin/*"
             scope: local
 
@@ -248,7 +249,7 @@
           ansible.builtin.find:
             file_type: directory
             paths:
-              - "/media"
+              - /media
             depth: 3
             recurse: true
             patterns: "*keys"
@@ -299,17 +300,47 @@
       tags:
         - gnome
       ansible.builtin.command: gsettings set '{{ item.schema }}' '{{ item.key }}' '{{ item.value }}'
+      changed_when: true
       loop:
-        - { schema: org.gnome.desktop.interface, key: gtk-theme, value: "Yaru-dark" }
-        - { schema: org.gnome.desktop.interface, key: show-battery-percentage, value: "true" }
-        - { schema: org.gnome.desktop.interface, key: clock-show-seconds, value: "true" }
-        - { schema: org.gnome.desktop.interface, key: clock-show-date, value: "true" }
-        - { schema: org.gnome.desktop.interface, key: clock-show-weekday, value: "true" }
-        - { schema: org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/, key: use-theme-colors, value: "false" }
-        - { schema: org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/, key: foreground-color, value: "#FFFFFF" }
-        - { schema: org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/, key: background-color, value: "#181818" }
-        - { schema: org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/, key: scrollbar-policy, value: "always" }
-        - { schema: org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/, key: scrollback-unlimited, value: "false" }
-        - { schema: org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/, key: scrollback-lines, value: "10000" }
-        - { schema: org.gnome.Terminal.Legacy.Settings, key: theme-variant, value: "dark" }
-        - { schema: org.gnome.Terminal.Legacy.Settings, key: new-tab-position, value: "next" }
+        - schema: org.gnome.desktop.interface
+          key: gtk-theme
+          value: "Yaru-dark"
+        - schema: org.gnome.desktop.interface
+          key: show-battery-percentage
+          value: "true"
+        - schema: org.gnome.desktop.interface
+          key: clock-show-seconds
+          value: "true"
+        - schema: org.gnome.desktop.interface
+          key: clock-show-date
+          value: "true"
+        - schema: org.gnome.desktop.interface
+          key: clock-show-weekday
+          value: "true"
+        - schema: org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/
+          key: audible-bell
+          value: "false"
+        - schema: org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/
+          key: use-theme-colors
+          value: "false"
+        - schema: org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/
+          key: foreground-color
+          value: "#FFFFFF"
+        - schema: org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/
+          key: background-color
+          value: "#181818"
+        - schema: org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/
+          key: scrollbar-policy
+          value: "always"
+        - schema: org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/
+          key: scrollback-unlimited
+          value: "false"
+        - schema: org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/
+          key: scrollback-lines
+          value: "10000"
+        - schema: org.gnome.Terminal.Legacy.Settings
+          key: theme-variant
+          value: "dark"
+        - schema: org.gnome.Terminal.Legacy.Settings
+          key: new-tab-position
+          value: "next"
