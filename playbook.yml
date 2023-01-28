@@ -40,7 +40,23 @@
           become: true
           ansible.builtin.apt:
             update_cache: true
-            name: "{{ apt_install_packages }}"
+            name:
+              # --- homebrew ---
+              - build-essential
+              - procps
+              - curl
+              - file
+              - git
+              - zlib1g-dev
+              # --- containers ---
+              - uidmap
+              # --- flatpak ---
+              - flatpak
+              # --- gnome ---
+              - gnome-tweaks
+              - network-manager-openconnect-gnome
+              # --- chrome ---
+              - google-chrome-stable
 
         - name: Purge apt packages
           become: true
@@ -48,7 +64,9 @@
             state: absent
             purge: true
             autoremove: true
-            name: "{{ apt_purge_packages }}"
+            name:
+              - snapd
+              - unattended-upgrades
 
     - name: Homebrew-related
       tags:
@@ -76,10 +94,58 @@
             dest: "{{ homebrew_prefix }}/bin/brew"
             state: link
 
-        - name: Install Homebrew packages
+        - name: Install Homebrew formulae
+          vars:
+            formulae:
+              - dawidd6/tap/sshpass
+              - ansible
+              - ansible-lint
+              - bat
+              - btop
+              - cpio
+              - curl
+              - diff-so-fancy
+              - diffoscope
+              - distrobox
+              - dos2unix
+              - fish
+              - fzf
+              - gh
+              - ghorg
+              - git
+              - gitbatch
+              - glab
+              - go
+              - grex
+              - htop
+              - ipcalc
+              - jfrog-cli
+              - jq
+              - lab
+              - lm-sensors
+              - ncdu
+              - neofetch
+              - neovim
+              - nmap
+              - node
+              - noti
+              - parallel
+              - podman
+              - python
+              - rpm2cpio
+              - ruby
+              - shellcheck
+              - strace
+              - stress
+              - tealdeer
+              - trash-cli
+              - tree
+              - xsel
           environment:
+            HOMEBREW_DEVELOPER: 1
             HOMEBREW_NO_AUTO_UPDATE: 1
-          ansible.builtin.shell: "ulimit -Sn 100000; {{ homebrew_prefix }}/bin/brew install {{ brew_install_packages | join(' ') }}"
+            HOMEBREW_NO_INSTALL_FROM_API: 1
+          ansible.builtin.shell: "ulimit -Sn 100000; {{ homebrew_prefix }}/bin/brew install {{ formulae | join(' ') }}"
           register: brew_install
           changed_when: '"Pouring" in brew_install.stdout'
 
@@ -125,7 +191,18 @@
           community.general.flatpak:
             method: user
             name: "{{ item }}"
-          loop: "{{ flatpak_install_packages }}"
+          loop:
+            - com.visualstudio.code
+            - com.spotify.Client
+            - com.mattjakeman.ExtensionManager
+            - org.filezillaproject.Filezilla
+            - org.gimp.GIMP
+            - org.kryogenix.Pick
+            - org.inkscape.Inkscape
+            - org.pulseaudio.pavucontrol
+            - org.keepassxc.KeePassXC
+            - org.gnome.Boxes
+            - org.gnome.Weather
 
         - name: Flatpak override code
           ansible.builtin.command: "{{ item }}"
