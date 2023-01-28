@@ -1,6 +1,0 @@
-- name: Deploy scripts
-  ansible.builtin.git:
-    repo: https://github.com/dawidd6/bin.git
-    dest: "{{ ansible_env.HOME }}/bin"
-    update: false
-    version: master
