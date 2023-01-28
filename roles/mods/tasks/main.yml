@@ -30,3 +30,9 @@
     - flatpak override --user --filesystem=xdg-run/podman com.visualstudio.code
     - flatpak override --user --filesystem=/tmp com.visualstudio.code
     - "flatpak override --user --env=PATH=/app/bin:/bin:{{ ansible_env.HOME }}/bin com.visualstudio.code"
+
+- name: Tweak GNOME settings
+  ansible.builtin.command: gsettings set '{{ item.schema }}' '{{ item.key }}' '{{ item.value }}'
+  loop:
+    - { schema: org.gnome.desktop.interface, key: gtk-theme, value: "Yaru-dark" }
+    - { schema: org.gnome.desktop.interface, key: show-battery-percentage, value: "true" }
