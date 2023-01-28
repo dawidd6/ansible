@@ -338,6 +338,12 @@
         - schema: org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/
           key: scrollback-lines
           value: "10000"
+        - schema: org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/
+          key: default-size-columns
+          value: "140"
+        - schema: org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/
+          key: default-size-rows
+          value: "40"
         - schema: org.gnome.Terminal.Legacy.Settings
           key: theme-variant
           value: "dark"
