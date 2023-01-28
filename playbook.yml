@@ -302,3 +302,14 @@
       loop:
         - { schema: org.gnome.desktop.interface, key: gtk-theme, value: "Yaru-dark" }
         - { schema: org.gnome.desktop.interface, key: show-battery-percentage, value: "true" }
+        - { schema: org.gnome.desktop.interface, key: clock-show-seconds, value: "true" }
+        - { schema: org.gnome.desktop.interface, key: clock-show-date, value: "true" }
+        - { schema: org.gnome.desktop.interface, key: clock-show-weekday, value: "true" }
+        - { schema: org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/, key: use-theme-colors, value: "false" }
+        - { schema: org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/, key: foreground-color, value: "#FFFFFF" }
+        - { schema: org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/, key: background-color, value: "#181818" }
+        - { schema: org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/, key: scrollbar-policy, value: "always" }
+        - { schema: org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/, key: scrollback-unlimited, value: "false" }
+        - { schema: org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/, key: scrollback-lines, value: "10000" }
+        - { schema: org.gnome.Terminal.Legacy.Settings, key: theme-variant, value: "dark" }
+        - { schema: org.gnome.Terminal.Legacy.Settings, key: new-tab-position, value: "next" }
