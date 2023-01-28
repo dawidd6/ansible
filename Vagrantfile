@@ -4,6 +4,8 @@ Vagrant.configure("2") do |config|
     # Prevent SharedFoldersEnableSymlinksCreate errors
     config.vm.synced_folder ".", "/vagrant", disabled: false
 
+    config.vm.provision "shell", inline: "sudo apt update && sudo apt install -y ubuntu-desktop"
+
     config.vm.provision "shell", path: "bootstrap.sh"
 
     # Run Ansible from the Vagrant VM
