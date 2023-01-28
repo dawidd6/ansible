@@ -12,17 +12,6 @@
     create: true
     mode: 0644
 
-- name: Add teams repo key
-  become: true
-  ansible.builtin.apt_key:
-    url: https://packages.microsoft.com/keys/microsoft.asc
-
-- name: Add teams repo
-  become: true
-  ansible.builtin.apt_repository:
-    repo: deb [arch=amd64] https://packages.microsoft.com/repos/ms-teams stable main
-    filename: teams
-
 - name: Install apt packages
   become: true
   ansible.builtin.apt:
