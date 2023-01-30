@@ -13,26 +13,25 @@
       - zlib1g-dev
       # --- containers ---
       - uidmap
-      # --- flatpak ---
-      - flatpak
       # --- gnome ---
+      - gnome-boxes
+      - gnome-shell-extension-manager
       - gnome-tweaks
+      - gnome-weather
       - network-manager-openconnect-gnome
       # --- chrome ---
       - google-chrome-stable
-    flatpak_packages:
-      - com.visualstudio.code
-      - com.spotify.Client
-      - com.mattjakeman.ExtensionManager
-      - org.filezillaproject.Filezilla
-      - org.gimp.GIMP
-      - org.kryogenix.Pick
-      - org.inkscape.Inkscape
-      - org.pulseaudio.pavucontrol
-      - org.keepassxc.KeePassXC
-      - com.github.hluk.copyq
-      - org.gnome.Boxes
-      - org.gnome.Weather
+      # --- other ---
+      - copyq
+      - filezilla
+      - gimp
+      - gpick
+      - inkscape
+      - keepassxc
+      - pavucontrol
+    snap_packages:
+      - code:classic
+      - spotify
     homebrew_formulae:
       - dawidd6/tap/sshpass
       - ansible
@@ -153,11 +152,6 @@
           register: brew_install
           changed_when: '"Pouring" in brew_install.stdout'
 
-        - name: Enable podman service
-          ansible.builtin.command: "{{ homebrew_prefix }}/bin/brew services start podman"
-          register: brew_services
-          changed_when: '"already started" not in brew_services.stdout'
-
         - name: Set fish as default shell
           become: true
           ansible.builtin.user:
@@ -181,30 +175,16 @@
             mode: 0775
           notify: Install nvim plugins
 
-    - name: Flatpak-related
+    - name: Snap-related
       tags:
-        - flatpak
+        - snap
       block:
-        - name: Add flathub remote
-          community.general.flatpak_remote:
-            method: user
-            flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
-            name: flathub
-
-        - name: Install flatpak packages
-          community.general.flatpak:
-            method: user
-            name: "{{ item }}"
-          loop: "{{ flatpak_packages }}"
-
-        - name: Flatpak override code
-          ansible.builtin.command: "{{ item }}"
-          changed_when: false
-          loop:
-            - flatpak override --user --reset com.visualstudio.code
-            - flatpak override --user --filesystem=xdg-run/podman com.visualstudio.code
-            - flatpak override --user --filesystem=/tmp com.visualstudio.code
-            - "flatpak override --user --env=PATH=/app/bin:/bin:{{ ansible_env.HOME }}/bin com.visualstudio.code"
+        - name: Install snap packages
+          become: true
+          community.general.snap:
+            name: "{{ item | replace(':classic', '') }}"
+            classic: "{{ true if ':classic' in item else false }}"
+          loop: "{{ snap_packages }}"
 
     - name: Dotfiles-related
       tags:
