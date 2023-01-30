@@ -3,6 +3,81 @@
   hosts: localhost
   vars:
     homebrew_prefix: /home/linuxbrew/.linuxbrew
+    apt_packages:
+      # --- homebrew ---
+      - build-essential
+      - procps
+      - curl
+      - file
+      - git
+      - zlib1g-dev
+      # --- containers ---
+      - uidmap
+      # --- flatpak ---
+      - flatpak
+      # --- gnome ---
+      - gnome-tweaks
+      - network-manager-openconnect-gnome
+      # --- chrome ---
+      - google-chrome-stable
+    flatpak_packages:
+      - com.visualstudio.code
+      - com.spotify.Client
+      - com.mattjakeman.ExtensionManager
+      - org.filezillaproject.Filezilla
+      - org.gimp.GIMP
+      - org.kryogenix.Pick
+      - org.inkscape.Inkscape
+      - org.pulseaudio.pavucontrol
+      - org.keepassxc.KeePassXC
+      - com.github.hluk.copyq
+      - org.gnome.Boxes
+      - org.gnome.Weather
+    homebrew_formulae:
+      - dawidd6/tap/sshpass
+      - ansible
+      - ansible-lint
+      - bat
+      - btop
+      - cpio
+      - curl
+      - diff-so-fancy
+      - diffoscope
+      - distrobox
+      - dos2unix
+      - fish
+      - fzf
+      - gh
+      - ghorg
+      - git
+      - gitbatch
+      - glab
+      - go
+      - grex
+      - htop
+      - ipcalc
+      - jfrog-cli
+      - jq
+      - lab
+      - lm-sensors
+      - ncdu
+      - neofetch
+      - neovim
+      - nmap
+      - node
+      - noti
+      - parallel
+      - podman
+      - python
+      - rpm2cpio
+      - ruby
+      - shellcheck
+      - strace
+      - stress
+      - tealdeer
+      - trash-cli
+      - tree
+      - xsel
   handlers:
     - name: Checkout dotfiles
       ansible.builtin.command: "git --git-dir={{ ansible_env.HOME }}/.dotfiles --work-tree={{ ansible_env.HOME }} checkout -f"
@@ -41,33 +116,7 @@
           become: true
           ansible.builtin.apt:
             update_cache: true
-            name:
-              # --- homebrew ---
-              - build-essential
-              - procps
-              - curl
-              - file
-              - git
-              - zlib1g-dev
-              # --- containers ---
-              - uidmap
-              # --- flatpak ---
-              - flatpak
-              # --- gnome ---
-              - gnome-tweaks
-              - network-manager-openconnect-gnome
-              # --- chrome ---
-              - google-chrome-stable
-
-        - name: Purge apt packages
-          become: true
-          ansible.builtin.apt:
-            state: absent
-            purge: true
-            autoremove: true
-            name:
-              - snapd
-              - unattended-upgrades
+            name: "{{ apt_packages }}"
 
     - name: Homebrew-related
       tags:
@@ -96,57 +145,11 @@
             state: link
 
         - name: Install Homebrew formulae
-          vars:
-            formulae:
-              - dawidd6/tap/sshpass
-              - ansible
-              - ansible-lint
-              - bat
-              - btop
-              - cpio
-              - curl
-              - diff-so-fancy
-              - diffoscope
-              - distrobox
-              - dos2unix
-              - fish
-              - fzf
-              - gh
-              - ghorg
-              - git
-              - gitbatch
-              - glab
-              - go
-              - grex
-              - htop
-              - ipcalc
-              - jfrog-cli
-              - jq
-              - lab
-              - lm-sensors
-              - ncdu
-              - neofetch
-              - neovim
-              - nmap
-              - node
-              - noti
-              - parallel
-              - podman
-              - python
-              - rpm2cpio
-              - ruby
-              - shellcheck
-              - strace
-              - stress
-              - tealdeer
-              - trash-cli
-              - tree
-              - xsel
           environment:
             HOMEBREW_DEVELOPER: 1
             HOMEBREW_NO_AUTO_UPDATE: 1
             HOMEBREW_NO_INSTALL_FROM_API: 1
-          ansible.builtin.shell: "ulimit -Sn 100000; {{ homebrew_prefix }}/bin/brew install {{ formulae | join(' ') }}"
+          ansible.builtin.shell: "ulimit -Sn 100000; {{ homebrew_prefix }}/bin/brew install {{ homebrew_formulae | join(' ') }}"
           register: brew_install
           changed_when: '"Pouring" in brew_install.stdout'
 
@@ -192,19 +195,7 @@
           community.general.flatpak:
             method: user
             name: "{{ item }}"
-          loop:
-            - com.visualstudio.code
-            - com.spotify.Client
-            - com.mattjakeman.ExtensionManager
-            - org.filezillaproject.Filezilla
-            - org.gimp.GIMP
-            - org.kryogenix.Pick
-            - org.inkscape.Inkscape
-            - org.pulseaudio.pavucontrol
-            - org.keepassxc.KeePassXC
-            - com.github.hluk.copyq
-            - org.gnome.Boxes
-            - org.gnome.Weather
+          loop: "{{ flatpak_packages }}"
 
         - name: Flatpak override code
           ansible.builtin.command: "{{ item }}"
