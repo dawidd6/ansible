@@ -187,6 +187,7 @@
           loop: "{{ snap_packages }}"
 
         - name: Disable snap automatic updates
+          become: true
           ansible.builtin.command: snap refresh --hold
           changed_when: false
 
