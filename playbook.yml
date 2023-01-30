@@ -186,6 +186,10 @@
             classic: "{{ true if ':classic' in item else false }}"
           loop: "{{ snap_packages }}"
 
+        - name: Disable snap automatic updates
+          ansible.builtin.command: snap refresh --hold
+          changed_when: false
+
     - name: Dotfiles-related
       tags:
         - dotfiles
