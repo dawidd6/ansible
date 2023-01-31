@@ -76,7 +76,6 @@
       - tealdeer
       - trash-cli
       - tree
-      - xsel
   handlers:
     - name: Checkout dotfiles
       ansible.builtin.command: "git --git-dir={{ ansible_env.HOME }}/.dotfiles --work-tree={{ ansible_env.HOME }} checkout -f"
