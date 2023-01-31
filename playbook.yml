@@ -14,7 +14,6 @@
       # --- containers ---
       - uidmap
       # --- gnome ---
-      - gnome-boxes
       - gnome-clocks
       - gnome-tweaks
       - gnome-weather
@@ -30,6 +29,7 @@
       - inkscape
       - keepassxc
       - pavucontrol
+      - virt-manager
     snap_packages:
       - code:classic
       - spotify
