@@ -15,9 +15,10 @@
       - uidmap
       # --- gnome ---
       - gnome-boxes
-      - gnome-shell-extension-manager
+      - gnome-clocks
       - gnome-tweaks
       - gnome-weather
+      - gnome-shell-extension-manager
       - network-manager-openconnect-gnome
       # --- chrome ---
       - google-chrome-stable
