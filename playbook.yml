@@ -1,5 +1,5 @@
 ---
-- name: Make the OS mine
+- name: Set up OS
   hosts: localhost
   vars:
     homebrew_prefix: /home/linuxbrew/.linuxbrew
