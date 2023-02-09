@@ -19,6 +19,7 @@
       - gnome-weather
       - gnome-shell-extension-manager
       - network-manager-openconnect-gnome
+      - python3-pydrive # for deja-dup
       # --- chrome ---
       - google-chrome-stable
       # --- other ---
