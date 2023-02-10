@@ -71,6 +71,7 @@
       - parallel
       - podman
       - python
+      - rclone
       - rpm2cpio
       - ruby
       - shellcheck
