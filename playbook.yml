@@ -234,6 +234,16 @@
         update: false
         version: master
 
+    - name: Tweak sudo
+      become: true
+      tags:
+        - sudo
+      ansible.builtin.lineinfile:
+        create: true
+        line: "Defaults !admin_flag"
+        path: /etc/sudoers.d/disable_admin_file_in_home
+        mode: 0644
+
     - name: Tweak GNOME settings
       tags:
         - gnome
