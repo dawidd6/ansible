@@ -96,14 +96,6 @@
       tags:
         - apt
       block:
-        - name: Disable unattended upgrades
-          become: true
-          ansible.builtin.copy:
-            src: /usr/share/unattended-upgrades/20auto-upgrades-disabled
-            dest: /etc/apt/apt.conf.d/
-            mode: 0644
-            remote_src: true
-
         - name: Add chrome repo key
           become: true
           ansible.builtin.apt_key:
@@ -192,11 +184,6 @@
             name: "{{ item | replace(':classic', '') }}"
             classic: "{{ true if ':classic' in item else false }}"
           loop: "{{ snap_packages }}"
-
-        - name: Disable snap automatic updates
-          become: true
-          ansible.builtin.command: snap refresh --hold
-          changed_when: false
 
     - name: Dotfiles-related
       tags:
