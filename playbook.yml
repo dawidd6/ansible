@@ -86,11 +86,6 @@
       ansible.builtin.command: "git --git-dir={{ ansible_env.HOME }}/.dotfiles --work-tree={{ ansible_env.HOME }} checkout -f"
       args:
         warn: false
-
-    - name: Install nvim plugins
-      environment:
-        PATH: "{{ homebrew_prefix }}/bin"
-      ansible.builtin.command: nvim -c PlugInstall -c qa
   tasks:
     - name: Apt-related
       tags:
@@ -157,23 +152,6 @@
             name: "{{ ansible_env.USER }}"
             shell: "{{ homebrew_prefix }}/bin/fish"
 
-    - name: Neovim-related
-      tags:
-        - neovim
-      block:
-        - name: Create nvim directories
-          ansible.builtin.file:
-            path: "{{ ansible_env.HOME }}/.local/share/nvim/site/autoload"
-            state: directory
-            mode: 0775
-
-        - name: Install nvim plugin manager
-          ansible.builtin.get_url:
-            url: https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-            dest: "{{ ansible_env.HOME }}/.local/share/nvim/site/autoload/plug.vim"
-            mode: 0775
-          notify: Install nvim plugins
-
     - name: Snap-related
       tags:
         - snap
@@ -220,16 +198,6 @@
         dest: "{{ ansible_env.HOME }}/bin"
         update: false
         version: master
-
-    - name: Tweak sudo
-      become: true
-      tags:
-        - sudo
-      ansible.builtin.lineinfile:
-        create: true
-        line: "Defaults !admin_flag"
-        path: /etc/sudoers.d/disable_admin_file_in_home
-        mode: 0644
 
     - name: Tweak GNOME settings
       tags:
