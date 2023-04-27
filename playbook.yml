@@ -75,6 +75,7 @@
       - rpm2cpio
       - ruby
       - shellcheck
+      - starship
       - strace
       - stress
       - tealdeer
