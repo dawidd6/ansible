@@ -61,6 +61,7 @@
       - jfrog-cli
       - jq
       - lab
+      - lazygit
       - lm-sensors
       - ncdu
       - neofetch
