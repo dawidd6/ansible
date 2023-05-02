@@ -20,7 +20,6 @@
       - gnome-shell-extension-manager
       - network-manager-openconnect-gnome
       - network-manager-vpnc-gnome
-      - python3-pydrive # for deja-dup
       # --- chrome ---
       - google-chrome-stable
       # --- other ---
@@ -32,6 +31,7 @@
       - keepassxc
       - pavucontrol
       - virt-manager
+      - vorta
     snap_packages:
       - code:classic
       - spotify
